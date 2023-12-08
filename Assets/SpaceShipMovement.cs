@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class SpaceShipMovement : MonoBehaviour
+public class SpaceShipMovement : Breakable
 {
     [SerializeField] float speed = 10f;
 
@@ -10,7 +10,9 @@ public class SpaceShipMovement : MonoBehaviour
 
     private void Update()
     {
-        if((int)currentHeight != goalHeight)
+        if (isBroken) return;
+        
+        if ((int)currentHeight != goalHeight)
         {
             currentHeight += Mathf.Sign(goalHeight - currentHeight) * speed * Time.deltaTime;
         }

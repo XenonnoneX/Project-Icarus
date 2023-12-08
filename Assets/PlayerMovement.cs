@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] float moveSpeed = 5f;
 
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
