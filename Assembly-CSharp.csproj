@@ -63,10 +63,14 @@
     <Compile Include="Assets\Research.cs" />
     <Compile Include="Assets\BrokenInteractablePanel.cs" />
     <Compile Include="Assets\IInteractable.cs" />
+    <Compile Include="Assets\GravityPullOnPlayer.cs" />
     <Compile Include="Assets\ResearchControlPanel.cs" />
     <Compile Include="Assets\SpaceShipMovement.cs" />
+    <Compile Include="Assets\BH_Shader\BlackHoleEffect.cs" />
     <Compile Include="Assets\PlayerMovement.cs" />
     <Compile Include="Assets\SpaceShipControlPanel.cs" />
+    <Compile Include="Assets\PlayerInputs.cs" />
+    <Compile Include="Assets\BH_Shader\GravityPullEffect.cs" />
     <Compile Include="Assets\InteractableDetector.cs" />
     <Compile Include="Assets\Breakable.cs" />
     <Compile Include="Assets\Interactable.cs" />
@@ -90,7 +94,9 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\BH_Shader\BlackHoleShader.shader" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\BH_Shader\GravityPullShader.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
   </ItemGroup>

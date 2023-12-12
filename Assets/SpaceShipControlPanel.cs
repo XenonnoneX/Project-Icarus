@@ -3,10 +3,14 @@ using UnityEngine;
 
 public class SpaceShipControlPanel : MonoBehaviour
 {
-    [SerializeField] SpaceShipMovement spaceShipMovement;
+    SpaceShipMovement spaceShipMovement;
     [SerializeField] TMP_Text currentHeightText;
     [SerializeField] TMP_Text goalHeightText;
 
+    private void Awake()
+    {
+        spaceShipMovement = FindObjectOfType<SpaceShipMovement>();
+    }
     void Update()
     {
         currentHeightText.text = spaceShipMovement.GetCurrentHeight().ToString() + "k km";

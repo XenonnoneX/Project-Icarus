@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,9 +11,11 @@ public class Interactable : MonoBehaviour, IInteractable
     [SerializeField] GameObject showInteractable;
 
     public Transform myTransform { get; set; }
+    public Action onInteractEnd { get; set; }
 
     [SerializeField] bool isBroken = false;
 
+    bool isInteracting;
     
 
     void Awake()
@@ -36,6 +39,10 @@ public class Interactable : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        if (isInteracting) return;
+
+        isInteracting = true;
+        
         if (isBroken)
         {
             brokenInteractablePanel.gameObject.SetActive(true);
@@ -49,8 +56,14 @@ public class Interactable : MonoBehaviour, IInteractable
 
     public void InteractEnd()
     {
+        if (!isInteracting) return;
+        
+        isInteracting = false;
+
         if (isBroken) brokenInteractablePanel.gameObject.SetActive(false);
         else interactionPanel.SetActive(false);
+
+        onInteractEnd.Invoke();
     }
 
     public void ShowInteractable()

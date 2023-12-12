@@ -3,8 +3,13 @@ using UnityEngine;
 
 public class ResearchControlPanel : MonoBehaviour
 {
-    [SerializeField] Research research;
+    Research research;
     [SerializeField] TMP_Text currentResearchPointsText;
+
+    private void Awake()
+    {
+        research = FindObjectOfType<Research>();
+    }
 
     void Update()
     {

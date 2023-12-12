@@ -333,7 +333,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactionPanel: {fileID: 0}
+  station: {fileID: 0}
   showInteractable: {fileID: 2461775751503735719}
+  isBroken: 0
 --- !u!61 &624428603990810932
 BoxCollider2D:
   m_ObjectHideFlags: 0

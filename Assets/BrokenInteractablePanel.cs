@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class BrokenInteractablePanel : MonoBehaviour
 {
+    PlayerInputs controls;
+
     [SerializeField] Slider slider;
     [SerializeField] float TimeToRepair = 3f;
 
@@ -12,12 +15,14 @@ public class BrokenInteractablePanel : MonoBehaviour
 
     private void Start()
     {
+        controls = new PlayerInputs();
+        controls.Enable();
         gameObject.SetActive(false);
     }
 
-    private void Update()
+    void Update()
     {
-        repairTime += Time.deltaTime;
+        repairTime += controls.Player.Repair.ReadValue<float>() * Time.deltaTime;
 
         slider.value = repairTime / TimeToRepair;
 

@@ -3,11 +3,16 @@ using UnityEngine;
 
 public class InteractableDetector : MonoBehaviour
 {
-    [SerializeField] PlayerMovement playerMovement;
+    PlayerMovement playerMovement;
     
     private List<IInteractable> _interactablesInRange = new List<IInteractable>();
 
     IInteractable currentInteractable;
+
+    private void Awake()
+    {
+        playerMovement = FindObjectOfType<PlayerMovement>();
+    }
 
     private void Update()
     {
@@ -50,6 +55,7 @@ public class InteractableDetector : MonoBehaviour
         if (currentInteractable != null)
         {
             currentInteractable.Interact();
+            currentInteractable.onInteractEnd += OnInteractEnd;
             playerMovement.enabled = false;
         }
     }

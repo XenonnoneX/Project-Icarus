@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+     //   print("Hello Im the Movement");
     }
 
     // Update is called once per frame
