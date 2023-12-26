@@ -61,31 +61,49 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\ControlStations\MissionManager.cs" />
+    <Compile Include="Assets\Hazards\TimeAffected.cs" />
     <Compile Include="Assets\UI\ResearchUI.cs" />
     <Compile Include="Assets\Hazards\Anomalies\GravityPullOnPlayer.cs" />
     <Compile Include="Assets\Missions\ShowMission.cs" />
-    <Compile Include="Assets\Core\PlayerMovement.cs" />
+    <Compile Include="Assets\Artifacts\Artifact.cs" />
     <Compile Include="Assets\Interactables\PickupItem.cs" />
+    <Compile Include="Assets\Artifacts\StringOfTimeAbility.cs" />
+    <Compile Include="Assets\UI\GetArtifactTaskUI.cs" />
     <Compile Include="Assets\Hazards\Spawner.cs" />
     <Compile Include="Assets\ControlStations\SpaceShipMovement.cs" />
     <Compile Include="Assets\Hazards\Anomalies\BH_Shader\BlackHoleEffect.cs" />
     <Compile Include="Assets\Interactables\IInteractable.cs" />
-    <Compile Include="Assets\Core\GameManager.cs" />
-    <Compile Include="Assets\ControlStations\Research.cs" />
+    <Compile Include="Assets\Artifacts\ArtifactShow.cs" />
+    <Compile Include="Assets\Artifacts\Artifact2.cs" />
+    <Compile Include="Assets\Artifacts\ArtifactData.cs" />
+    <Compile Include="Assets\Upgrades\UpgradeShop.cs" />
+    <Compile Include="Assets\Upgrades\UpgradeShow.cs" />
     <Compile Include="Assets\Interactables\InteractableDetector.cs" />
     <Compile Include="Assets\Hazards\Alien.cs" />
+    <Compile Include="Assets\ControlStations\VoronoiEffect\VoronoiTiling.cs" />
     <Compile Include="Assets\Missions\MissionData.cs" />
+    <Compile Include="Assets\Artifacts\StringOfTimeVisuals.cs" />
     <Compile Include="Assets\Hazards\Anomalies\BH_Shader\GravityPullEffect.cs" />
+    <Compile Include="Assets\Tasks\GetArtifactTask.cs" />
     <Compile Include="Assets\Core\ConditionalHideAttribute.cs" />
-    <Compile Include="Assets\Menu\UpgradeMenu.cs" />
+    <Compile Include="Assets\Core\TimeManager.cs" />
+    <Compile Include="Assets\Player\PlayerMovement.cs" />
+    <Compile Include="Assets\ControlStations\ResearchStation.cs" />
+    <Compile Include="Assets\Player\PlayerAnimator.cs" />
+    <Compile Include="Assets\Upgrades\UpgradeMenuUI.cs" />
     <Compile Include="Assets\Menu\MovingBG.cs" />
     <Compile Include="Assets\Items\PlayerInventory.cs" />
-    <Compile Include="Assets\Menu\UpgradeMenuUI.cs" />
+    <Compile Include="Assets\ControlStations\StationManager.cs" />
     <Compile Include="Assets\Core\PlayerInputs.cs" />
     <Compile Include="Assets\Tasks\ControlShipHeightTask.cs" />
+    <Compile Include="Assets\Upgrades\UpgradeData.cs" />
     <Compile Include="Assets\Missions\Mission.cs" />
+    <Compile Include="Assets\Artifacts\ArtifactManager.cs" />
     <Compile Include="Assets\Menu\Menu.cs" />
+    <Compile Include="Assets\Upgrades\Upgrade.cs" />
+    <Compile Include="Assets\UI\RPStorageUI.cs" />
     <Compile Include="Assets\ControlStations\ControlStation.cs" />
+    <Compile Include="Assets\ControlStations\ArtifactDock.cs" />
     <Compile Include="Assets\Hazards\HazardManager.cs" />
     <Compile Include="Assets\UI\MissionUI.cs" />
     <Compile Include="Assets\Hazards\Anomaly.cs" />
@@ -94,7 +112,10 @@
     <Compile Include="Assets\Tasks\RepairTask.cs" />
     <Compile Include="Assets\Tasks\PressKeysInOrderTask.cs" />
     <Compile Include="Assets\UI\SpaceShipMovementUI.cs" />
+    <Compile Include="Assets\Hazards\TimeSlowField.cs" />
     <Compile Include="Assets\Items\Item.cs" />
+    <Compile Include="Assets\Upgrades\UpgradeShopManager.cs" />
+    <Compile Include="Assets\Upgrades\UpgradeManager.cs" />
     <Compile Include="Assets\Tasks\Task.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -111,6 +132,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\ControlStations\VoronoiEffect\VoronoiShader.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />

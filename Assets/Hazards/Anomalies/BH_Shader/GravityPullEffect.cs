@@ -1,18 +1,15 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
 public class GravityPullEffect : MonoBehaviour
 {
-    public Shader shader;
-    public Transform pullEffectObject;
+    [SerializeField] Shader shader;
+    Transform pullEffectObject;
     List<Transform> nextPullEffectObjects = new List<Transform>();
-    public float ratio; // aspect ratio of the screen
-    public float radius;
-    public float strength;
+    float ratio = 0.5625f; // aspect ratio of the screen
+    public float radius = 4;
+    [SerializeField] float strength = 0.1f;
 
     Camera cam;
     Material _material; // will be procedurally generated

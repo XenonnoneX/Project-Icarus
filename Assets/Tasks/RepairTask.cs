@@ -18,7 +18,7 @@ public class RepairTask : Task
     {
         base.UpdateLogic();
 
-        repairTime += controls.Player.Repair.ReadValue<float>() * Time.deltaTime;
+        repairTime += controls.Player.Repair.ReadValue<float>() * Time.deltaTime * timeScale;
 
         slider.value = repairTime / holdDownTime;
 

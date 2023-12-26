@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MissionManager : ControlStation
 {
-    Research research;
+    ResearchStation research;
 
     public int maxMissions = 3;
     [SerializeField] float timeToGetNewMission = 10f;
@@ -18,25 +18,33 @@ public class MissionManager : ControlStation
 
     private void Awake()
     {
-        research = FindObjectOfType<Research>();
+        research = FindObjectOfType<ResearchStation>();
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
+
         CheckMissionsCompleted();
 
-        if (isBroken) return;
+        if (stationState != StationState.Working) return;
 
+        newMissionTimer += Time.deltaTime * timeScale;
+    }
+
+    public override void CompleteTask()
+    {
         GetNewMissions();
+
+        base.CompleteTask();
     }
 
     private void GetNewMissions()
     {
-        newMissionTimer += Time.deltaTime;
-
-        if (newMissionTimer > timeToGetNewMission && currentMissions.Count < maxMissions && currentMissions.Count < allMissions.Count)
+        while (newMissionTimer > timeToGetNewMission && currentMissions.Count < maxMissions && currentMissions.Count < allMissions.Count)
         {
-            newMissionTimer = 0;
+            print("Getting new mission");
+            newMissionTimer -= timeToGetNewMission;
 
             currentMissions.Add(GetNewRandomMission());
             onMissionsChanged.Invoke();

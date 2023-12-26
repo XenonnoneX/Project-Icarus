@@ -31,8 +31,6 @@ public class MissionUI : MonoBehaviour
 
     void UpdateUI()
     {
-        print("Updating UI with " + missionManager.currentMissions.Count + " missions");
-
         for (int i = 0; i < missionManager.maxMissions; i++)
         {
             if(missionManager.currentMissions.Count <= i)

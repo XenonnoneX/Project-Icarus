@@ -1,15 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
 public class BlackHoleEffect : MonoBehaviour
 {
-    public Shader shader;
-    public Transform blackHole;
-    public float ratio; // aspect ratio of the screen
-    public float radius;
-    public float strength = 1;
+    [SerializeField] Shader shader;
+    [SerializeField] Transform blackHole;
+    float ratio = 0.5625f; // aspect ratio of the screen
+    [SerializeField] float radius = 1;
+    [SerializeField] float strength = 1;
 
     Camera cam;
     Material _material; // will be procedurally generated

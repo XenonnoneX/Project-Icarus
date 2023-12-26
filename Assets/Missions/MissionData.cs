@@ -8,13 +8,6 @@ public enum MissionType
     ReachHeightBelow,
     CompleteStationTask
 }
-public enum StationType
-{
-    ShipMovement,
-    Research,
-    MissionManager,
-    SendSignal
-}
 
 [CreateAssetMenu()]
 public class MissionData : ScriptableObject
@@ -102,7 +95,7 @@ public class MissionStep
 
     internal ControlStation GetStationOfType(StationType stationType)
     {
-        foreach (ControlStation station in GameManager.instance.controlStations)
+        foreach (ControlStation station in StationManager.instance.controlStations)
         {
             if (station.stationType == stationType)
             {

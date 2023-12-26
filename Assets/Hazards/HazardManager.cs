@@ -23,7 +23,9 @@ public class HazardManager : MonoBehaviour
     [SerializeField] List<Anomaly> allAnomalies;
 
     [SerializeField] float timeToGetNewHazard = 10f;
+    [SerializeField] float timeBetweenHazardsDecreasePerMinute = 0.9f;
     float newHazardTimer;
+    float timeSinceStart;
 
     private void Awake()
     {
@@ -43,8 +45,9 @@ public class HazardManager : MonoBehaviour
     private void Update()
     {
         newHazardTimer += Time.deltaTime;
-        
-        if(newHazardTimer > TimeToGetNewHazard())
+        timeSinceStart += Time.deltaTime;
+
+        if (newHazardTimer > TimeToGetNewHazard())
         {
             newHazardTimer = 0;
             CauseRandomHazard();
@@ -53,7 +56,7 @@ public class HazardManager : MonoBehaviour
 
     private float TimeToGetNewHazard()
     {
-        return timeToGetNewHazard * (spaceShipMovement.GetCurrentHeight() + 1);
+        return (timeToGetNewHazard * (Mathf.Pow(timeBetweenHazardsDecreasePerMinute,timeSinceStart / 60))) * (spaceShipMovement.GetCurrentHeight() + 1);
     }
 
     private void CauseRandomHazard()
@@ -77,19 +80,16 @@ public class HazardManager : MonoBehaviour
 
     private void BreakRandomStation()
     {
-        print("Break Station");
-        allControlStations[UnityEngine.Random.Range(0, allControlStations.Count)].SetIsBroken(true);
+        allControlStations[UnityEngine.Random.Range(0, allControlStations.Count)].SetStationState(StationState.Broken);
     }
 
     private void SpawnAlien()
     {
-        print("Spawn Alien");
         alienSpawner.SpawnRandom();
     }
 
     private void SpawnAnomaly()
     {
-        print("Spawn Anomaly");
         anomalySpawner.SpawnRandom();
     }
 }

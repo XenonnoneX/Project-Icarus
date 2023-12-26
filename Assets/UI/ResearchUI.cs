@@ -3,16 +3,16 @@ using UnityEngine;
 
 public class ResearchUI : MonoBehaviour
 {
-    Research research;
+    ResearchStation research;
     [SerializeField] TMP_Text currentResearchPointsText;
 
     private void Awake()
     {
-        research = FindObjectOfType<Research>();
+        research = FindObjectOfType<ResearchStation>();
     }
 
     void Update()
     {
-        currentResearchPointsText.text = research.GetCurrentResearchPoints().ToString() + " RP";
+        currentResearchPointsText.text = research.GetSavedRP().ToString() + " RP";
     }
 }

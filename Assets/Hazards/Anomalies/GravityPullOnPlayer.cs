@@ -30,6 +30,6 @@ public class GravityPullOnPlayer : Anomaly
 
         float currentPullStrength = pullStrength * (1 - (distance / gravityPullEffect.radius));
 
-        playerMovement.GetComponent<Rigidbody2D>().AddForce((transform.position - playerMovement.transform.position).normalized * currentPullStrength * Time.deltaTime);
+        playerMovement.AddForce((transform.position - playerMovement.transform.position).normalized * currentPullStrength * Time.deltaTime);
     }
 }

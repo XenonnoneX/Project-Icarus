@@ -1,18 +1,21 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SpaceShipMovement : ControlStation
 {
     [SerializeField] float minHeight, maxHeight;
 
-    [SerializeField] float speedUp = 10f;
-    [SerializeField] float speedDown = 10f;
+    [SerializeField] float speedUp = 1f;
+    [SerializeField] float speedDown = 0.1f;
+    [SerializeField] float percentageBrokenToCancelOutUpSpeed = 0.7f;
 
     [SerializeField] float currentHeight;
 
     bool goingDown = true;
 
     public static SpaceShipMovement instance;
+    ResearchStation researchStation;
 
     private void Awake()
     {
@@ -20,23 +23,40 @@ public class SpaceShipMovement : ControlStation
         else Destroy(gameObject);
     }
 
-    private void Update()
+    private void Start()
     {
+        researchStation = StationManager.instance.GetControlStationFromType(StationType.Research) as ResearchStation;
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+
+        currentHeight += GetCurrentSpeed() * Time.deltaTime;
+
+        if (currentHeight > maxHeight)
+        {
+            currentHeight = maxHeight;
+        }
+        else if (currentHeight < minHeight)
+        {
+            GameOver();
+        }
+    }
+
+    float GetCurrentSpeed()
+    {
+        float speed = 0;
+
         if (goingDown)
         {
-            if (currentHeight > minHeight) currentHeight -= speedDown * Time.deltaTime;
-            else
-            {
-                print("Game over");
-                currentHeight = minHeight;
-                GameOver();
-            }
+            speed -= speedDown + (speedDown * StationManager.instance.GetStationBrokenPercentage() / percentageBrokenToCancelOutUpSpeed);
         }
         else
         {
-            if (currentHeight < maxHeight) currentHeight += speedUp * Time.deltaTime;
-            else currentHeight = maxHeight;
+            speed += speedUp - (speedUp * StationManager.instance.GetStationBrokenPercentage() / percentageBrokenToCancelOutUpSpeed);
         }
+        return speed;
     }
 
     public void GoUp()
@@ -61,6 +81,8 @@ public class SpaceShipMovement : ControlStation
 
     private void GameOver()
     {
-        GameManager.instance.GameOver();
+        PlayerPrefs.SetInt("CollectedResearchPoints", researchStation.GetSavedRP());
+
+        SceneManager.LoadScene("Menu");
     }
 }

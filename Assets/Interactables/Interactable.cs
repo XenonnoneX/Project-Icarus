@@ -3,17 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Interactable : MonoBehaviour, IInteractable
+public class Interactable : MonoBehaviour, IInteractable, TimeAffected
 {
     PlayerInventory playerInventory;
     RepairTask repairTask;
     
-    [SerializeField] ControlStation station;
+    public ControlStation station;
     [SerializeField] Task task;
     [SerializeField] Item neededItem;
 
     [SerializeField] GameObject showInteractable;
     [SerializeField] GameObject showBroken;
+    [SerializeField] GameObject showDestroyed;
 
     public Transform myTransform { get; set; }
     public Action onInteractEnd { get; set; }
@@ -34,8 +35,8 @@ public class Interactable : MonoBehaviour, IInteractable
     private void Start()
     {
         repairTask.onInteractEnd += InteractEnd;
-        task.onInteractEnd += InteractEnd;
-        station.onChangeBrokenState += SetBrokenShowActive;
+        if(task != null) task.onInteractEnd += InteractEnd;
+        station.onChangeStationState += ShowStationState;
 
         HideInteractable();
         showBroken.SetActive(false);
@@ -51,16 +52,29 @@ public class Interactable : MonoBehaviour, IInteractable
         if (isInteracting) return;
 
         isInteracting = true;
-        
-        if (station.GetIsBroken())
+
+        if (station.GetStationState() == StationState.Destroyed)
+        {
+            InteractEnd();
+            return; // TODO: repair kit to fix
+        }
+        else if (station.GetStationState() == StationState.Broken)
         {
             print("Repairing");
             repairTask.StartTask(this);
+            repairTask.SetTimeScale(station.timeScale);
         }
         else
         {
-            // if (neededItem == null) task.StartTask(this); else if // with this you can do task while carrying item
-            if (currentItem == neededItem)
+            if (task == null)
+            {
+                station.CompleteTask();
+                InteractEnd();
+                return;
+            }
+
+            if (neededItem == null) task.StartTask(this); // with this you can do task while carrying item
+            else if (currentItem == neededItem)
             {
                 task.StartTask(this);
             }
@@ -104,25 +118,35 @@ public class Interactable : MonoBehaviour, IInteractable
         showInteractable.SetActive(false);
     }
 
-    void SetBrokenShowActive(bool active)
+    void ShowStationState(StationState state) // TODO: show Destroyed
     {
-        showBroken.SetActive(active);
+        if(state == StationState.Broken) showBroken.SetActive(true);
+        else showBroken.SetActive(false);
+
+        if (state == StationState.Destroyed) showDestroyed.SetActive(true);
+        else showDestroyed.SetActive(false);
     }
 
     public void BreakInteractable()
     {
-        station.SetIsBroken(true);
+        station.SetStationState(StationState.Broken);
     }
 
     public void FixInteractable()
     {
         InteractEnd();
-        station.SetIsBroken(false);
+        station.SetStationState(StationState.Working);
     }
 
     internal virtual void CompleteTask()
     {
         station.CompleteTask();
         InteractEnd();
+    }
+
+    public void SetTimeScale(float timeScale)
+    {
+        station.SetTimeScale(timeScale);
+        if (task != null) task.SetTimeScale(timeScale);
     }
 }

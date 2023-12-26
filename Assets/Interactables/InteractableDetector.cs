@@ -8,7 +8,6 @@ public class InteractableDetector : MonoBehaviour
     private List<IInteractable> _interactablesInRange = new List<IInteractable>();
 
     IInteractable currentClosestInteractable;
-    Task currentTask;
 
     private void Awake()
     {
@@ -57,7 +56,7 @@ public class InteractableDetector : MonoBehaviour
         
         //currentTask = currentClosestInteractable;
         currentClosestInteractable.onInteractEnd += OnInteractEnd;
-        playerMovement.enabled = false;
+        playerMovement.StopMovement();
         currentClosestInteractable.Interact();
     }
 
@@ -71,10 +70,8 @@ public class InteractableDetector : MonoBehaviour
     public void OnInteractEnd()
     {
         if (currentClosestInteractable == null) return;
-        
-        playerMovement.enabled = true;
-        currentTask = null;
-        // currentInteractable.InteractEnd();
+
+        playerMovement.StartMovement();
     }
 
     IInteractable GetClosestInteractable()

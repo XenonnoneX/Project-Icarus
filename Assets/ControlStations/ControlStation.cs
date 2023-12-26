@@ -1,32 +1,71 @@
 ﻿using System;
 using UnityEngine;
 
-public abstract class ControlStation : MonoBehaviour
+public enum StationType
+{
+    ShipMovement,
+    Research,
+    MissionManager,
+    SendSignal,
+    ArtifactDock
+}
+
+public enum StationState
+{
+    Working,
+    Broken,
+    Destroyed
+}
+
+public abstract class ControlStation : MonoBehaviour, TimeAffected
 {
     public StationType stationType;
-    [SerializeField]protected bool isBroken;
+    public Color stationColor;
+    [SerializeField]protected StationState stationState;
 
-    public delegate void OnChangeBrokenState(bool isBroken);
-    public OnChangeBrokenState onChangeBrokenState;
+    public delegate void OnChangeStationState(StationState stationState);
+    public OnChangeStationState onChangeStationState;
 
     public delegate void OnCompleteTask();
     public OnCompleteTask onCompleteTask;
 
-    public void SetIsBroken(bool isBroken)
-    {
-        this.isBroken = isBroken;
+    public float timeScale = 1;
 
-        onChangeBrokenState?.Invoke(isBroken);
+    float timeToBreak = 30;
+    float timeSinceBroken = 0;
+
+    protected virtual void Update()
+    {
+        if(stationState == global::StationState.Broken)
+        {
+            timeSinceBroken += Time.deltaTime * timeScale;
+            if(timeSinceBroken > timeToBreak)
+            {
+                SetStationState(StationState.Destroyed);
+            }
+        }
     }
 
-    public bool GetIsBroken()
+    public void SetStationState(StationState state)
     {
-        return isBroken;
+        this.stationState = state;
+
+        onChangeStationState?.Invoke(state);
     }
 
-    internal virtual void CompleteTask()
+    public StationState GetStationState()
+    {
+        return stationState;
+    }
+
+    public virtual void CompleteTask()
     {
         onCompleteTask?.Invoke();
         print("Task completed");
+    }
+
+    public void SetTimeScale(float timeScale)
+    {
+        this.timeScale = timeScale;
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public abstract class Task : MonoBehaviour
+public abstract class Task : MonoBehaviour, TimeAffected
 {
     protected PlayerInputs controls;
     
@@ -11,6 +11,8 @@ public abstract class Task : MonoBehaviour
 
     protected bool isInteracting;
     public Action onInteractEnd { get; set; }
+
+    protected float timeScale = 1;
 
     protected virtual void Start()
     {
@@ -49,6 +51,11 @@ public abstract class Task : MonoBehaviour
         if (showTaskStuff != null) showTaskStuff.SetActive(false);
         isInteracting = false;
 
-        onInteractEnd.Invoke();
+        onInteractEnd?.Invoke();
+    }
+
+    public void SetTimeScale(float timeScale)
+    {
+        this.timeScale = timeScale;
     }
 }
