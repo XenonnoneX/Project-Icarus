@@ -40,6 +40,7 @@ public class Interactable : MonoBehaviour, IInteractable, TimeAffected
 
         HideInteractable();
         showBroken.SetActive(false);
+        showDestroyed.SetActive(false);
     }
 
     void Update()

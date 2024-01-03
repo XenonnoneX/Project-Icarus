@@ -30,7 +30,12 @@ public class Mission
         bool allStepsCompleted = true;
         for (int i = 0; i < missionData.missionSteps.Count; i++)
         {
-            if (missionData.missionSteps[i].Completed()) stepsCompleted[i] = true;
+            if (missionData.missionSteps[i].Completed())
+            {
+                Debug.Log("Mission Step Completed: " + missionData.missionSteps[i].missionType);
+                Debug.Log("Total Step count: " + missionData.missionSteps.Count);
+                stepsCompleted[i] = true;
+            }
             else allStepsCompleted = false;
         }
 

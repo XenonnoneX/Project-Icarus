@@ -9,6 +9,8 @@ public class MissionManager : ControlStation
     [SerializeField] float timeToGetNewMission = 10f;
     float newMissionTimer;
 
+    [HideInInspector] public float missionRewardMultiplyer = 1f;
+
     [SerializeField] List<MissionData> allMissions;
     public List<Mission> currentMissions = new List<Mission>();
     [SerializeField] List<Mission> completedMissions = new List<Mission>();
@@ -29,7 +31,7 @@ public class MissionManager : ControlStation
 
         if (stationState != StationState.Working) return;
 
-        newMissionTimer += Time.deltaTime * timeScale;
+        if(currentMissions.Count * timeToGetNewMission + newMissionTimer < maxMissions * timeToGetNewMission) newMissionTimer += Time.deltaTime * timeScale;
     }
 
     public override void CompleteTask()
@@ -62,8 +64,6 @@ public class MissionManager : ControlStation
             breakCounter++;
         }
 
-        print("New Random Mission: " + rand);
-
         return new Mission(allMissions[rand]);
     }
 
@@ -86,10 +86,12 @@ public class MissionManager : ControlStation
     {
         foreach (Mission mission in currentMissions)
         {
+            print("Checking Mission: " + mission.missionData.name);
             if (mission.CheckMissionCompleted())
             {
-                research.AddResearchPoints(mission.missionReward);
+                research.AddResearchPoints(mission.missionReward * missionRewardMultiplyer);
                 completedMissions.Add(mission);
+                print("Mission Completed: " + mission.missionData.name);
             }
         }
 
@@ -97,9 +99,15 @@ public class MissionManager : ControlStation
         {
             if (currentMissions.Contains(mission))
             {
+                print("Removing Mission: " + mission.missionData.name + " from current missions");
                 currentMissions.Remove(mission);
                 onMissionsChanged.Invoke();
             }
         }
+    }
+
+    public bool MissionAvailable()
+    {
+        return newMissionTimer > timeToGetNewMission;
     }
 }

@@ -15,9 +15,9 @@ MonoBehaviour:
   shopIcon: {fileID: 21300000, guid: b6eaa89f77459364b9f216d818cb610e, type: 3}
   levelValues:
   - 0
-  - 10
-  - 20
-  - 30
-  - 40
-  - 50
+  - 1.1
+  - 1.2
+  - 1.3
+  - 1.4
+  - 1.5
   upgradeCosts: 3200000064000000c80000009001000020030000

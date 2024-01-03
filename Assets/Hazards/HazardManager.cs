@@ -7,7 +7,6 @@ using UnityEngine;
 public enum HazardType
 {
     BreakStation,
-    SpawnAlien,
     SpawnAnomaly
 }
 
@@ -15,12 +14,11 @@ public class HazardManager : MonoBehaviour
 {
     SpaceShipMovement spaceShipMovement;
     List<ControlStation> allControlStations = new List<ControlStation>();
-
-    Spawner<Alien> alienSpawner;
+    
     Spawner<Anomaly> anomalySpawner;
-
-    [SerializeField] List<Alien> allAliens;
+    
     [SerializeField] List<Anomaly> allAnomalies;
+    [SerializeField] Transform hazardParent;
 
     [SerializeField] float timeToGetNewHazard = 10f;
     [SerializeField] float timeBetweenHazardsDecreasePerMinute = 0.9f;
@@ -35,9 +33,6 @@ public class HazardManager : MonoBehaviour
 
     private void Start()
     {
-        alienSpawner = new Spawner<Alien>();
-        alienSpawner.allObjects.AddRange(allAliens);
-
         anomalySpawner = new Spawner<Anomaly>();
         anomalySpawner.allObjects.AddRange(allAnomalies);
     }
@@ -69,9 +64,6 @@ public class HazardManager : MonoBehaviour
             case HazardType.BreakStation:
                 BreakRandomStation();
                 break;
-            case HazardType.SpawnAlien:
-                SpawnAlien();
-                break;
             case HazardType.SpawnAnomaly:
                 SpawnAnomaly();
                 break;
@@ -83,13 +75,8 @@ public class HazardManager : MonoBehaviour
         allControlStations[UnityEngine.Random.Range(0, allControlStations.Count)].SetStationState(StationState.Broken);
     }
 
-    private void SpawnAlien()
-    {
-        alienSpawner.SpawnRandom();
-    }
-
     private void SpawnAnomaly()
     {
-        anomalySpawner.SpawnRandom();
+        anomalySpawner.SpawnRandom(hazardParent);
     }
 }

@@ -10,11 +10,20 @@ public class PressKeysInOrderTask : Task
     {
         base.StartTask(interactable);
 
+        if (keyCodes.Count == 0) GenerateKeyCodes();
+
+        for (int i = 0; i < keyCodes.Count; i++)
+        {
+            print("Press " + keyCodes[i]);
+        }
+    }
+
+    private void GenerateKeyCodes()
+    {
         for (int i = 0; i < numberOfKeys; i++)
         {
             keyCodes.Add(GetRandomLetterKeyCode());
         }
-        print("Press " + keyCodes[0] + " then " + keyCodes[1] + " then " + keyCodes[2]);
     }
 
     protected override void UpdateLogic()
@@ -23,13 +32,13 @@ public class PressKeysInOrderTask : Task
 
         if (keyCodes.Count == 0) return;
 
-        // foreach (KeyCode code in System.Enum.GetValues(typeof(KeyCode)))
-        // {
-        //     if (Input.GetKeyDown(code))
-        //     {
-        //         print(code);
-        //     }
-        // }
+        foreach (KeyCode code in System.Enum.GetValues(typeof(KeyCode)))
+        {
+            if (Input.GetKeyDown(code))
+            {
+                print(code);
+            }
+        }
 
         if (Input.GetKeyDown(keyCodes[0]))
         {

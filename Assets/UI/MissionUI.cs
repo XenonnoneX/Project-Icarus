@@ -25,7 +25,7 @@ public class MissionUI : MonoBehaviour
     {
         for (int i = 0; i < missionManager.maxMissions; i++)
         {
-            showMissions.Add((ShowMission)Instantiate(showMission, transform));
+            showMissions.Add(Instantiate(showMission, transform));
         }
     }
 
@@ -45,5 +45,4 @@ public class MissionUI : MonoBehaviour
             }
         }
     }
-
 }

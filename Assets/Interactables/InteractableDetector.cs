@@ -16,6 +16,11 @@ public class InteractableDetector : MonoBehaviour
 
     private void Update()
     {
+        ShowClosestInteractable();
+    }
+
+    private void ShowClosestInteractable()
+    {
         IInteractable closestInteractable = GetClosestInteractable();
 
         if (currentClosestInteractable != closestInteractable)
@@ -26,9 +31,10 @@ public class InteractableDetector : MonoBehaviour
             }
 
             currentClosestInteractable = closestInteractable;
-            if(currentClosestInteractable != null) currentClosestInteractable.ShowInteractable();
+            if (currentClosestInteractable != null) currentClosestInteractable.ShowInteractable();
         }
     }
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -82,6 +88,8 @@ public class InteractableDetector : MonoBehaviour
 
         foreach (IInteractable interactable in _interactablesInRange)
         {
+            if (!IsVisible(interactable)) continue;
+
             float distance = Vector2.Distance(transform.position, interactable.myTransform.position);
 
             if (distance < closestDistance)
@@ -92,5 +100,23 @@ public class InteractableDetector : MonoBehaviour
         }
 
         return closestInteractable;
+    }
+    private bool IsVisible(IInteractable interactable)
+    {
+        // cast ray to interactable
+
+        Vector2 direction = interactable.myTransform.position - transform.position;
+
+        // LayerMask wallLayerMask = LayerMask.GetMask("Wall");
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Vector3.Magnitude(direction));
+
+        if (hit.collider == null) return false;
+
+        if (hit.collider.GetComponent<IInteractable>() == null) return false;
+
+        if (hit.collider.GetComponent<IInteractable>() != interactable) return false;
+
+        return true;
     }
 }

@@ -13,7 +13,16 @@ public class UpgradeManager : MonoBehaviour
         {
             Upgrade upgrade = new Upgrade(allUpgradeDatas[i]);
             allUpgrades.Add(upgrade);
-            upgrade.SetLevel(PlayerPrefs.GetInt("Upgrade_" + allUpgradeDatas[i].name));
+
+            string upgradeName = allUpgradeDatas[i].name;
+            int upgradeLevel = PlayerPrefs.GetInt("Upgrade_" + upgradeName);
+
+            upgrade.SetLevel(upgradeLevel);
+
+            if (upgradeName == "MovSpeed") FindObjectOfType<PlayerMovement>().movSpeedMultiplier = upgrade.GetValue();
+            else if (upgradeName == "RepairSpeed") FindObjectOfType<RepairTask>().repairSpeedMultiplier = upgrade.GetValue();
+            else if (upgradeName == "RPStorageCap") FindObjectOfType<ResearchStation>().addedRPStorageCapacity = upgrade.GetValue();
+            else if (upgradeName == "MoreRPFromMissions") FindObjectOfType<MissionManager>().missionRewardMultiplyer = upgrade.GetValue();
         }
     }
 }

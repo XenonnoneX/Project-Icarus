@@ -6,6 +6,7 @@ public class RPStorageUI : MonoBehaviour
     ResearchStation researchStation;
 
     [SerializeField] Image image;
+    [SerializeField] Light2D warningLight;
 
     private void Awake()
     {
@@ -15,6 +16,7 @@ public class RPStorageUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        image.GetComponent<RectTransform>().localScale = new Vector3(1,researchStation.GetRPStorageFillPercentage(),1);
+        image.fillAmount = researchStation.GetRPStorageFillPercentage();
+        warningLight.SetAlphaMulitplier(Mathf.Min(researchStation.GetRPStorageFillPercentage() + 0.5f, 1));
     }
 }

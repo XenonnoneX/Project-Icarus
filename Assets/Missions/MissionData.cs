@@ -32,7 +32,7 @@ public class MissionStep
     [HideInInspector] public ControlStation station;
     bool stationTaskCompleted;
 
-    [SerializeField] bool setupDone = false;
+    bool setupDone;
 
     internal bool Completed()
     {
@@ -60,8 +60,6 @@ public class MissionStep
 
     private void Setup()
     {
-        Debug.Log("SetupDone: " + setupDone);
-
         if (setupDone) return;
 
         Debug.Log("Setup not done");

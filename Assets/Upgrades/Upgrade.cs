@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [System.Serializable]
 public class Upgrade
@@ -19,5 +20,10 @@ public class Upgrade
     public void SetLevel(int level)
     {
         currentLevel = level;
+    }
+
+    internal float GetValue()
+    {
+        return upgradeData.levelValues[currentLevel];
     }
 }

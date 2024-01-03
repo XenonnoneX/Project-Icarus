@@ -6,6 +6,7 @@ public class RepairTask : Task
 {   
     [SerializeField] Slider slider;
     [SerializeField] float holdDownTime = 3f;
+    [HideInInspector] public float repairSpeedMultiplier = 1f;
 
     float repairTime;
 
@@ -18,7 +19,7 @@ public class RepairTask : Task
     {
         base.UpdateLogic();
 
-        repairTime += controls.Player.Repair.ReadValue<float>() * Time.deltaTime * timeScale;
+        repairTime += controls.Player.Repair.ReadValue<float>() * repairSpeedMultiplier * Time.deltaTime * timeScale;
 
         slider.value = repairTime / holdDownTime;
 

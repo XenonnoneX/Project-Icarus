@@ -9,6 +9,6 @@ public class ShowMission : MonoBehaviour
     public void SetMission(Mission mission)
     {
         missionText.text = mission.missionText;
-        missionRewardText.text = mission.missionReward.ToString() + " RP";
+        missionRewardText.text = (mission.missionReward * FindObjectOfType<MissionManager>().missionRewardMultiplyer).ToString("F0") + " RP";
     }
 }

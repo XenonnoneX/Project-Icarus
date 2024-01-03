@@ -8,8 +8,10 @@ public class PlayerMovement : MonoBehaviour, TimeAffected
 {
     Rigidbody2D rb;
     Vector2 moveInput;
+    public Vector2 MoveInput { get => moveInput; }
 
     [SerializeField] float moveSpeed = 5f;
+    [HideInInspector] public float movSpeedMultiplier = 1;
 
     public float timeScale = 1;
 
@@ -26,7 +28,7 @@ public class PlayerMovement : MonoBehaviour, TimeAffected
     // Update is called once per frame
     void Update()
     {
-        rb.velocity = moveInput * moveSpeed * timeScale;
+        rb.velocity = moveInput * moveSpeed * movSpeedMultiplier * timeScale;
     }
 
     void OnMove(InputValue inputValue)

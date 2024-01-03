@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ArtifactDock : ControlStation{
 
+    
     ArtifactManager artifactManager;
 
     public int artifactChooseAmount = 3;

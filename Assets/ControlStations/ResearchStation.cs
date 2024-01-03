@@ -9,6 +9,7 @@ public class ResearchStation : ControlStation
     SpaceShipMovement spaceShipMovement;
 
     [SerializeField] float RPStorageCapacity = 100;
+    [HideInInspector] public float addedRPStorageCapacity = 0;
 
     float savedRP;
     float onBoardStoredRP;
@@ -44,12 +45,12 @@ public class ResearchStation : ControlStation
     {
         onBoardStoredRP += researchPoints;
 
-        if (onBoardStoredRP > RPStorageCapacity) onBoardStoredRP = RPStorageCapacity;
+        if (onBoardStoredRP > RPStorageCapacity + addedRPStorageCapacity) onBoardStoredRP = RPStorageCapacity + addedRPStorageCapacity;
     }
 
     public float GetRPStorageFillPercentage()
     {
-        return onBoardStoredRP / RPStorageCapacity;
+        return onBoardStoredRP / (RPStorageCapacity + addedRPStorageCapacity);
     }
 
     public override void CompleteTask()

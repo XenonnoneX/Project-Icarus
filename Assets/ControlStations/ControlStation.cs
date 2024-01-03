@@ -6,7 +6,7 @@ public enum StationType
     ShipMovement,
     Research,
     MissionManager,
-    SendSignal,
+    AnomalyAnalizer,
     ArtifactDock
 }
 
@@ -36,7 +36,7 @@ public abstract class ControlStation : MonoBehaviour, TimeAffected
 
     protected virtual void Update()
     {
-        if(stationState == global::StationState.Broken)
+        if(stationState == StationState.Broken)
         {
             timeSinceBroken += Time.deltaTime * timeScale;
             if(timeSinceBroken > timeToBreak)
@@ -49,6 +49,8 @@ public abstract class ControlStation : MonoBehaviour, TimeAffected
     public void SetStationState(StationState state)
     {
         this.stationState = state;
+
+        if (stationState == StationState.Working) timeSinceBroken = 0;
 
         onChangeStationState?.Invoke(state);
     }
@@ -67,5 +69,10 @@ public abstract class ControlStation : MonoBehaviour, TimeAffected
     public void SetTimeScale(float timeScale)
     {
         this.timeScale = timeScale;
+    }
+
+    public float GetBrokenTimePercentage()
+    {
+        return timeSinceBroken / timeToBreak;
     }
 }
