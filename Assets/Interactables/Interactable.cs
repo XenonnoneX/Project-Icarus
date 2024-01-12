@@ -153,7 +153,7 @@ public class Interactable : MonoBehaviour, IInteractable, TimeAffected
     public void CancelTask()
     {
         repairTask.EndTask();
-        task.EndTask();
+        if(task != null) task.EndTask();
     }
 
     public void StartRepair()

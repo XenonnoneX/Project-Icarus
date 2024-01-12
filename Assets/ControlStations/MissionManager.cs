@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MissionManager : ControlStation
@@ -71,7 +72,7 @@ public class MissionManager : ControlStation
         int breakCounter = 0;
         int rand = -1;
         
-        while (rand == -1 || MissionAlreadyActive(rand) || breakCounter > 100)
+        while (rand == -1 || MissionTypeActive(rand) || breakCounter > 100)
         {
             rand = UnityEngine.Random.Range(0, allMissions.Count);
             breakCounter++;
@@ -80,19 +81,27 @@ public class MissionManager : ControlStation
         return new Mission(allMissions[rand]);
     }
 
-    private bool MissionAlreadyActive(int rand)
+    private bool MissionTypeActive(int rand)
     {
         Mission checkMission = new Mission(allMissions[rand]);
 
         foreach (Mission mission in currentMissions)
         {
-            if (mission.missionData == checkMission.missionData)
+            if (mission.missionData == checkMission.missionData || SameStationMissions(mission, checkMission))
             {
                 return true;
             }
         }
 
         return false;
+    }
+
+    private bool SameStationMissions(Mission mission, Mission checkMission)
+    {
+        bool sameMisionType = mission.missionData.missionSteps[0].missionType == checkMission.missionData.missionSteps[0].missionType;
+        bool sameStationType = mission.missionData.missionSteps[0].stationType == checkMission.missionData.missionSteps[0].stationType;
+
+        return sameMisionType && sameStationType;
     }
 
     private void CheckMissionsCompleted()

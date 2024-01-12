@@ -72,6 +72,6 @@ public abstract class Task : MonoBehaviour, TimeAffected
     void SetIsInteracting(bool isInteracting)
     {
         this.isInteracting = isInteracting;
-        interactable.SetIsInteracting(isInteracting);
+        if(interactable != null) interactable.SetIsInteracting(isInteracting);
     }
 }

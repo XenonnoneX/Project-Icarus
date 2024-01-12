@@ -10368,7 +10368,6 @@ GameObject:
   m_Component:
   - component: {fileID: 631573117}
   - component: {fileID: 631573118}
-  - component: {fileID: 631573119}
   - component: {fileID: 631573120}
   m_Layer: 0
   m_Name: MissionScanner
@@ -10422,20 +10421,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d08f3906e921a2b4ab8138aabb0de37f, type: 2}
   - {fileID: 11400000, guid: 7bd643dd44739f2458a9918ad5c0eb9a, type: 2}
   - {fileID: 11400000, guid: 700bb4cfabd439d4da1ae3eb511cca61, type: 2}
---- !u!114 &631573119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 631573116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd5b31477c07809419681809b271491c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  showTaskStuff: {fileID: 0}
-  numberOfKeys: 3
 --- !u!114 &631573120
 MonoBehaviour:
   m_ObjectHideFlags: 0
