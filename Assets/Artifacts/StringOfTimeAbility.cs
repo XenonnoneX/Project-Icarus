@@ -1,10 +1,7 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public class StringOfTimeAbility : Artifact, TimeAffected
+public class StringOfTimeAbility : Artifact, TimeAffected, Ability
 {
     Transform player;
 
@@ -18,6 +15,7 @@ public class StringOfTimeAbility : Artifact, TimeAffected
 
     public delegate void OnPositionSaved();
     public event OnPositionSaved onPositionSaved;
+    public event Ability.OnAbilityUsed onAbilityUsed;
 
     float timeScale = 1;
 
@@ -56,15 +54,15 @@ public class StringOfTimeAbility : Artifact, TimeAffected
         onPositionSaved.Invoke();
     }
 
-    private void UseAbility()
+    void UseAbility()
     {
         player.position = positions.Dequeue();
         positions.Clear();
 
         timeSinceLastUse = 0f;
+
+        onAbilityUsed?.Invoke();
     }
-
-
 
     public void SetTimeScale(float timeScale)
     {

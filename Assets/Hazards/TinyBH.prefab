@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6511728061251888658}
   - component: {fileID: 3367681468381748536}
   - component: {fileID: 7615687756378887592}
+  - component: {fileID: 5206809739672332236}
   m_Layer: 0
   m_Name: TinyBH
   m_TagString: Untagged
@@ -47,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anomalyDuration: 10
-  anomalyType: 3
+  anomalyType: 4
   movSpeed: 2
 --- !u!58 &3367681468381748536
 CircleCollider2D:
@@ -111,3 +112,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &5206809739672332236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 727241229006065429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f22f49a0b656b54d9355663c7affbbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anomalySpawnSound: {fileID: 0}
+  anomalyRemoveSound: {fileID: 0}
+  hitPlayerSound: {fileID: 0}

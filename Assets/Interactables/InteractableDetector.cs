@@ -9,14 +9,24 @@ public class InteractableDetector : MonoBehaviour
 
     IInteractable currentClosestInteractable;
 
+    IInteractable currentInteractingInteractable;
+    public IInteractable CurrentInteractingInteractable => currentInteractingInteractable;
+
     private void Awake()
     {
         playerMovement = FindObjectOfType<PlayerMovement>();
+
+        playerMovement.onHitByBH += CancelTask;
     }
 
     private void Update()
     {
         ShowClosestInteractable();
+    }
+
+    void CancelTask()
+    {
+        if (currentInteractingInteractable != null) currentInteractingInteractable.CancelTask();
     }
 
     private void ShowClosestInteractable()
@@ -59,11 +69,11 @@ public class InteractableDetector : MonoBehaviour
     void OnInteract()
     {
         if (currentClosestInteractable == null) return;
-        
-        //currentTask = currentClosestInteractable;
-        currentClosestInteractable.onInteractEnd += OnInteractEnd;
+
+        currentInteractingInteractable = currentClosestInteractable;
+        currentInteractingInteractable.onInteractEnd += OnInteractEnd;
         playerMovement.StopMovement();
-        currentClosestInteractable.Interact();
+        currentInteractingInteractable.Interact();
     }
 
     void OnTakeItem()
@@ -75,8 +85,7 @@ public class InteractableDetector : MonoBehaviour
 
     public void OnInteractEnd()
     {
-        if (currentClosestInteractable == null) return;
-
+        currentInteractingInteractable = null;
         playerMovement.StartMovement();
     }
 

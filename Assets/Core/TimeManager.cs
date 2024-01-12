@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class TimeManager : MonoBehaviour
@@ -14,21 +13,19 @@ public class TimeManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    private void Update()
+    public void SetTimeScale(float scale)
     {
-        if (Input.GetKeyDown(KeyCode.Space)) TogglePause();
-
+        timeScale = scale; 
         Time.timeScale = timeScale;
     }
 
-    public void SetTimeScale(float scale)
+    internal void Pause()
     {
-        timeScale = scale;
+        SetTimeScale(0);
     }
 
-    public void TogglePause()
+    internal void Unpause()
     {
-        if (timeScale == 0) timeScale = 1;
-        else timeScale = 0;
+        SetTimeScale(1);
     }
 }

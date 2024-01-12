@@ -12,4 +12,5 @@ public interface IInteractable
     public void Interact();
     public void TakeItem();
     public void InteractEnd();
+    void CancelTask();
 }

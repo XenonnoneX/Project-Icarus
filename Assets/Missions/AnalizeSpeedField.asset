@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a93a66a77f9c9114a9206c20c2de9810, type: 3}
-  m_Name: SendSignal
+  m_Name: AnalizeSpeedField
   m_EditorClassIdentifier: 
   missionSteps:
   - missionType: 1
     height: 0
     stationType: 3
+    anomalyType: 3
     station: {fileID: 0}
-  missionText: Send signal
+  missionText: Analyze Speed Field
   missionReward: 50

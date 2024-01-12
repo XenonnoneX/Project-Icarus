@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1605750997386722236
 RectTransform:
   m_ObjectHideFlags: 0
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 8489208369922323158}
   - component: {fileID: 8494705076731419018}
   m_Layer: 5
-  m_Name: MissionPrefab
+  m_Name: MissionShowPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -225,7 +225,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missionText: {fileID: 3506876002434405280}
-  missionRewardText: {fileID: 4991681580115045372}
 --- !u!1 &2512842777111758654
 GameObject:
   m_ObjectHideFlags: 0

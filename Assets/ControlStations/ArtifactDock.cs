@@ -33,8 +33,6 @@ public class ArtifactDock : ControlStation{
         {
             int rand = Random.Range(0, availableArtifacts.Count);
 
-            print(rand);
-
             Artifact artifact = availableArtifacts[rand];
 
             if (!artifacts.Contains(artifact))
@@ -52,5 +50,11 @@ public class ArtifactDock : ControlStation{
         }
 
         return artifacts;
+    }
+
+    internal bool ArtifactAvailable()
+    {
+        if (availableArtifactsCount > 0) return true;
+        else return false;
     }
 }

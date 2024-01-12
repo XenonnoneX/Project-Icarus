@@ -6,6 +6,7 @@ public class MissionManager : ControlStation
     ResearchStation research;
 
     public int maxMissions = 3;
+    public int missionsForArtifact = 1;
     [SerializeField] float timeToGetNewMission = 10f;
     float newMissionTimer;
 
@@ -14,13 +15,23 @@ public class MissionManager : ControlStation
     [SerializeField] List<MissionData> allMissions;
     public List<Mission> currentMissions = new List<Mission>();
     [SerializeField] List<Mission> completedMissions = new List<Mission>();
+    public int CompletedMissionsCount => completedMissions.Count;
 
     public delegate void OnMissionsChanged();
     public OnMissionsChanged onMissionsChanged;
 
+    public delegate void OnMissionCompleted();
+    public OnMissionCompleted onMissionCompleted;
+
     private void Awake()
     {
         research = FindObjectOfType<ResearchStation>();
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        newMissionTimer = timeToGetNewMission;
     }
 
     protected override void Update()
@@ -48,7 +59,9 @@ public class MissionManager : ControlStation
             print("Getting new mission");
             newMissionTimer -= timeToGetNewMission;
 
-            currentMissions.Add(GetNewRandomMission());
+            Mission newMission = GetNewRandomMission();
+            newMission.Setup();
+            currentMissions.Add(newMission);
             onMissionsChanged.Invoke();
         }
     }
@@ -86,12 +99,11 @@ public class MissionManager : ControlStation
     {
         foreach (Mission mission in currentMissions)
         {
-            print("Checking Mission: " + mission.missionData.name);
             if (mission.CheckMissionCompleted())
             {
                 research.AddResearchPoints(mission.missionReward * missionRewardMultiplyer);
                 completedMissions.Add(mission);
-                print("Mission Completed: " + mission.missionData.name);
+                onMissionCompleted?.Invoke();
             }
         }
 
@@ -99,7 +111,6 @@ public class MissionManager : ControlStation
         {
             if (currentMissions.Contains(mission))
             {
-                print("Removing Mission: " + mission.missionData.name + " from current missions");
                 currentMissions.Remove(mission);
                 onMissionsChanged.Invoke();
             }

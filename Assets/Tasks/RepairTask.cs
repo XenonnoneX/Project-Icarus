@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class RepairTask : Task
@@ -34,7 +33,10 @@ public class RepairTask : Task
     {
         print("start repair task");
         base.StartTask(interactable);
-        
+
+        interactable.StartRepair();
+
+
         repairTime = 0f;
         slider.value = 0f;
     }

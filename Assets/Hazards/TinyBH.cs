@@ -6,6 +6,9 @@ public class TinyBH : Anomaly, TimeAffected
 
     Vector3 movDir;
 
+    public delegate void OnHitPlayer();
+    public OnHitPlayer onHitPlayer;
+
     float timeScale = 1;
 
     public void SetTimeScale(float timeScale)
@@ -46,7 +49,8 @@ public class TinyBH : Anomaly, TimeAffected
     {
         if (collision.CompareTag("Player"))
         {
-            collision.transform.position = Utils.GetRandomPosOnWalkableArea();
+            collision.GetComponent<PlayerMovement>().GetHitByBH();
+            onHitPlayer?.Invoke();
         }
         else if(collision.GetComponent<Interactable>())
         {

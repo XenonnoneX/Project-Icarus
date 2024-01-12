@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class Mission
@@ -32,13 +30,18 @@ public class Mission
         {
             if (missionData.missionSteps[i].Completed())
             {
-                Debug.Log("Mission Step Completed: " + missionData.missionSteps[i].missionType);
-                Debug.Log("Total Step count: " + missionData.missionSteps.Count);
+                // Debug.Log("Mission Step Completed: " + missionData.missionSteps[i].missionType);
+                // Debug.Log("Total Step count: " + missionData.missionSteps.Count);
                 stepsCompleted[i] = true;
             }
             else allStepsCompleted = false;
         }
 
         return allStepsCompleted;
+    }
+
+    internal void Setup()
+    {
+        missionData.Setup();
     }
 }

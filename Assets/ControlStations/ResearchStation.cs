@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class ResearchStation : ControlStation
@@ -14,10 +11,14 @@ public class ResearchStation : ControlStation
     float savedRP;
     float onBoardStoredRP;
 
+    float papersReleased;
+
     public int GetSavedRP()
     {
         return (int) savedRP;
     }
+
+    public int PapersReleased() => (int)papersReleased;
 
     private void Awake()
     {
@@ -31,14 +32,18 @@ public class ResearchStation : ControlStation
 
         if (stationState != StationState.Working) return;
 
-        AddResearchPoints(ResearchPointsPerSecond() * Time.deltaTime * timeScale);
+        CheckReleasePaper();
     }
 
-    private float ResearchPointsPerSecond()
+    private void CheckReleasePaper()
     {
-        int shipHeight = spaceShipMovement.GetCurrentHeight() + 1; // to not divide by 0
+        float rand = UnityEngine.Random.Range(0f, 1f);
 
-        return 10f / shipHeight;
+        // the higher the savedRP Count the higher probability to release a paper
+
+        papersReleased += rand * savedRP / 100 * Time.deltaTime;
+
+        savedRP = Mathf.Max(0, savedRP - Time.deltaTime);
     }
 
     public void AddResearchPoints(float researchPoints)

@@ -23,8 +23,9 @@ public class SpaceShipMovement : ControlStation
         else Destroy(gameObject);
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         researchStation = StationManager.instance.GetControlStationFromType(StationType.Research) as ResearchStation;
     }
 
@@ -82,7 +83,18 @@ public class SpaceShipMovement : ControlStation
     private void GameOver()
     {
         PlayerPrefs.SetInt("CollectedResearchPoints", researchStation.GetSavedRP());
+        PlayerPrefs.SetInt("ReleasedPapers", researchStation.PapersReleased());
+        PlayerPrefs.SetFloat("TimeSurvived", Time.timeSinceLevelLoad);
 
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("GameOver");
+    }
+
+    internal bool HeightBelowWarningHeight()
+    {
+        if (currentHeight < maxHeight * 0.25f)
+        {
+            return true;
+        }
+        else return false;
     }
 }

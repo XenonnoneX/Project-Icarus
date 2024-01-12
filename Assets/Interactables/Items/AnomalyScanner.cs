@@ -1,13 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class AnomalyScanner : MonoBehaviour
 {
     PlayerInventory inventory;
-    [SerializeField] Item anomalyScannerItem;
+    [SerializeField] ItemData anomalyScannerItem;
 
     [SerializeField] Transform hazardParent;
     List<Anomaly> anomaliesInRange;
@@ -15,6 +13,9 @@ public class AnomalyScanner : MonoBehaviour
 
     AnomalyType capturedAnomalyType;
     public AnomalyType GetCapturedAnomalyType => capturedAnomalyType;
+
+    public delegate void OnAnomalyChanged(AnomalyType anomalyType);
+    public event OnAnomalyChanged onAnomalyChanged;
 
     private void Awake()
     {
@@ -35,7 +36,7 @@ public class AnomalyScanner : MonoBehaviour
         if (capturedAnomalyType == AnomalyType.None)
         {
             Anomaly closestAnomaly = GetClosestAnomaly();
-            capturedAnomalyType = closestAnomaly.anomalyType;
+            SetAnomalyType(closestAnomaly.anomalyType);
 
             closestAnomaly.RemoveAnomaly();
         }
@@ -75,5 +76,11 @@ public class AnomalyScanner : MonoBehaviour
         }
 
         return anomaliesInRange;
+    }
+    
+    internal void SetAnomalyType(AnomalyType type)
+    {
+        capturedAnomalyType = type;
+        onAnomalyChanged?.Invoke(capturedAnomalyType);
     }
 }

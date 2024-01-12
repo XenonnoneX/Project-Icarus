@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections;
-using Unity.VisualScripting;
+﻿using System.Collections;
 using UnityEngine;
 
-public class Dash : Artifact
+public class Dash : Artifact, Ability
 {
     protected PlayerMovement playerMovement;
     Rigidbody2D playerRB;
@@ -14,6 +12,8 @@ public class Dash : Artifact
     
     [SerializeField] public float cooldown = 0.5f;
     float timeSinceLastUse = Mathf.Infinity;
+
+    public event Ability.OnAbilityUsed onAbilityUsed;
 
     protected override void Awake()
     {
@@ -38,7 +38,13 @@ public class Dash : Artifact
         }
     }
 
-    protected virtual void UseAbility()
+    void UseAbility()
+    {
+        onAbilityUsed?.Invoke();
+        AbilityLogic();
+    }
+
+    protected virtual void AbilityLogic()
     {
         StartCoroutine(DoDash());
     }

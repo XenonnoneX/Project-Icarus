@@ -6,6 +6,7 @@ public class Light2D : MonoBehaviour, TimeAffected
     [SerializeField] LayerMask wallLayer = 1 << 10;
     [SerializeField] float lightRange = 1f;
     [SerializeField] Color lightColor = Color.white;
+    // [SerializeField, Range(0, 1)] float emissionIntensity = 0.5f;
     [SerializeField] float blinkingSpeed = 10f; // Blinks per second
     float blinkSpeedMultiplier = 1;
     float alphaMultiplier = 1;
@@ -33,6 +34,9 @@ public class Light2D : MonoBehaviour, TimeAffected
         // Set the sorting order
         meshRenderer.sortingLayerName = "Default"; // Change to your desired sorting layer
         meshRenderer.sortingOrder = sortingLayer; // Change to your desired sorting order
+                                                  // Set up emission properties
+        // urpMaterial.EnableKeyword("_EMISSION");
+        // urpMaterial.SetColor("_EmissionColor", lightColor * emissionIntensity);
     }
 
     private void Update()
@@ -106,6 +110,9 @@ public class Light2D : MonoBehaviour, TimeAffected
 
         float alpha = Mathf.Cos(totalTime * currentBlinkingSpeed) * 0.5f + 0.5f;
         lightColor.a = alpha * alphaMultiplier;
+        
+        // Adjust emission intensity based on alpha
+        // meshRenderer.material.SetColor("_EmissionColor", lightColor * alpha * alphaMultiplier * emissionIntensity);
     }
 
     internal void SetBlinkSpeedMultiplier(float v)

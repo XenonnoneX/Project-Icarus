@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 7053453654599514443}
   - component: {fileID: 8059998197753824033}
   - component: {fileID: 5604208299363144403}
+  - component: {fileID: 6257306187346951986}
+  - component: {fileID: -806126595215237722}
   m_Layer: 2
   m_Name: TimeSlowField
   m_TagString: Untagged
@@ -83,8 +85,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anomalyDuration: 5
   anomalyType: 2
-  effectDuration: 5
   timeScale: 0.5
+--- !u!114 &6257306187346951986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896844525242792584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28d432f278febf14296d1f33ce4b5039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anomalySpawnSound: {fileID: 0}
+  anomalyRemoveSound: {fileID: 0}
+--- !u!50 &-806126595215237722
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1896844525242792584}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &4276353372638091837
 GameObject:
   m_ObjectHideFlags: 0

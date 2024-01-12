@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7642007200888623457}
   - component: {fileID: 5335569898637681050}
+  - component: {fileID: 3843782024865218262}
   m_Layer: 0
   m_Name: GravityPullEffect
   m_TagString: Untagged
@@ -47,3 +48,17 @@ MonoBehaviour:
   anomalyDuration: 8
   anomalyType: 1
   pullStrength: 10000
+--- !u!114 &3843782024865218262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3648881193036305261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28d432f278febf14296d1f33ce4b5039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anomalySpawnSound: {fileID: 0}
+  anomalyRemoveSound: {fileID: 0}

@@ -17,6 +17,18 @@ public class RPStorageUI : MonoBehaviour
     void Update()
     {
         image.fillAmount = researchStation.GetRPStorageFillPercentage();
-        warningLight.SetAlphaMulitplier(Mathf.Min(researchStation.GetRPStorageFillPercentage() + 0.5f, 1));
+
+        if(researchStation.GetStationState() != StationState.Working)
+        {
+            warningLight.SetAlphaMulitplier(0);
+        }
+        else if (researchStation.GetRPStorageFillPercentage() >= 0.75f)
+        {
+            warningLight.SetAlphaMulitplier(1);
+        }
+        else
+        {
+            warningLight.SetAlphaMulitplier(0);
+        }
     }
 }

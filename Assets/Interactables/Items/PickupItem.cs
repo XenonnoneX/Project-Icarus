@@ -7,7 +7,7 @@ public class PickupItem : MonoBehaviour, IInteractable
     SpriteRenderer spriteRenderer;
     [SerializeField] GameObject showInteractable;
 
-    [SerializeField] Item itemData;
+    [SerializeField] ItemData itemData;
 
     public Transform myTransform { get; set; }
     public Action onInteractEnd { get; set; }
@@ -55,12 +55,17 @@ public class PickupItem : MonoBehaviour, IInteractable
 
     public void InteractEnd()
     {
-        onInteractEnd.Invoke();
+        onInteractEnd?.Invoke();
     }
 
-    public void SetItemData(Item itemData)
+    public void SetItemData(ItemData itemData)
     {
         this.itemData = itemData;
         spriteRenderer.sprite = itemData.sprite;
+    }
+
+    public void CancelTask()
+    {
+        
     }
 }

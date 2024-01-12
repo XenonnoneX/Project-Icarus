@@ -22,7 +22,7 @@ public class StringOfTimeVisuals : MonoBehaviour
         playerShadow = Instantiate(playerVisuals, transform);
         playerShadow.GetComponentInChildren<SpriteRenderer>().color = new Color(0, 0, 0, 0.5f);
     }
-
+     
     private void DrawLine()
     {
         Vector3[] positions = stringOfTimeAbility.positions.ToArray();

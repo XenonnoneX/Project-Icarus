@@ -1,7 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using static System.Collections.Specialized.BitVector32;
 
 public class Interactable : MonoBehaviour, IInteractable, TimeAffected
 {
@@ -10,7 +9,7 @@ public class Interactable : MonoBehaviour, IInteractable, TimeAffected
     
     public ControlStation station;
     [SerializeField] Task task;
-    [SerializeField] Item neededItem;
+    [SerializeField] ItemData neededItem;
 
     [SerializeField] GameObject showInteractable;
     [SerializeField] GameObject showBroken;
@@ -20,10 +19,15 @@ public class Interactable : MonoBehaviour, IInteractable, TimeAffected
     public Action onInteractEnd { get; set; }
 
 
-    Item currentItem;
+    ItemData currentItem;
 
     bool isInteracting;
-    
+    public void SetIsInteracting(bool value) 
+    {
+        isInteracting = value;
+        station.SetIsInteracting(value);
+    }
+
 
     void Awake()
     {
@@ -43,16 +47,11 @@ public class Interactable : MonoBehaviour, IInteractable, TimeAffected
         showDestroyed.SetActive(false);
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.B)) BreakInteractable();
-    }
-
     public void Interact()
     {
         if (isInteracting) return;
 
-        isInteracting = true;
+        SetIsInteracting(true);
 
         if (station.GetStationState() == StationState.Destroyed)
         {
@@ -61,7 +60,6 @@ public class Interactable : MonoBehaviour, IInteractable, TimeAffected
         }
         else if (station.GetStationState() == StationState.Broken)
         {
-            print("Repairing");
             repairTask.StartTask(this);
             repairTask.SetTimeScale(station.timeScale);
         }
@@ -103,8 +101,9 @@ public class Interactable : MonoBehaviour, IInteractable, TimeAffected
     public void InteractEnd()
     {
         if (!isInteracting) return;
-        
-        isInteracting = false;
+
+        station.beingRepaired = false;
+        SetIsInteracting(false);
         
         onInteractEnd.Invoke();
     }
@@ -149,5 +148,16 @@ public class Interactable : MonoBehaviour, IInteractable, TimeAffected
     {
         station.SetTimeScale(timeScale);
         if (task != null) task.SetTimeScale(timeScale);
+    }
+
+    public void CancelTask()
+    {
+        repairTask.EndTask();
+        task.EndTask();
+    }
+
+    public void StartRepair()
+    {
+        station.beingRepaired = true;
     }
 }

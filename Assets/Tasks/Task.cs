@@ -14,6 +14,9 @@ public abstract class Task : MonoBehaviour, TimeAffected
 
     protected float timeScale = 1;
 
+    public delegate void OnStartTask();
+    public event OnStartTask onStartTask;
+
     protected virtual void Start()
     {
         controls = new PlayerInputs();
@@ -21,14 +24,14 @@ public abstract class Task : MonoBehaviour, TimeAffected
         if(showTaskStuff != null) showTaskStuff.SetActive(false);
     }
 
-    protected virtual void Update()
+    protected virtual void LateUpdate()
     {
+        if (!isInteracting) return;
+
         if (controls.Player.CancelInteraction.triggered)
         {
             EndTask();
         }
-
-        if (!isInteracting) return;
 
         UpdateLogic();
     }
@@ -41,21 +44,34 @@ public abstract class Task : MonoBehaviour, TimeAffected
     public virtual void StartTask(Interactable interactable)
     {
         if (showTaskStuff != null) showTaskStuff.SetActive(true);
-        isInteracting = true;
 
         this.interactable = interactable;
+
+        SetIsInteracting(true);
+
+        onStartTask?.Invoke();
     }
 
     public virtual void EndTask()
     {
-        if (showTaskStuff != null) showTaskStuff.SetActive(false);
-        isInteracting = false;
+        if (showTaskStuff != null)
+        {
+            showTaskStuff.SetActive(false);
+        }
 
         onInteractEnd?.Invoke();
+
+        SetIsInteracting(false);
     }
 
     public void SetTimeScale(float timeScale)
     {
         this.timeScale = timeScale;
+    }
+
+    void SetIsInteracting(bool isInteracting)
+    {
+        this.isInteracting = isInteracting;
+        interactable.SetIsInteracting(isInteracting);
     }
 }

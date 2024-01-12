@@ -1,13 +1,17 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class AnomalyAnalysisStation : ControlStation
 {
     AnomalyScanner anomalyScanner;
 
     AnomalyType currentAnomalyType;
+    public AnomalyType CurrentAnomalyType => currentAnomalyType;
 
     [SerializeField] float anomalyAnalysisTime = 15f;
     float timeSinceAnomalyAnalysisStarted = 0;
+
+    bool analysisCompleted = false;
 
     private void Awake()
     {
@@ -20,6 +24,8 @@ public class AnomalyAnalysisStation : ControlStation
 
         if (stationState != StationState.Working) return;
 
+        if (currentAnomalyType == AnomalyType.None) return;
+        
         timeSinceAnomalyAnalysisStarted += Time.deltaTime * timeScale;
     }
 
@@ -31,9 +37,11 @@ public class AnomalyAnalysisStation : ControlStation
 
     public override void CompleteTask()
     {
-        if (currentAnomalyType == AnomalyType.None)
+        if (timeSinceAnomalyAnalysisStarted == 0)
         {
             currentAnomalyType = anomalyScanner.GetCapturedAnomalyType;
+            anomalyScanner.SetAnomalyType(AnomalyType.None);
+            // anomalyScanner.SetAnomalyType(currentAnomalyType); // if other anomaly was inside swap them
         }
         else if (timeSinceAnomalyAnalysisStarted > anomalyAnalysisTime)
         {
@@ -47,5 +55,11 @@ public class AnomalyAnalysisStation : ControlStation
     private void FinishAnalysis()
     {
         print("Analysis of " + currentAnomalyType + " finished");
+        analysisCompleted = true;
+        timeSinceAnomalyAnalysisStarted = 0;
     }
+
+    internal bool AnalysisCompleted() => analysisCompleted;
+
+    internal bool CurrentlyAnalizing() => timeSinceAnomalyAnalysisStarted > 0;
 }

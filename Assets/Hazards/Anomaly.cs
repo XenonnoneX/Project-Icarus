@@ -1,11 +1,11 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public enum AnomalyType
 {
     None,
     GravitySurge,
     TimeSlowField,
+    TimeSpeedField,
     TinyBH
 }
 
@@ -15,6 +15,9 @@ public class Anomaly : MonoBehaviour
 
     public AnomalyType anomalyType;
 
+    public delegate void OnRemoveAnomaly();
+    public OnRemoveAnomaly onRemoveAnomaly;
+
     protected virtual void Start()
     {
         Invoke("RemoveAnomaly", anomalyDuration);
@@ -22,6 +25,6 @@ public class Anomaly : MonoBehaviour
 
     internal virtual void RemoveAnomaly()
     {
-        
+        onRemoveAnomaly?.Invoke();
     }
 }

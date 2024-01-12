@@ -30,7 +30,7 @@ public class TunnelDash : Dash
         dash.enabled = false;
     }
 
-    protected override void UseAbility()
+    protected override void AbilityLogic()
     {
         if (timeSinceLastTunnelDash >= tunnelDashCD)
         {
@@ -39,7 +39,7 @@ public class TunnelDash : Dash
         }
         else
         {
-            base.UseAbility();
+            base.AbilityLogic();
         }
     }
 

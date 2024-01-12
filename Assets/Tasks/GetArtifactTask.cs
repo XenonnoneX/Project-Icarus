@@ -1,10 +1,11 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 
 public class GetArtifactTask : Task
 {
     ArtifactManager artifactManager;
     ArtifactDock artifactDock;
+    MissionManager missionManager;
     public List<Artifact> chooseableArtifacts = new List<Artifact>();
 
     public delegate void OnGetChoice();
@@ -14,20 +15,32 @@ public class GetArtifactTask : Task
     {
         artifactManager = FindObjectOfType<ArtifactManager>();
         artifactDock = FindObjectOfType<ArtifactDock>();
+        missionManager = FindObjectOfType<MissionManager>();
+
+        missionManager.onMissionCompleted += CheckGetArtifact;
+    }
+
+    private void CheckGetArtifact()
+    {
+        if(missionManager.CompletedMissionsCount % missionManager.missionsForArtifact == 0)
+        {
+            artifactDock.availableArtifactsCount++;
+            StartTask(null);
+        }
     }
 
     public override void StartTask(Interactable interactable)
     {
         base.StartTask(interactable);
 
-        TimeManager.instance.SetTimeScale(0);
+        TimeManager.instance.Pause();
 
         if (chooseableArtifacts.Count == 0) GetArtifactChoice();
     }
 
     public override void EndTask()
     {
-        TimeManager.instance.SetTimeScale(1);
+        TimeManager.instance.Unpause();
         base.EndTask();
     }
 

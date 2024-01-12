@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GravityPullOnPlayer : Anomaly
@@ -37,6 +35,7 @@ public class GravityPullOnPlayer : Anomaly
 
     internal override void RemoveAnomaly()
     {
+        base.RemoveAnomaly();
         gravityPullEffect.EndEffect();
     }
 }

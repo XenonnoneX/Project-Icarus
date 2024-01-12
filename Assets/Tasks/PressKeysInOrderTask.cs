@@ -1,28 +1,32 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.Controls;
 
 public class PressKeysInOrderTask : Task
 {
     [SerializeField] float numberOfKeys = 3f;
     List<KeyCode> keyCodes = new List<KeyCode>();
+    public List<KeyCode> GetKeyCodes => keyCodes;
+
+    int currentKeyIndex = 0;
+    public int GetCurrentKeyIndex => currentKeyIndex;
+
+    public delegate void OnInputRegistered();
+    public event OnInputRegistered onInputRegistered;
+
     public override void StartTask(Interactable interactable)
     {
-        base.StartTask(interactable);
-
         if (keyCodes.Count == 0) GenerateKeyCodes();
-
-        for (int i = 0; i < keyCodes.Count; i++)
-        {
-            print("Press " + keyCodes[i]);
-        }
+        
+        currentKeyIndex = 0;
+        
+        base.StartTask(interactable);
     }
 
     private void GenerateKeyCodes()
     {
         for (int i = 0; i < numberOfKeys; i++)
         {
-            keyCodes.Add(GetRandomLetterKeyCode());
+            keyCodes.Add(GetRandomArrowKeyCode());
         }
     }
 
@@ -34,19 +38,25 @@ public class PressKeysInOrderTask : Task
 
         foreach (KeyCode code in System.Enum.GetValues(typeof(KeyCode)))
         {
-            if (Input.GetKeyDown(code))
+            if (Input.GetKeyDown(code) && code != keyCodes[currentKeyIndex])
             {
-                print(code);
+                currentKeyIndex = 0;
+                onInputRegistered?.Invoke();
             }
         }
 
-        if (Input.GetKeyDown(keyCodes[0]))
+        if (Input.GetKeyDown(keyCodes[currentKeyIndex]))
         {
-            keyCodes.RemoveAt(0);
+            currentKeyIndex++;
 
-            if (keyCodes.Count == 0)
+            onInputRegistered?.Invoke();
+
+            if (currentKeyIndex >= keyCodes.Count)
             {
+                keyCodes.Clear();
                 interactable.CompleteTask();
+                EndTask();
+                currentKeyIndex = 0;
             }
         }
     }
@@ -62,5 +72,15 @@ public class PressKeysInOrderTask : Task
         };
 
         return letterKeyCodes[Random.Range(0, letterKeyCodes.Length)];
+    }
+
+    KeyCode GetRandomArrowKeyCode()
+    {
+        KeyCode[] arrowKeyCodes =
+        {
+            KeyCode.DownArrow, KeyCode.UpArrow, KeyCode.LeftArrow, KeyCode.RightArrow
+        };
+
+        return arrowKeyCodes[Random.Range(0, arrowKeyCodes.Length)];
     }
 }

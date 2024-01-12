@@ -4,7 +4,7 @@ using UnityEngine;
 public class ResearchUI : MonoBehaviour
 {
     ResearchStation research;
-    [SerializeField] TMP_Text currentResearchPointsText;
+    [SerializeField] TMP_Text PapersReleasedText;
 
     private void Awake()
     {
@@ -13,6 +13,6 @@ public class ResearchUI : MonoBehaviour
 
     void Update()
     {
-        currentResearchPointsText.text = research.GetSavedRP().ToString() + " RP";
+        PapersReleasedText.text = research.PapersReleased().ToString() + " papers released";
     }
 }

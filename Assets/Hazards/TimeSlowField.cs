@@ -33,6 +33,8 @@ public class TimeSlowField : Anomaly
 
     internal override void RemoveAnomaly()
     {
+        base.RemoveAnomaly();
+
         foreach (TimeAffected timeAffected in currentlyAffectedObjects)
         {
             timeAffected.SetTimeScale(1f);

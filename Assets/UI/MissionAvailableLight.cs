@@ -17,7 +17,11 @@ public class MissionAvailableLight : MonoBehaviour
 
     private void Update()
     {
-        if(missionManager.MissionAvailable())
+        if (missionManager.GetStationState() != StationState.Working)
+        {
+            missionAvailableLight.SetAlphaMulitplier(0);
+        }
+        else if (missionManager.MissionAvailable())
         {
             missionAvailableLight.SetAlphaMulitplier(1);
         }

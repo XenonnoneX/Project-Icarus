@@ -6,7 +6,8 @@ using UnityEngine;
 public enum MissionType
 {
     ReachHeightBelow,
-    CompleteStationTask
+    CompleteStationTask,
+    GetHitByTineBH
 }
 
 [CreateAssetMenu()]
@@ -16,6 +17,14 @@ public class MissionData : ScriptableObject
     
     public string missionText;
     public int missionReward;
+
+    internal void Setup()
+    {
+        foreach (MissionStep step in missionSteps)
+        {
+            step.Setup();
+        }
+    }
 }
 
 [System.Serializable]
@@ -28,26 +37,24 @@ public class MissionStep
     
     [ConditionalHide("missionType", (int)MissionType.CompleteStationTask)]
     public StationType stationType;
-    [ConditionalHide("missionType", (int)MissionType.CompleteStationTask)]
-    [HideInInspector] public ControlStation station;
-    bool stationTaskCompleted;
 
-    bool setupDone;
+    [ConditionalHide("stationType", (int)StationType.AnomalyAnalizer)]
+    public AnomalyType anomalyType;
+
+
+    [HideInInspector] public ControlStation station;
+    bool missionStepCompleted;
+    
 
     internal bool Completed()
     {
-        Setup();
-
         if(missionType == MissionType.ReachHeightBelow)
         {
-            if (ReachedHeightBelow(height)) Debug.Log("Reached Height completed task");
             return ReachedHeightBelow(height);
-        }else if (missionType == MissionType.CompleteStationTask)
+        }else if (missionType == MissionType.CompleteStationTask || missionType == MissionType.GetHitByTineBH)
         {
-            bool completed = stationTaskCompleted;
-            stationTaskCompleted = false;
-
-            if (completed) Debug.Log("Station Task Completed");
+            bool completed = missionStepCompleted;
+            missionStepCompleted = false;
             
             return completed;
         }
@@ -58,19 +65,20 @@ public class MissionStep
         }
     }
 
-    private void Setup()
+    public void Setup()
     {
-        if (setupDone) return;
-
-        Debug.Log("Setup not done");
-
-        setupDone = true;
+        Debug.Log("mission Setup");
 
         if (missionType == MissionType.CompleteStationTask)
         {
             Debug.Log("Subscribing to station");
             station = GetStationOfType(stationType);
-            station.onCompleteTask += OnCompleteStationTask;
+            station.onCompleteTask += CheckCompleteMissionStep;
+        }
+        else if (missionType == MissionType.GetHitByTineBH)
+        {
+            PlayerMovement playerMovement = GameObject.FindObjectOfType<PlayerMovement>();
+            playerMovement.onHitByBH += CheckCompleteMissionStep;
         }
     }
 
@@ -83,10 +91,26 @@ public class MissionStep
         return false;
     }
 
-    void OnCompleteStationTask()
+    void CheckCompleteMissionStep()
     {
-        Debug.Log("OnCOmpleteStationTask");
-        stationTaskCompleted = true;
+        if (missionType == MissionType.CompleteStationTask)
+        {
+            if (stationType == StationType.AnomalyAnalizer)
+            {
+                if (((AnomalyAnalysisStation)station).CurrentAnomalyType == anomalyType)
+                {
+                    missionStepCompleted = true;
+                }
+            }
+            else
+            {
+                missionStepCompleted = true;
+            }
+        }
+        else if (missionType == MissionType.GetHitByTineBH)
+        {
+            missionStepCompleted = true;
+        }
     }
 
 

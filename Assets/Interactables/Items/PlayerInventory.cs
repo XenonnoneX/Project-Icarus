@@ -2,11 +2,19 @@
 
 public class PlayerInventory : MonoBehaviour
 {
-    Item currentItem;
-    public Item GetCurrentItem() => currentItem;
-    public void SetCurrentItem(Item item) => currentItem = item;
+    ItemData currentItem;
 
-    public void PickUpItem(Item item)
+    public delegate void OnItemChanged();
+    public event OnItemChanged onItemChanged;
+    
+    public ItemData GetCurrentItem() => currentItem;
+    public void SetCurrentItem(ItemData item) 
+    { 
+        currentItem = item;
+        onItemChanged?.Invoke();
+    }
+
+    public void PickUpItem(ItemData item)
     {
         if (currentItem != null) OnDropItem();
 

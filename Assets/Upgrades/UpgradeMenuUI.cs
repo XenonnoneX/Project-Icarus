@@ -18,7 +18,7 @@ public class UpgradeMenuUI : MonoBehaviour
         upgradeShop = GetComponent<UpgradeShop>();
         upgradeManager = GetComponent<UpgradeShopManager>();
 
-        upgradeShop.onResearchPointsChanged += UpdateUI;
+        upgradeShop.onFoundsChanged += UpdateUI;
         upgradeManager.onUpgradesChanged += UpdateUI;
     }
 
@@ -36,7 +36,7 @@ public class UpgradeMenuUI : MonoBehaviour
 
     private void UpdateUI()
     {
-        rpText.text = upgradeShop.currentResearchPoints.ToString() + " RP";
+        rpText.text = upgradeShop.currentFounds.ToString() + " €";
 
         for (int i = 0; i < upgradeShowObjects.Count; i++)
         {

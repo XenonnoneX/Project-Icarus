@@ -1,13 +1,15 @@
+using System;
+using UnityEditor.Experimental.RestService;
 using UnityEngine;
 
 public class UpgradeShop : MonoBehaviour
 {
     UpgradeShopManager upgradeManager;
 
-    public int currentResearchPoints;
+    public int currentFounds;
 
     public delegate void OnResearchPointsChanged();
-    public OnResearchPointsChanged onResearchPointsChanged;
+    public OnResearchPointsChanged onFoundsChanged;
 
     private void Awake()
     {
@@ -16,12 +18,12 @@ public class UpgradeShop : MonoBehaviour
 
     private void Start()
     {
-        currentResearchPoints = PlayerPrefs.GetInt("TotalResearchPoints");
+        currentFounds = PlayerPrefs.GetInt("TotalFounds");
 
-        currentResearchPoints += PlayerPrefs.GetInt("CollectedResearchPoints");
+        currentFounds += PlayerPrefs.GetInt("FoundsGained");
 
-        onResearchPointsChanged += SaveResearchPoints;
-        onResearchPointsChanged?.Invoke();
+        onFoundsChanged += SaveResearchPoints;
+        onFoundsChanged?.Invoke();
     }
 
     private void Update()
@@ -33,23 +35,25 @@ public class UpgradeShop : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            currentResearchPoints += 1000;
-            onResearchPointsChanged?.Invoke();
+            currentFounds += 1000;
+            onFoundsChanged?.Invoke();
         }
     }
+
+    
 
     public void Buy(int index)
     {
         if (upgradeManager.UpgradeIsMaxLevel(index)) return;
-        if (currentResearchPoints < upgradeManager.GetUpgradeCost(index)) return;
+        if (currentFounds < upgradeManager.GetUpgradeCost(index)) return;
         
-        currentResearchPoints -= upgradeManager.GetUpgradeCost(index);
-        onResearchPointsChanged?.Invoke();
+        currentFounds -= upgradeManager.GetUpgradeCost(index);
+        onFoundsChanged?.Invoke();
         upgradeManager.Upgrade(index);
     }
 
     void SaveResearchPoints()
     {
-        PlayerPrefs.SetInt("TotalResearchPoints", currentResearchPoints);
+        PlayerPrefs.SetInt("TotalFounds", currentFounds);
     }
 }
