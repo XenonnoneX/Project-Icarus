@@ -52,6 +52,10 @@ public class TinyBH : Anomaly, TimeAffected
             collision.GetComponent<PlayerMovement>().GetHitByBH();
             onHitPlayer?.Invoke();
         }
+        else if (collision.CompareTag("Teleportable"))
+        {
+            collision.transform.position = Utils.GetRandomPosOnWalkableArea();
+        }
         else if(collision.GetComponent<Interactable>())
         {
             collision.GetComponent<Interactable>()?.BreakInteractable();

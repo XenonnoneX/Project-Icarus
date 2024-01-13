@@ -7,7 +7,8 @@ public enum StationType
     Research,
     MissionManager,
     AnomalyAnalizer,
-    ArtifactDock
+    ArtifactDock,
+    Door
 }
 
 public enum StationState

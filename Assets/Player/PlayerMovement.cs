@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour, TimeAffected
         }
     }
 
-    private bool OutOfShip()
+    public bool OutOfShip()
     {
         float rayLength = 20f; // You can adjust the ray length as needed
 
@@ -95,7 +95,7 @@ public class PlayerMovement : MonoBehaviour, TimeAffected
     {
         if (!this.enabled) return;
         
-        rb.AddForce(force);
+        rb.AddForce(force * timeScale);
     }
 
     internal void StopMovement()
@@ -119,5 +119,11 @@ public class PlayerMovement : MonoBehaviour, TimeAffected
     public void SetTimeScale(float timeScale)
     {
         this.timeScale = timeScale;
+    }
+
+    internal void TeleportToInteractable(Interactable interactable)
+    {
+        transform.position = Utils.GetWalkablePosNextTo(interactable.transform.position, 1f);
+        rb.velocity = Vector2.zero;
     }
 }

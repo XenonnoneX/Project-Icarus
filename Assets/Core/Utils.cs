@@ -72,4 +72,23 @@ public static class Utils
         // If no colliders are found at the spawn position, return it
         return spawnPosition;
     }
+
+    internal static Vector3 GetWalkablePosNextTo(Vector3 position, float maxDist)
+    {
+        Vector3 spawnPosition = position + Random.insideUnitSphere * maxDist;
+        spawnPosition.z = 0f;
+
+        // Check for 2D colliders at the spawn position
+        Collider2D[] colliders = Physics2D.OverlapPointAll(spawnPosition);
+
+        // Check if any colliders were found
+        if (colliders.Length > 0)
+        {
+            // If colliders are found, recursively call the method to find a new spawn position
+            return GetWalkablePosNextTo(position, maxDist);
+        }
+
+        // If no colliders are found at the spawn position, return it
+        return spawnPosition;
+    }
 }

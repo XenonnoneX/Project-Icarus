@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopIcon: {fileID: 21300000, guid: b6eaa89f77459364b9f216d818cb610e, type: 3}
   levelValues:
-  - 0
+  - 1
   - 1.1
   - 1.2
   - 1.3

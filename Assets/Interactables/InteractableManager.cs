@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class StationRandomizer : MonoBehaviour
+public class InteractableManager : MonoBehaviour
 {
     [SerializeField] List<Interactable> interactables = new List<Interactable>(); // vllt doch hier den parent rein tun un dann automatisch weiter geben? Aber werden halt auch nicht immer so viele Stationen geaddet, aber manchmal halt schon und dann solls easy sein
-    [SerializeField] List<Transform> stationPossiblePositions;
+    public List<Interactable> GetInteractables() { return interactables; }
+    [SerializeField] List<Transform> interactablePossiblePositions;
     List<int> occupiedPositions = new List<int>();
 
     private void Start()
@@ -14,7 +15,7 @@ public class StationRandomizer : MonoBehaviour
 
     public void RandomizeStationPositions()
     {
-        if(stationPossiblePositions.Count < interactables.Count)
+        if(interactablePossiblePositions.Count < interactables.Count)
         {
             Debug.LogError("Not enough positions for all interactables");
             return;
@@ -24,7 +25,7 @@ public class StationRandomizer : MonoBehaviour
 
         for (int i = 0; i < interactables.Count; i++)
         {
-            int rand = UnityEngine.Random.Range(0, stationPossiblePositions.Count);
+            int rand = UnityEngine.Random.Range(0, interactablePossiblePositions.Count);
 
             if (occupiedPositions.Contains(rand))
             {
@@ -34,7 +35,7 @@ public class StationRandomizer : MonoBehaviour
 
             occupiedPositions.Add(rand);
 
-            interactables[i].transform.position = stationPossiblePositions[rand].position;
+            interactables[i].transform.position = interactablePossiblePositions[rand].position;
         }
 
     }

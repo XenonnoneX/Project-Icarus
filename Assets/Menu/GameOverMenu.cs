@@ -14,7 +14,7 @@ public class GameOverMenu : MonoBehaviour
     void Start()
     {
         papersReleasedText.text = "Papers Released: " + PlayerPrefs.GetInt("ReleasedPapers").ToString();
-        timeSurvivedText.text = "Time Survived: " + PlayerPrefs.GetFloat("TimeSurvived").ToString("F2");
+        timeSurvivedText.text = "Time Survived: " + PlayerPrefs.GetFloat("TimeSurvived").ToString("F0") + "s";
 
         StartCoroutine(GainFounds());
     }
@@ -22,6 +22,8 @@ public class GameOverMenu : MonoBehaviour
     IEnumerator GainFounds()
     {
         int foundsGained = 0;
+
+        foundsGainedText.text = "Founds Gained: " + foundsGained.ToString();
 
         for (int i = 0; i < PlayerPrefs.GetInt("ReleasedPapers"); i++)
         {

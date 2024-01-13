@@ -29,7 +29,7 @@ public class Interactable : MonoBehaviour, IInteractable, TimeAffected
     }
 
 
-    void Awake()
+    protected virtual void Awake()
     {
         playerInventory = FindObjectOfType<PlayerInventory>();
         repairTask = FindObjectOfType<RepairTask>();

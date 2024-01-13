@@ -6,7 +6,8 @@ public enum AnomalyType
     GravitySurge,
     TimeSlowField,
     TimeSpeedField,
-    TinyBH
+    TinyBH,
+    GravityField
 }
 
 public class Anomaly : MonoBehaviour
