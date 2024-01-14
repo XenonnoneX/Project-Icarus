@@ -57,7 +57,6 @@ public class MissionManager : ControlStation
     {
         while (newMissionTimer > timeToGetNewMission && currentMissions.Count < maxMissions && currentMissions.Count < allMissions.Count)
         {
-            print("Getting new mission");
             newMissionTimer -= timeToGetNewMission;
 
             Mission newMission = GetNewRandomMission();

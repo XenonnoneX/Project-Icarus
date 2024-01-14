@@ -13,6 +13,7 @@ public enum AnomalyType
 public class Anomaly : MonoBehaviour
 {
     [SerializeField] protected float anomalyDuration = 5f;
+    public float AnomalyDuration { get => anomalyDuration; }
 
     public AnomalyType anomalyType;
 

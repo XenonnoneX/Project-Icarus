@@ -16,7 +16,7 @@ public class Door : ControlStation
     {
         base.CompleteTask();
 
-        if (playerMovement.OutOfShip()) playerMovement.transform.position = insideSpawnPoint.position;
+        if (Utils.OutOfShip(playerMovement.transform)) playerMovement.transform.position = insideSpawnPoint.position;
         else playerMovement.transform.position = outsideSpawnPoint.position;
     }
 }

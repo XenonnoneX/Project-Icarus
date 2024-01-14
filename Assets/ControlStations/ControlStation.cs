@@ -87,7 +87,6 @@ public abstract class ControlStation : MonoBehaviour, TimeAffected
     public virtual void CompleteTask()
     {
         onCompleteTask?.Invoke();
-        print("Task completed");
     }
 
     public void SetTimeScale(float timeScale)

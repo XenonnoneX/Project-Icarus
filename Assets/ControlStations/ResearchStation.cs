@@ -32,7 +32,16 @@ public class ResearchStation : ControlStation
 
         if (stationState != StationState.Working) return;
 
-        CheckReleasePaper();
+        CheckReleasePaper(); 
+        
+        AddResearchPoints(ResearchPointsPerSecond() * Time.deltaTime * timeScale);
+    }
+
+    private float ResearchPointsPerSecond()
+    {
+        int shipHeight = spaceShipMovement.GetCurrentHeight() + 1; // to not divide by 0
+
+        return 10f / shipHeight;
     }
 
     private void CheckReleasePaper()

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum MissionType
@@ -65,11 +66,8 @@ public class MissionStep
 
     public void Setup()
     {
-        Debug.Log("mission Setup");
-
         if (missionType == MissionType.CompleteStationTask)
         {
-            Debug.Log("Subscribing to station");
             station = GetStationOfType(stationType);
             station.onCompleteTask += CheckCompleteMissionStep;
         }

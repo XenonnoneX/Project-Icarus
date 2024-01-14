@@ -61,7 +61,6 @@ public class SoundManager : MonoBehaviour
         SetSFXVolume(PlayerPrefs.GetFloat("SFXVolume", 0.5f));
         bool wasMusicOn = musicOn;
         musicOn = PlayerPrefs.GetInt("MusicOn", 1) == 1;
-        print("MusicOn: " + musicOn);
         if (musicOn && !wasMusicOn) musicAudioSource.Play();
         else if(!musicOn) musicAudioSource.Stop();
 

@@ -6,10 +6,8 @@ public class GravityField : Anomaly
     PlayerMovement playerMovement;
 
     Vector2 dir;
-
-    [SerializeField] float warningTime = 5f;
-    float warningTimer;
-    [SerializeField] float pullStrength = 10f;
+    
+    [SerializeField] float pullStrength = 1000f;
 
     private void Awake()
     {
@@ -32,8 +30,7 @@ public class GravityField : Anomaly
 
     private void Update()
     {
-        if(warningTimer > warningTime) playerMovement.AddForce(pullStrength * Time.deltaTime * dir);
-        else warningTimer += Time.deltaTime;
+        playerMovement.AddForce(pullStrength * Time.deltaTime * dir);
     }
 
     internal override void RemoveAnomaly()
@@ -42,16 +39,4 @@ public class GravityField : Anomaly
 
         Destroy(gameObject);
     }
-}
-
-public class GravityFieldWarning : MonoBehaviour
-{
-    [SerializeField] GameObject showWarning;
-
-    private void Start()
-    {
-        showWarning.SetActive(true);
-    }
-
-    
 }

@@ -19,7 +19,6 @@ public class ControlShipHeightTask : Task
         }
         else if (controls.Player.Interact.phase == InputActionPhase.Waiting)
         {
-            print("end shoip comntiolo task");
             spaceShipMovement.GoDown();
             EndTask();
         }

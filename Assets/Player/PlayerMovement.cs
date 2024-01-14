@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour, TimeAffected
     // Update is called once per frame
     void Update()
     {
-        if (OutOfShip())
+        if (Utils.OutOfShip(transform))
         {
             OnStopWalking?.Invoke();
 
@@ -54,36 +54,6 @@ public class PlayerMovement : MonoBehaviour, TimeAffected
                 OnStopWalking?.Invoke();
             }
         }
-    }
-
-    public bool OutOfShip()
-    {
-        float rayLength = 20f; // You can adjust the ray length as needed
-
-        // Cast rays in all directions
-        for (int i = 0; i < 360; i += 10) // Change the step size as needed
-        {
-            // Convert angle to radians
-            float angle = i * Mathf.Deg2Rad;
-
-            // Calculate direction vector based on angle
-            Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
-
-            // Create a ray from the current position in the calculated direction
-            Ray2D ray = new Ray2D(transform.position, direction);
-
-            // Perform the raycast
-            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, rayLength);
-
-            if (hit.collider == null)
-            {
-                // If no wall is hit, return true
-                return true;
-            }
-        }
-
-        // If any ray hits a wall, return false
-        return false;
     }
 
     void OnMove(InputValue inputValue)

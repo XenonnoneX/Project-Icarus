@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public static class Utils
 {
@@ -90,5 +91,37 @@ public static class Utils
 
         // If no colliders are found at the spawn position, return it
         return spawnPosition;
+    }
+
+    public static bool OutOfShip(UnityEngine.Transform transformComponent)
+    {
+        float rayLength = 20f; // You can adjust the ray length as needed
+
+        LayerMask wallLayer = LayerMask.GetMask("Wall");
+
+        // Cast rays in all directions
+        for (int i = 0; i < 360; i += 10) // Change the step size as needed
+        {
+            // Convert angle to radians
+            float angle = i * Mathf.Deg2Rad;
+
+            // Calculate direction vector based on angle
+            Vector2 direction = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle));
+
+            // Create a ray from the current position in the calculated direction
+            Ray2D ray = new Ray2D(transformComponent.position, direction);
+
+            // Perform the raycast
+            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, rayLength, wallLayer);
+
+            if (hit.collider == null)
+            {
+                // If no wall is hit, return true
+                return true;
+            }
+        }
+
+        // If any ray hits a wall, return false
+        return false;
     }
 }

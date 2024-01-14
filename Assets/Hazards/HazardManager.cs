@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,16 +17,28 @@ public class HazardManager : MonoBehaviour
     Spawner<Anomaly> anomalySpawner;
     
     [SerializeField] List<Anomaly> allAnomalies;
+    [SerializeField] List<Anomaly> highImpactAnomalies;
     [SerializeField] Transform hazardParent;
 
-    [SerializeField] float timeToGetNewHazard = 2f;
-    [SerializeField] float timeBetweenHazardsDecreasePerMinute = 0.9f;
-    [SerializeField] float timeBetweenBreakingStations = 1.5f;
+    [SerializeField] float timeBetweenAnomaliesAtHeight0 = 2f;
+    [SerializeField] float timeBetweenAnomaliesDecreasePerMinute = 0.9f;
+    [SerializeField] float timeBetweenBreakingStationsAtHeight0 = 1.5f;
     [SerializeField] float timeBetweenBreakingStationsDecreasePerMinute = 0.9f;
-    float newHazardTimer;
+    [SerializeField] float timeBetweenHighImpactAnomalies = 60;
+    [SerializeField] float highImpactAnomalyWarningTime = 10f;
+    [SerializeField] float timeFreeOfOtherHazardsAfterHighImpactAnomaly = 10f;
+    public float HighImpactAnomalyWarningTime => highImpactAnomalyWarningTime;
+    float newAnomalyTimer;
     float breakingStationTimer;
     float timeSinceStart;
+    float newHighImpactAnomalyTimer;
 
+    bool highImpactAnomalyActive;
+
+    public delegate void OnHighImpactAnomalyWarning(Anomaly anomaly);
+    public OnHighImpactAnomalyWarning onHighImpactAnomalyWarning;
+
+    
     private void Awake()
     {
         spaceShipMovement = FindObjectOfType<SpaceShipMovement>();
@@ -43,35 +54,42 @@ public class HazardManager : MonoBehaviour
 
     private void Update()
     {
-        newHazardTimer += Time.deltaTime;
-        breakingStationTimer += Time.deltaTime;
-        timeSinceStart += Time.deltaTime;
-
-        if (newHazardTimer > TimeToGetNewHazard())
+        if (!highImpactAnomalyActive)
         {
-            newHazardTimer = 0;
+            newAnomalyTimer += Time.deltaTime;
+            breakingStationTimer += Time.deltaTime;
+            timeSinceStart += Time.deltaTime;
+            newHighImpactAnomalyTimer += Time.deltaTime;
+        }
+
+        if (newAnomalyTimer > TimeToGetNewHazard())
+        {
+            newAnomalyTimer = 0;
             SpawnAnomaly();
         } else if(breakingStationTimer > TimeToBreakStation())
         {
             breakingStationTimer = 0;
             BreakRandomStation();
         }
+        else if (newHighImpactAnomalyTimer > timeBetweenHighImpactAnomalies)
+        {
+            newHighImpactAnomalyTimer = 0;
+            StartCoroutine(SpawnHighImpactAnomaly());
+        }
     }
 
     private float TimeToGetNewHazard()
     {
-        return (timeToGetNewHazard * (Mathf.Pow(timeBetweenHazardsDecreasePerMinute,timeSinceStart / 60))) * (spaceShipMovement.GetCurrentHeight() + 1);
+        return (timeBetweenAnomaliesAtHeight0 * (Mathf.Pow(timeBetweenAnomaliesDecreasePerMinute,timeSinceStart / 60))) * (spaceShipMovement.GetCurrentHeight() + 1);
     }
 
     private float TimeToBreakStation()
     {
-        return (timeBetweenBreakingStations * (Mathf.Pow(timeBetweenBreakingStationsDecreasePerMinute, timeSinceStart / 60))) * (spaceShipMovement.GetCurrentHeight() + 1);
+        return (timeBetweenBreakingStationsAtHeight0 * (Mathf.Pow(timeBetweenBreakingStationsDecreasePerMinute, timeSinceStart / 60))) * (spaceShipMovement.GetCurrentHeight() + 1);
     }
 
     private void BreakRandomStation()
     {
-        print("beaksksdj");
-
         int rand = UnityEngine.Random.Range(0, allControlStations.Count);
 
         if (!allControlStations[rand].CanBreak())
@@ -90,6 +108,23 @@ public class HazardManager : MonoBehaviour
 
     private void SpawnAnomaly()
     {
-        anomalySpawner.SpawnRandom(hazardParent);
+        Anomaly temp = GameObject.Instantiate(allAnomalies[UnityEngine.Random.Range(0, allAnomalies.Count)], Utils.GetRandomPosOnWalkableArea(), Quaternion.identity);
+        temp.transform.parent = hazardParent;
+    }
+    
+    System.Collections.IEnumerator SpawnHighImpactAnomaly()
+    {
+        Anomaly anomaly = highImpactAnomalies[UnityEngine.Random.Range(0, highImpactAnomalies.Count)];
+        onHighImpactAnomalyWarning.Invoke(anomaly);
+
+        yield return new WaitForSeconds(highImpactAnomalyWarningTime);
+
+        highImpactAnomalyActive = true;
+
+        Anomaly temp = GameObject.Instantiate(anomaly, Utils.GetRandomPosOnWalkableArea(), Quaternion.identity);
+
+        yield return new WaitForSeconds(timeFreeOfOtherHazardsAfterHighImpactAnomaly);
+
+        highImpactAnomalyActive = false;
     }
 }

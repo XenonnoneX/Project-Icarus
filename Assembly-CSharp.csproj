@@ -143,6 +143,7 @@
     <Compile Include="Assets\Hazards\TinyBH.cs" />
     <Compile Include="Assets\Hazards\TimeSlowField.cs" />
     <Compile Include="Assets\Music_SFX\ControlStationSounds.cs" />
+    <Compile Include="Assets\Hazards\HighImpactAnomalyWarnings.cs" />
     <Compile Include="Assets\UI\ArtifactAvailableLight.cs" />
     <Compile Include="Assets\Upgrades\UpgradeShopManager.cs" />
     <Compile Include="Assets\Upgrades\UpgradeManager.cs" />

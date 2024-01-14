@@ -31,7 +31,6 @@ public class RepairTask : Task
 
     public override void StartTask(Interactable interactable)
     {
-        print("start repair task");
         base.StartTask(interactable);
 
         interactable.StartRepair();

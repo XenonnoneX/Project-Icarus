@@ -2,6 +2,7 @@
 
 public class PlayerInventory : MonoBehaviour
 {
+    [SerializeField] PickupItem itemPrefab;
     ItemData currentItem;
 
     public delegate void OnItemChanged();
@@ -25,8 +26,8 @@ public class PlayerInventory : MonoBehaviour
     {
         if (currentItem == null) return;
 
-        GameObject itemDrop = (GameObject) Instantiate(currentItem.itemPrefab, transform.position, transform.rotation);
-        itemDrop.GetComponent<PickupItem>().SetItemData(currentItem);
+        PickupItem itemDrop = Instantiate(itemPrefab, Utils.GetWalkablePosNextTo(transform.position, 1), transform.rotation);
+        itemDrop.SetItemData(currentItem);
 
         SetCurrentItem(null);
     }

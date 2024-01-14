@@ -12,6 +12,8 @@ public class PickupItem : MonoBehaviour, IInteractable
     public Transform myTransform { get; set; }
     public Action onInteractEnd { get; set; }
 
+    bool outOfShip;
+
     private void Awake()
     {
         playerInventory = GameObject.FindObjectOfType<PlayerInventory>();
@@ -28,6 +30,28 @@ public class PickupItem : MonoBehaviour, IInteractable
         {
             SetItemData(itemData);
         }
+    }
+
+    private void Update()
+    {
+        if(!outOfShip) CheckOutOfShip();
+    }
+
+    public void CheckOutOfShip()
+    {
+        if (Utils.OutOfShip(transform))
+        {
+            SetOutOfShip();
+        }
+    }
+
+    public void SetOutOfShip()
+    {
+        Rigidbody2D rb = gameObject.AddComponent<Rigidbody2D>();
+        rb.gravityScale = 0;
+        rb.velocity = new Vector2(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f));
+        GetComponent<Collider2D>().isTrigger = false;
+        outOfShip = true;
     }
 
     public void ShowInteractable()
