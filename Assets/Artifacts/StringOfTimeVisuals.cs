@@ -22,6 +22,20 @@ public class StringOfTimeVisuals : MonoBehaviour
         playerShadow = Instantiate(playerVisuals, transform);
         playerShadow.GetComponentInChildren<SpriteRenderer>().color = new Color(0, 0, 0, 0.5f);
     }
+
+    void Update()
+    {
+        if (stringOfTimeAbility.TimeSinceLastUse < stringOfTimeAbility.Cooldown)
+        {
+            lineRenderer.enabled = false;
+            playerShadow.SetActive(false);
+        }
+        else
+        {
+            lineRenderer.enabled = true;
+            playerShadow.SetActive(true);
+        }
+    }
      
     private void DrawLine()
     {

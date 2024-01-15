@@ -1,20 +1,31 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerSounds : MonoBehaviour
 {
     PlayerMovement playerMovement;
+    InteractableDetector interactableDetector;
+    PlayerInventory playerInventory;
 
-    public AudioClip movementStepSound;
-    public AudioClip interactSound;
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip movementStepSound;
+    [SerializeField] AudioClip interactSound;
+    [SerializeField] AudioClip dropItem;
 
     bool isWalking = false;
-     
-    [SerializeField] float stepSoundDelay = 0.5f;
-    float stepSoundTimer = 0f;
 
     private void Awake()
     {
         playerMovement = GetComponent<PlayerMovement>();
+        interactableDetector = FindObjectOfType<InteractableDetector>();
+
+        interactableDetector.onInteracted += PlayInteractSound;
+        playerInventory.onDropedItem += PlayDropItemSound;
+    }
+
+    private void PlayDropItemSound()
+    {
+        SoundManager.instance.PlaySound(dropItem);
     }
 
     void Start()
@@ -26,26 +37,22 @@ public class PlayerSounds : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        stepSoundTimer += Time.deltaTime * playerMovement.timeScale;
-
-        if (stepSoundTimer > stepSoundDelay)
-        {
-            stepSoundTimer = 0;
-            if (isWalking) SoundManager.instance.PlaySound(movementStepSound);
-        }
-    }
-
     private void OnPlayerStartWalking()
     {
         if (isWalking) return;
         isWalking = true;
+        audioSource.Play();
     }
 
     private void OnPlayerStopWalking()
     {
         if (!isWalking) return;
         isWalking = false;
+        audioSource.Stop();
+    }
+
+    private void PlayInteractSound()
+    {
+        SoundManager.instance.PlaySound(interactSound);
     }
 }

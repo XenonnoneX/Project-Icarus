@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour, TimeAffected
     [SerializeField] float moveSpeed = 5f;
     [HideInInspector] public float movSpeedMultiplier = 1;
     [SerializeField] float outOfShipMoveForce = 5f;
+    [SerializeField] Vector2 distToLoopToOtherSide;
 
     public float timeScale = 1;
 
@@ -38,6 +39,8 @@ public class PlayerMovement : MonoBehaviour, TimeAffected
             rb.velocity += moveInput * outOfShipMoveForce * movSpeedMultiplier * timeScale;
 
             rb.velocity = Vector2.ClampMagnitude(rb.velocity, moveSpeed * movSpeedMultiplier * timeScale);
+
+            LoopBoundaryConditions();
         }
         else
         {
@@ -54,6 +57,12 @@ public class PlayerMovement : MonoBehaviour, TimeAffected
                 OnStopWalking?.Invoke();
             }
         }
+    }
+
+    private void LoopBoundaryConditions()
+    {
+        if (Mathf.Abs(transform.position.x) > distToLoopToOtherSide.x) transform.position = new Vector3(-transform.position.x * 0.95f, transform.position.y, transform.position.z);
+        if (Mathf.Abs(transform.position.y) > distToLoopToOtherSide.y) transform.position = new Vector3(transform.position.x, -transform.position.y * 0.95f, transform.position.z);
     }
 
     void OnMove(InputValue inputValue)

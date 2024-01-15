@@ -8,9 +8,11 @@ public class InteractableManager : MonoBehaviour
     [SerializeField] List<Transform> interactablePossiblePositions;
     List<int> occupiedPositions = new List<int>();
 
+    [SerializeField] bool randomizePositions = false;
+
     private void Start()
     {
-        RandomizeStationPositions();
+        if(randomizePositions) RandomizeStationPositions();
     }
 
     public void RandomizeStationPositions()

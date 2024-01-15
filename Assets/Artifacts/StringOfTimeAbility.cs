@@ -5,13 +5,16 @@ public class StringOfTimeAbility : Artifact, TimeAffected, Ability
 {
     Transform player;
 
+    [Header("cooldown is set by ArtifactData level values")]
     [SerializeField] float cooldown = 1f;
+    public float Cooldown { get => cooldown; }
     [SerializeField] float abilityDuration = 5f;
     [SerializeField] float saveTime = 0.1f;
 
     public Queue<Vector3> positions = new Queue<Vector3>();
 
     float timeSinceLastUse = Mathf.Infinity;
+    public float TimeSinceLastUse => timeSinceLastUse;
 
     public delegate void OnPositionSaved();
     public event OnPositionSaved onPositionSaved;
@@ -42,6 +45,13 @@ public class StringOfTimeAbility : Artifact, TimeAffected, Ability
         {
             if(timeSinceLastUse >= cooldown) UseAbility();
         }
+    }
+    
+    protected override void SetLevel(int level)
+    {
+        base.SetLevel(level);
+
+        cooldown = artifactData.levelValues[level];
     }
 
     private void SaveCurrentPosition()

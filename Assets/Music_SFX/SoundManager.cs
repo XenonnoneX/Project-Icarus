@@ -33,7 +33,7 @@ public class SoundManager : MonoBehaviour
     {
         musicAudioSource.loop = true;
         musicAudioSource.clip = music[currentTrack];
-        if(musicOn) musicAudioSource.Play();
+        if(musicOn && music.Length > 0) musicAudioSource.Play();
 
         Reload();
     }

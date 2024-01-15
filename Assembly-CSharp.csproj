@@ -115,6 +115,7 @@
     <Compile Include="Assets\Missions\Mission.cs" />
     <Compile Include="Assets\Artifacts\ArtifactManager.cs" />
     <Compile Include="Assets\Menu\Menu.cs" />
+    <Compile Include="Assets\Artifacts\AbilitySounds.cs" />
     <Compile Include="Assets\Core\Utils.cs" />
     <Compile Include="Assets\Upgrades\Upgrade.cs" />
     <Compile Include="Assets\Interactables\InteractableManager.cs" />
@@ -144,8 +145,10 @@
     <Compile Include="Assets\Hazards\TimeSlowField.cs" />
     <Compile Include="Assets\Music_SFX\ControlStationSounds.cs" />
     <Compile Include="Assets\Hazards\HighImpactAnomalyWarnings.cs" />
+    <Compile Include="Assets\Hazards\BH_Shader\GravityFieldEffect.cs" />
     <Compile Include="Assets\UI\ArtifactAvailableLight.cs" />
     <Compile Include="Assets\Upgrades\UpgradeShopManager.cs" />
+    <Compile Include="Assets\Player\CameraFollowPlayer.cs" />
     <Compile Include="Assets\Upgrades\UpgradeManager.cs" />
     <Compile Include="Assets\Tasks\Task.cs" />
     <Compile Include="Assets\UI\AnomalyAnalizerLight.cs" />
@@ -175,6 +178,7 @@
     <None Include="Assets\Hazards\BH_Shader\GravityPullShader.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
+    <None Include="Assets\Hazards\BH_Shader\GravityFieldShader.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

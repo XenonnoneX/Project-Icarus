@@ -4,6 +4,7 @@ using UnityEngine;
 public class GravityField : Anomaly
 {
     PlayerMovement playerMovement;
+    GravityFieldEffect gravityFieldEffect;
 
     Vector2 dir;
     
@@ -12,6 +13,7 @@ public class GravityField : Anomaly
     private void Awake()
     {
         playerMovement = FindObjectOfType<PlayerMovement>();
+        gravityFieldEffect = FindObjectOfType<GravityFieldEffect>();
     }
 
     protected override void Start()
@@ -23,9 +25,26 @@ public class GravityField : Anomaly
 
     private void SpawnSetup()
     {
-        transform.position = Utils.GetPositionOutOfScreen(2f);
+        int rand = UnityEngine.Random.Range(0, 4);
 
-        dir = -transform.position;
+        if (rand == 0)
+        {
+            dir = new Vector2(0, 1);
+        }
+        else if (rand == 1)
+        {
+            dir = new Vector2(1, 0);
+        }
+        else if(rand == 2)
+        {
+            dir = new Vector2(0, -1);
+        }
+        else if(rand == 3)
+        {
+            dir = new Vector2(-1, 0);
+        }
+
+        gravityFieldEffect.StartEffect(dir, anomalyDuration);
     }
 
     private void Update()
@@ -36,6 +55,8 @@ public class GravityField : Anomaly
     internal override void RemoveAnomaly()
     {
         base.RemoveAnomaly();
+
+        gravityFieldEffect.EndEffect();
 
         Destroy(gameObject);
     }

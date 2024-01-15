@@ -16,4 +16,5 @@ MonoBehaviour:
   requiredArtifact: {fileID: 0}
   levelValues:
   - 0
-  - 1
+  - 5
+  - 3

@@ -55,8 +55,20 @@ public class Interactable : MonoBehaviour, IInteractable, TimeAffected
 
         if (station.GetStationState() == StationState.Destroyed)
         {
-            InteractEnd();
-            return; // TODO: repair kit to fix
+            if(playerInventory.GetCurrentItem().name == "RepairKit")
+            {
+                playerInventory.DestroyItem();
+
+                station.SetStationState(StationState.Broken);
+                SetIsInteracting(false);
+                Interact();
+                return;
+            }
+            else
+            {
+                InteractEnd();
+                return; // TODO: repair kit to fix
+            }
         }
         else if (station.GetStationState() == StationState.Broken)
         {

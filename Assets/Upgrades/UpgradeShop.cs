@@ -6,6 +6,8 @@ public class UpgradeShop : MonoBehaviour
 {
     UpgradeShopManager upgradeManager;
 
+    [SerializeField] AudioClip upgradeSound;
+
     public int currentFounds;
 
     public delegate void OnResearchPointsChanged();
@@ -50,6 +52,8 @@ public class UpgradeShop : MonoBehaviour
         currentFounds -= upgradeManager.GetUpgradeCost(index);
         onFoundsChanged?.Invoke();
         upgradeManager.Upgrade(index);
+
+        SoundManager.instance.PlaySound(upgradeSound);
     }
 
     void SaveResearchPoints()

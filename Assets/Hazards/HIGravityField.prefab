@@ -46,5 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anomalyDuration: 15
   anomalyType: 5
-  warningTime: 5
-  pullStrength: 1000
+  pullStrength: 800

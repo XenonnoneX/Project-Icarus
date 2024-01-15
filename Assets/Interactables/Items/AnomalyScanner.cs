@@ -36,6 +36,9 @@ public class AnomalyScanner : MonoBehaviour
         if (capturedAnomalyType == AnomalyType.None)
         {
             Anomaly closestAnomaly = GetClosestAnomaly();
+
+            if (closestAnomaly == null) return;
+
             SetAnomalyType(closestAnomaly.anomalyType);
 
             closestAnomaly.RemoveAnomaly();

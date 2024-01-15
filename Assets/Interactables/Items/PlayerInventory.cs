@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using static PlayerInventory;
 
 public class PlayerInventory : MonoBehaviour
 {
@@ -7,7 +9,10 @@ public class PlayerInventory : MonoBehaviour
 
     public delegate void OnItemChanged();
     public event OnItemChanged onItemChanged;
-    
+
+    public delegate void OnDropedItem();
+    public event OnDropedItem onDropedItem;
+
     public ItemData GetCurrentItem() => currentItem;
     public void SetCurrentItem(ItemData item) 
     { 
@@ -29,6 +34,13 @@ public class PlayerInventory : MonoBehaviour
         PickupItem itemDrop = Instantiate(itemPrefab, Utils.GetWalkablePosNextTo(transform.position, 1), transform.rotation);
         itemDrop.SetItemData(currentItem);
 
+        onDropedItem?.Invoke();
+
         SetCurrentItem(null);
+    }
+
+    internal void DestroyItem()
+    {
+        currentItem = null;
     }
 }

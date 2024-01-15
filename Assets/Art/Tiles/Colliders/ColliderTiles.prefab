@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 6028647841703489634}
   - component: {fileID: 1536660909475794416}
   m_Layer: 0
-  m_Name: SpaceShip
+  m_Name: ColliderTiles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

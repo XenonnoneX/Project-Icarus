@@ -12,6 +12,9 @@ public class InteractableDetector : MonoBehaviour
     IInteractable currentInteractingInteractable;
     public IInteractable CurrentInteractingInteractable => currentInteractingInteractable;
 
+    public delegate void OnInteracted();
+    public OnInteracted onInteracted;
+
     private void Awake()
     {
         playerMovement = FindObjectOfType<PlayerMovement>();
@@ -74,6 +77,8 @@ public class InteractableDetector : MonoBehaviour
         currentInteractingInteractable.onInteractEnd += OnInteractEnd;
         playerMovement.StopMovement();
         currentInteractingInteractable.Interact();
+
+        onInteracted?.Invoke();
     }
 
     void OnTakeItem()

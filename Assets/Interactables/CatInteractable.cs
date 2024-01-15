@@ -14,7 +14,7 @@ public class CatInteractable : MonoBehaviour, IInteractable, TimeAffected
     [SerializeField] float cooldown = 10f;
     float cdTimer;
 
-    float timeScale;
+    float timeScale = 1;
 
     public Transform myTransform { get; set; }
     public Action onInteractEnd { get; set; }
