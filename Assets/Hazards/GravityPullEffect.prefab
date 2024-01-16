@@ -60,5 +60,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28d432f278febf14296d1f33ce4b5039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anomalySpawnSound: {fileID: 0}
+  anomalySpawnSound: {fileID: 8300000, guid: d56c6a1b5e9387642ae5bb3938801c26, type: 3}
   anomalyRemoveSound: {fileID: 0}

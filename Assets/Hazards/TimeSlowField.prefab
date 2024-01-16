@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28d432f278febf14296d1f33ce4b5039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anomalySpawnSound: {fileID: 0}
+  anomalySpawnSound: {fileID: 8300000, guid: 3aaa1be44ca02334d87c868be52a4c8b, type: 3}
   anomalyRemoveSound: {fileID: 0}
 --- !u!50 &-806126595215237722
 Rigidbody2D:

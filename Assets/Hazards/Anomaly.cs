@@ -20,9 +20,14 @@ public class Anomaly : MonoBehaviour
     public delegate void OnRemoveAnomaly();
     public OnRemoveAnomaly onRemoveAnomaly;
 
+    public delegate void OnAnomalyActivated();
+    public OnAnomalyActivated onAnomalyActivated;
+
     protected virtual void Start()
     {
         Invoke("RemoveAnomaly", anomalyDuration);
+
+        onAnomalyActivated?.Invoke();
     }
 
     internal virtual void RemoveAnomaly()

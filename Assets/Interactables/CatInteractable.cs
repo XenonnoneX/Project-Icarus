@@ -29,6 +29,13 @@ public class CatInteractable : MonoBehaviour, IInteractable, TimeAffected
         myTransform = transform;
     }
 
+    private void Start()
+    {
+        HideInteractable();
+
+        cdTimer = cooldown;
+    }
+
     void Update()
     {
         cdTimer += Time.deltaTime * timeScale;

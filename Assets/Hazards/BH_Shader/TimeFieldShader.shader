@@ -2,7 +2,7 @@
 
 // Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
-Shader "Hidden/GravityFieldShader"
+Shader "Hidden/TimeFieldShader"
 {
     Properties
     {
@@ -36,6 +36,14 @@ Shader "Hidden/GravityFieldShader"
                 float4 pos : SV_POSITION;
                 float2 uv : TEXCOORD0;
             };
+
+            v2f vert(appdata_img v)
+            {
+                v2f o;
+                o.pos = UnityObjectToClipPos(v.vertex);
+                o.uv = v.texcoord;
+                return o;
+            }
 
             // Convert RGB to HSV
             float3 RGBtoHSV(float3 color)
@@ -89,37 +97,29 @@ Shader "Hidden/GravityFieldShader"
                 return rgb;
             }
 
-            v2f vert(appdata_img v)
-            {
-                v2f o;
-                o.pos = UnityObjectToClipPos(v.vertex);
-                o.uv = v.texcoord;
-                return o;
-            }
-
             fixed4 frag(v2f i) : COLOR{
                 float2 dist = i.uv * _Direction;
-                float2 ratio = { _Ratio, 1 };
+    float2 ratio = { _Ratio, 1 };
 
-                float sinVal = sin((dist + _TimeSinceStart) * _Frequency);
+    float sinVal = sin((dist + _TimeSinceStart) * _Frequency);
 
-                // Adjust the scaling factor based on your preference for subtlety
-                float saturationFactor = _SaturationAdd + _SaturationSinMultiplier * sin(sinVal);
+    // Adjust the scaling factor based on your preference for subtlety
+    float saturationFactor = _SaturationAdd + _SaturationSinMultiplier * sin(sinVal);
 
-                float2 offset = i.uv + sinVal * sinVal * _Direction * _Strength;
+    float2 offset = i.uv + sinVal * sinVal * _Direction * _Strength;
 
-                half4 originalColor = tex2D(_MainTex, offset);
+    half4 originalColor = tex2D(_MainTex, offset);
 
-                // Convert to HSV
-                float3 hsv = RGBtoHSV(originalColor.rgb);
+    // Convert to HSV
+    float3 hsv = RGBtoHSV(originalColor.rgb);
 
-                // Modify saturation based on sinVal
-                hsv.y = saturate(hsv.y + saturationFactor); // Ensure saturation is in the valid range
+    // Modify saturation based on sinVal
+    hsv.y = saturate(hsv.y + saturationFactor); // Ensure saturation is in the valid range
 
-                // Convert back to RGB
-                half3 modifiedColor = HSVtoRGB(hsv);
+    // Convert back to RGB
+    half3 modifiedColor = HSVtoRGB(hsv);
 
-                return half4(modifiedColor, originalColor.a);
+    return half4(modifiedColor, originalColor.a);
 
             }
 

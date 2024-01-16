@@ -18,6 +18,7 @@ public class PlayerSounds : MonoBehaviour
     {
         playerMovement = GetComponent<PlayerMovement>();
         interactableDetector = FindObjectOfType<InteractableDetector>();
+        playerInventory = GetComponent<PlayerInventory>();
 
         interactableDetector.onInteracted += PlayInteractSound;
         playerInventory.onDropedItem += PlayDropItemSound;

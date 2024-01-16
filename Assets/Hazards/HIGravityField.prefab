@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9105165555415877189}
   - component: {fileID: 4616001888953354060}
+  - component: {fileID: -2042791848634645551}
   m_Layer: 0
   m_Name: HIGravityField
   m_TagString: Untagged
@@ -46,4 +47,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anomalyDuration: 15
   anomalyType: 5
-  pullStrength: 800
+  pullPercentageOfMovSpeed: 0.5
+--- !u!114 &-2042791848634645551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099756324257786939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28d432f278febf14296d1f33ce4b5039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anomalySpawnSound: {fileID: 8300000, guid: 40cc4550c2da45d40b25b6f4e965efdc, type: 3}
+  anomalyRemoveSound: {fileID: 0}

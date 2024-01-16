@@ -8,7 +8,7 @@ public class GravityField : Anomaly
 
     Vector2 dir;
     
-    [SerializeField] float pullStrength = 1000f;
+    [SerializeField] float pullPercentageOfMovSpeed = 0.5f;
 
     private void Awake()
     {
@@ -25,7 +25,7 @@ public class GravityField : Anomaly
 
     private void SpawnSetup()
     {
-        int rand = UnityEngine.Random.Range(0, 4);
+        int rand = UnityEngine.Random.Range(0, 2);
 
         if (rand == 0)
         {
@@ -49,7 +49,7 @@ public class GravityField : Anomaly
 
     private void Update()
     {
-        playerMovement.AddForce(pullStrength * Time.deltaTime * dir);
+        playerMovement.AddVelocity(pullPercentageOfMovSpeed * playerMovement.MoveSpeed * dir);
     }
 
     internal override void RemoveAnomaly()

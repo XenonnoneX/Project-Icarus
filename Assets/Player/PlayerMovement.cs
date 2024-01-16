@@ -18,9 +18,12 @@ public class PlayerMovement : MonoBehaviour, TimeAffected
     public OnHitByBH onHitByBH;
 
     [SerializeField] float moveSpeed = 5f;
+    public float MoveSpeed { get => moveSpeed; }
     [HideInInspector] public float movSpeedMultiplier = 1;
     [SerializeField] float outOfShipMoveForce = 5f;
     [SerializeField] Vector2 distToLoopToOtherSide;
+
+    Vector2 moveSpeedAddition;
 
     public float timeScale = 1;
 
@@ -36,7 +39,7 @@ public class PlayerMovement : MonoBehaviour, TimeAffected
         {
             OnStopWalking?.Invoke();
 
-            rb.velocity += moveInput * outOfShipMoveForce * movSpeedMultiplier * timeScale;
+            rb.velocity += movSpeedMultiplier * outOfShipMoveForce * timeScale * moveInput + moveSpeedAddition;
 
             rb.velocity = Vector2.ClampMagnitude(rb.velocity, moveSpeed * movSpeedMultiplier * timeScale);
 
@@ -46,13 +49,17 @@ public class PlayerMovement : MonoBehaviour, TimeAffected
         {
             if (moveInput != Vector2.zero)
             {
-                rb.velocity = moveInput * moveSpeed * movSpeedMultiplier * timeScale;
+                rb.velocity = moveSpeed * movSpeedMultiplier * timeScale * moveInput;
+
+                rb.velocity += movSpeedMultiplier * timeScale * moveSpeedAddition;
 
                 OnStartWalking?.Invoke();
             }
             else
             {
                 rb.velocity = Vector2.zero;
+
+                rb.velocity += moveSpeedAddition * movSpeedMultiplier;
 
                 OnStopWalking?.Invoke();
             }
@@ -75,6 +82,13 @@ public class PlayerMovement : MonoBehaviour, TimeAffected
         if (!this.enabled) return;
         
         rb.AddForce(force * timeScale);
+    }
+
+    public void AddVelocity(Vector2 velocity)
+    {
+        if (!this.enabled) return;
+
+        moveSpeedAddition = timeScale * velocity;
     }
 
     internal void StopMovement()

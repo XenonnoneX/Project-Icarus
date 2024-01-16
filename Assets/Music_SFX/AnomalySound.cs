@@ -21,6 +21,6 @@ public class AnomalySound : MonoBehaviour
 
     private void PlayRemoveSound()
     {
-        SoundManager.instance.PlaySound(anomalyRemoveSound);
+        if(anomalyRemoveSound != null) SoundManager.instance.PlaySound(anomalyRemoveSound);
     }
 }

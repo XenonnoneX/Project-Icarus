@@ -124,6 +124,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f22f49a0b656b54d9355663c7affbbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anomalySpawnSound: {fileID: 0}
+  anomalySpawnSound: {fileID: 8300000, guid: 033894af095d90e4e959ebdf6f631ec6, type: 3}
   anomalyRemoveSound: {fileID: 0}
-  hitPlayerSound: {fileID: 0}
+  hitPlayerSound: {fileID: 8300000, guid: 1609294bb24a55f47b158a66b87cdf13, type: 3}

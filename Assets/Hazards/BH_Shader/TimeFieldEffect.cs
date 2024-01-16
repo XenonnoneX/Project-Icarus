@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
-public class GravityFieldEffect : MonoBehaviour
+public class TimeFieldEffect : MonoBehaviour
 {
     [SerializeField] Shader shader;
     float ratio = 0.5625f; // aspect ratio of the screen

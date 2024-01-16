@@ -72,13 +72,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -3686143653111854914, guid: 6ae66d55eb90eba43a137dc6927e7503, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1896844525242792584, guid: 6ae66d55eb90eba43a137dc6927e7503, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6537892967679436203}
     - targetCorrespondingSourceObject: {fileID: 1896844525242792584, guid: 6ae66d55eb90eba43a137dc6927e7503, type: 3}
       insertIndex: -1
       addedObject: {fileID: -2427122281531123882}
@@ -88,20 +86,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1896844525242792584, guid: 6ae66d55eb90eba43a137dc6927e7503, type: 3}
   m_PrefabInstance: {fileID: 710896374360898488}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6537892967679436203
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1409466669274317104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28d432f278febf14296d1f33ce4b5039, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anomalySpawnSound: {fileID: 0}
-  anomalyRemoveSound: {fileID: 0}
 --- !u!50 &-2427122281531123882
 Rigidbody2D:
   serializedVersion: 4
