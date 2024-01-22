@@ -67,7 +67,7 @@ public class CatInteractable : MonoBehaviour, IInteractable, TimeAffected
         onInteractEnd?.Invoke();
     }
 
-    public void TakeItem()
+    public void TakeOutItem()
     {
 
     }

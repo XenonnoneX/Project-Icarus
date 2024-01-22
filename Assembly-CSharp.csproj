@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Music_SFX\AnomalySound.cs" />
+    <Compile Include="Assets\Core\NewLightController.cs" />
     <Compile Include="Assets\Music_SFX\MissionManagerSounds.cs" />
     <Compile Include="Assets\Interactables\Items\ItemData.cs" />
     <Compile Include="Assets\ControlStations\MissionManager.cs" />
@@ -75,7 +76,8 @@
     <Compile Include="Assets\Hazards\Spawner.cs" />
     <Compile Include="Assets\ControlStations\SpaceShipMovement.cs" />
     <Compile Include="Assets\Interactables\Items\PlayerInventory.cs" />
-    <Compile Include="Assets\Hazards\BH_Shader\TimeFieldEffect.cs" />
+    <Compile Include="Assets\Core\FieldOfView.cs" />
+    <Compile Include="Assets\Hazards\BH_Shader\TimeSlowEffect.cs" />
     <Compile Include="Assets\Hacks.cs" />
     <Compile Include="Assets\Interactables\IInteractable.cs" />
     <Compile Include="Assets\Artifacts\ArtifactShow.cs" />
@@ -87,12 +89,14 @@
     <Compile Include="Assets\Hazards\BH_Shader\BlackHoleEffect.cs" />
     <Compile Include="Assets\Upgrades\UpgradeShow.cs" />
     <Compile Include="Assets\Interactables\ShowBroken.cs" />
+    <Compile Include="Assets\UI\TelescopeVisuals.cs" />
     <Compile Include="Assets\Interactables\InteractableDetector.cs" />
     <Compile Include="Assets\Tasks\ShowKeys.cs" />
     <Compile Include="Assets\Music_SFX\AbilitySound.cs" />
     <Compile Include="Assets\Artifacts\Ability.cs" />
     <Compile Include="Assets\ControlStations\VoronoiEffect\VoronoiTiling.cs" />
     <Compile Include="Assets\Missions\MissionData.cs" />
+    <Compile Include="Assets\ControlStations\Telescope.cs" />
     <Compile Include="Assets\Artifacts\StringOfTimeVisuals.cs" />
     <Compile Include="Assets\Tasks\GetArtifactTask.cs" />
     <Compile Include="Assets\Core\ConditionalHideAttribute.cs" />
@@ -104,11 +108,13 @@
     <Compile Include="Assets\Menu\MovingBG.cs" />
     <Compile Include="Assets\Tasks\KeyShowObject.cs" />
     <Compile Include="Assets\Menu\GameOverMenu.cs" />
+    <Compile Include="Assets\UI\AnomalyAnalizerProgressBar.cs" />
     <Compile Include="Assets\ControlStations\StationManager.cs" />
     <Compile Include="Assets\Core\PlayerInputs.cs" />
     <Compile Include="Assets\Core\TimeAffected.cs" />
     <Compile Include="Assets\Tasks\ControlShipHeightTask.cs" />
     <Compile Include="Assets\Upgrades\UpgradeData.cs" />
+    <Compile Include="Assets\UI\StayInScreen.cs" />
     <Compile Include="Assets\Interactables\Items\AnomalyScanner.cs" />
     <Compile Include="Assets\Interactables\Items\PickupItem.cs" />
     <Compile Include="Assets\Core\Light2D.cs" />
@@ -116,6 +122,7 @@
     <Compile Include="Assets\Settings\SceneHandler.cs" />
     <Compile Include="Assets\Missions\Mission.cs" />
     <Compile Include="Assets\Artifacts\ArtifactManager.cs" />
+    <Compile Include="Assets\Tasks\InsertItemTask.cs" />
     <Compile Include="Assets\Menu\Menu.cs" />
     <Compile Include="Assets\Core\Utils.cs" />
     <Compile Include="Assets\Upgrades\Upgrade.cs" />
@@ -133,8 +140,8 @@
     <Compile Include="Assets\Music_SFX\SoundManager.cs" />
     <Compile Include="Assets\Hazards\Anomaly.cs" />
     <Compile Include="Assets\Interactables\Interactable.cs" />
-    <Compile Include="Assets\ControlStations\SendSignalStation.cs" />
     <Compile Include="Assets\UI\MissionAvailableLight.cs" />
+    <Compile Include="Assets\Hazards\BH_Shader\TimeSpeedEffect.cs" />
     <Compile Include="Assets\Music_SFX\TinyBHSound.cs" />
     <Compile Include="Assets\Tasks\RepairTask.cs" />
     <Compile Include="Assets\Hazards\BH_Shader\GravityPullEffect.cs" />

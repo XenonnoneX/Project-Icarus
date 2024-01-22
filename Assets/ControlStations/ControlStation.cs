@@ -8,7 +8,8 @@ public enum StationType
     MissionManager,
     AnomalyAnalizer,
     ArtifactDock,
-    Door
+    Door,
+    Telescope
 }
 
 public enum StationState
@@ -37,7 +38,7 @@ public abstract class ControlStation : MonoBehaviour, TimeAffected
     [SerializeField] float timeToBreak = 30;
     float timeSinceBroken = 0;
     public bool beingRepaired;
-    bool canBreak => stationState == StationState.Working && !beingRepaired && timeSinceRepaired > safeTimeAfterRepair && !isInteracting;
+    bool canBreak => !beingRepaired && timeSinceRepaired >= safeTimeAfterRepair && !isInteracting;
     [SerializeField] float safeTimeAfterRepair = 10f;
     float timeSinceRepaired;
 
@@ -51,14 +52,14 @@ public abstract class ControlStation : MonoBehaviour, TimeAffected
         if(stationState == StationState.Broken && !beingRepaired)
         {
             timeSinceBroken += Time.deltaTime * timeScale;
-            if(timeSinceBroken > timeToBreak)
+            if (timeSinceBroken > timeToBreak)
             {
                 SetStationState(StationState.Destroyed);
             }
         }
         else
         {
-            if (stationState == StationState.Working && !canBreak)
+            if (stationState == StationState.Working && !CanBreak())
             {
                 timeSinceRepaired += Time.deltaTime * timeScale;
             }
@@ -67,13 +68,18 @@ public abstract class ControlStation : MonoBehaviour, TimeAffected
 
     public void SetStationState(StationState state)
     {
-        if ((state == StationState.Broken || state == StationState.Destroyed) && !canBreak) return;
+        if (state == stationState) return;
+
+        if ((state == StationState.Broken || state == StationState.Destroyed) && !CanBreak())
+        {
+            return;
+        }
         
         stationState = state;
 
         if (stationState == StationState.Working)
         {
-            timeSinceBroken = 0;
+            timeSinceRepaired = 0;
         }
 
         onChangeStationState?.Invoke(state);
@@ -84,7 +90,7 @@ public abstract class ControlStation : MonoBehaviour, TimeAffected
         return stationState;
     }
 
-    public virtual void CompleteTask()
+    public virtual void CompleteTask(ItemData currentItem = null)
     {
         onCompleteTask?.Invoke();
     }
@@ -101,10 +107,6 @@ public abstract class ControlStation : MonoBehaviour, TimeAffected
 
     internal bool CanBreak()
     {
-        if (stationState != StationState.Working) print("Not Working");
-        if (beingRepaired) print("beingRepaired");
-        if (timeSinceRepaired <= safeTimeAfterRepair) print("SafeTime");
-        if (isInteracting) print("IsInteracting");
         return canBreak;
     }
 

@@ -27,7 +27,7 @@ public class AnomalyScanner : MonoBehaviour
         InvokeRepeating("GetAnomaliesInRange", 0, 0.5f);
     }
 
-    void OnInteract()
+    void OnSuckupAnomaly()
     {
         if (inventory.GetCurrentItem() != anomalyScannerItem) return;
 

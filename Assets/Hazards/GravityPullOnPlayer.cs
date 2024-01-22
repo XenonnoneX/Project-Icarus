@@ -9,7 +9,7 @@ public class GravityPullOnPlayer : Anomaly
 
     private void Awake()
     {
-        gravityPullEffect = FindObjectOfType<GravityPullEffect>();
+        gravityPullEffect = Camera.main.GetComponent<GravityPullEffect>();
         playerMovement = FindObjectOfType<PlayerMovement>();
     }
 
@@ -30,12 +30,13 @@ public class GravityPullOnPlayer : Anomaly
 
         float currentPullStrength = pullStrength * (1 - (distance / gravityPullEffect.radius));
 
-        playerMovement.AddForce((transform.position - playerMovement.transform.position).normalized * currentPullStrength * Time.deltaTime);
+        playerMovement.AddForce(currentPullStrength * Time.deltaTime * (transform.position - playerMovement.transform.position).normalized);
     }
 
     internal override void RemoveAnomaly()
     {
+        gravityPullEffect.EndEffect(transform);
+        
         base.RemoveAnomaly();
-        gravityPullEffect.EndEffect();
     }
 }

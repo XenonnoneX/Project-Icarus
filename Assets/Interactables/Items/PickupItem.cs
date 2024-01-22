@@ -32,19 +32,6 @@ public class PickupItem : MonoBehaviour, IInteractable
         }
     }
 
-    private void Update()
-    {
-        if(!outOfShip) CheckOutOfShip();
-    }
-
-    public void CheckOutOfShip()
-    {
-        if (Utils.OutOfShip(transform))
-        {
-            SetOutOfShip();
-        }
-    }
-
     public void SetOutOfShip()
     {
         Rigidbody2D rb = gameObject.AddComponent<Rigidbody2D>();
@@ -71,7 +58,7 @@ public class PickupItem : MonoBehaviour, IInteractable
         Destroy(gameObject);
     }
 
-    public void TakeItem()
+    public void TakeOutItem()
     {
         playerInventory.PickUpItem(itemData);
         Destroy(gameObject);

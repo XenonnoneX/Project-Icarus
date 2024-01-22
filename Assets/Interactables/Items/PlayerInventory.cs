@@ -10,7 +10,7 @@ public class PlayerInventory : MonoBehaviour
     public delegate void OnItemChanged();
     public event OnItemChanged onItemChanged;
 
-    public delegate void OnDropedItem();
+    public delegate void OnDropedItem(bool outOfShip);
     public event OnDropedItem onDropedItem;
 
     public ItemData GetCurrentItem() => currentItem;
@@ -34,12 +34,22 @@ public class PlayerInventory : MonoBehaviour
         PickupItem itemDrop = Instantiate(itemPrefab, Utils.GetWalkablePosNextTo(transform.position, 1), transform.rotation);
         itemDrop.SetItemData(currentItem);
 
-        onDropedItem?.Invoke();
+        if (Utils.OutOfShip(transform))
+        {
+            itemDrop.SetOutOfShip();
+
+            onDropedItem?.Invoke(true);
+        }
+        else
+        {
+            onDropedItem?.Invoke(false);
+        }
+
 
         SetCurrentItem(null);
     }
 
-    internal void DestroyItem()
+    internal void RemoveCurrentItem()
     {
         currentItem = null;
     }

@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Android;
 
 public enum MissionType
 {
     ReachHeightBelow,
     CompleteStationTask,
-    GetHitByTineBH
+    GetHitByTinyBH,
+    DropItemOutInSpace,
+    FlyFarAway
 }
 
 [CreateAssetMenu()]
@@ -15,7 +18,7 @@ public class MissionData : ScriptableObject
     public List<MissionStep> missionSteps;
     
     public string missionText;
-    public int missionReward;
+    public int missionReward = 50;
 
     internal void Setup()
     {
@@ -50,7 +53,7 @@ public class MissionStep
         if(missionType == MissionType.ReachHeightBelow)
         {
             return ReachedHeightBelow(height);
-        }else if (missionType == MissionType.CompleteStationTask || missionType == MissionType.GetHitByTineBH)
+        }else if (missionType == MissionType.CompleteStationTask || missionType == MissionType.GetHitByTinyBH || missionType == MissionType.DropItemOutInSpace)
         {
             bool completed = missionStepCompleted;
             missionStepCompleted = false;
@@ -71,10 +74,29 @@ public class MissionStep
             station = GetStationOfType(stationType);
             station.onCompleteTask += CheckCompleteMissionStep;
         }
-        else if (missionType == MissionType.GetHitByTineBH)
+        else if (missionType == MissionType.GetHitByTinyBH)
         {
             PlayerMovement playerMovement = GameObject.FindObjectOfType<PlayerMovement>();
             playerMovement.onHitByBH += CheckCompleteMissionStep;
+
+            if (missionStepCompleted)
+            {
+                missionStepCompleted = false;
+                // not sure why this is needed, but when walking into a BH before the mission is active, the mission is completed already at setup
+            }
+        }
+        else if (missionType == MissionType.DropItemOutInSpace)
+        {
+            PlayerInventory playerInventory = GameObject.FindObjectOfType<PlayerInventory>();
+            playerInventory.onDropedItem += CheckDropedItemInSpace;
+        }
+    }
+
+    private void CheckDropedItemInSpace(bool outOfShip)
+    {
+        if (outOfShip)
+        {
+            missionStepCompleted = true;
         }
     }
 
@@ -95,18 +117,23 @@ public class MissionStep
             {
                 if (((AnomalyAnalysisStation)station).CurrentAnomalyType == anomalyType)
                 {
-                    missionStepCompleted = true;
+                    SetMissionStepCompleted(true);
                 }
             }
             else
             {
-                missionStepCompleted = true;
+                SetMissionStepCompleted(true);
             }
         }
-        else if (missionType == MissionType.GetHitByTineBH)
+        else if (missionType == MissionType.GetHitByTinyBH)
         {
-            missionStepCompleted = true;
+            SetMissionStepCompleted(true);
         }
+    }
+
+    void SetMissionStepCompleted(bool value)
+    {
+        missionStepCompleted = value;
     }
 
 

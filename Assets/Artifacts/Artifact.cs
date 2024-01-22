@@ -31,8 +31,6 @@ public class Artifact : MonoBehaviour
 
     protected virtual void SetLevel(int level)
     {
-        print("set LEvel: " + level);
-
         currentLevel = level;
 
         if (currentLevel != 0) EnableArtifact();

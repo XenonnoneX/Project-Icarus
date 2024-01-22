@@ -14,7 +14,7 @@ public class UpgradeShow : MonoBehaviour
     {
         spriteImage.sprite = upgrade.upgradeData.shopIcon;
         levelText.text = "Level " + upgrade.currentLevel.ToString() + "/ " + (upgrade.upgradeData.levelValues.Count-1).ToString();
-        if(upgrade.currentLevel < upgrade.upgradeData.upgradeCosts.Count) upgradeCostText.text = upgrade.upgradeData.upgradeCosts[upgrade.currentLevel].ToString() + " RP";
+        if(upgrade.currentLevel < upgrade.upgradeData.upgradeCosts.Count) upgradeCostText.text = upgrade.upgradeData.upgradeCosts[upgrade.currentLevel].ToString();
         else upgradeCostText.text = "MAX";
         nameText.text = upgrade.upgradeData.name;
     }

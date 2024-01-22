@@ -23,12 +23,10 @@ public class SceneHandler : MonoBehaviour
                 if (settingsOpen)
                 {
                     CloseSettings();
-                    settingsOpen = false;
                 }
                 else
                 {
                     OpenSettings();
-                    settingsOpen = true;
                 }
             }
         }
@@ -36,6 +34,8 @@ public class SceneHandler : MonoBehaviour
 
     public void OpenSettings()
     {
+        settingsOpen = true;
+        
         // Pause the game
         if (timeManager != null) timeManager.Pause();
         
@@ -45,6 +45,7 @@ public class SceneHandler : MonoBehaviour
 
     public void CloseSettings()
     {
+        settingsOpen = false;
 
         // Unpause the game
         if (timeManager != null) timeManager.Unpause();

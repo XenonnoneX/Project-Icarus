@@ -24,7 +24,7 @@ public class PlayerSounds : MonoBehaviour
         playerInventory.onDropedItem += PlayDropItemSound;
     }
 
-    private void PlayDropItemSound()
+    private void PlayDropItemSound(bool outOfShip)
     {
         SoundManager.instance.PlaySound(dropItem);
     }

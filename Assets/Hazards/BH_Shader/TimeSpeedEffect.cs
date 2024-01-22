@@ -1,26 +1,28 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
-public class TimeFieldEffect : MonoBehaviour
+public class TimeSpeedEffect : MonoBehaviour
 {
     [SerializeField] Shader shader;
+    Transform pullEffectObject;
+    List<Transform> nextPullEffectObjects = new List<Transform>();
     float ratio = 0.5625f; // aspect ratio of the screen
-    [SerializeField] float timeMultiplier = 10f;
+    public float radius = 4;
     [SerializeField] float strength = 0.1f;
-    [SerializeField] float frequency = 20f;
-    [SerializeField] float saturationAdd = 0.2f;
-    [SerializeField] float saturationSinMultiplier = .3f;
-    [SerializeField] Vector2 dir;
+    [SerializeField] float _SaturationAdd = 0.3f;
 
     Camera cam;
     Material _material; // will be procedurally generated
 
-    float effectTime = 0f;
-    float effectDuration = Mathf.Infinity;
-    [SerializeField] float effectAnimateDuration = Mathf.Infinity;
+    Vector3 wtsp;
+    Vector2 pos;
 
-    [SerializeField] bool effectActive;
+    float effectTime = 0f;
+    float effectDuration = 8f;
+    [SerializeField] float effectAnimateDuration = 2f;
+
+    bool effectActive;
 
     Material material
     {
@@ -41,8 +43,8 @@ public class TimeFieldEffect : MonoBehaviour
         if (!effectActive) return;
 
         effectTime += Time.deltaTime;
-        
-        if(effectTime > effectDuration)
+
+        if (effectTime > effectDuration)
         {
             EndEffect();
         }
@@ -72,19 +74,23 @@ public class TimeFieldEffect : MonoBehaviour
 
     private void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
-        
-
-        if (shader && material && effectActive)
+        if (shader && material && pullEffectObject)
         {
-            _material.SetVector("_Direction", - dir.normalized);
-            _material.SetFloat("_Strength", strength);
-            _material.SetFloat("_Frequency", frequency);
-            _material.SetFloat("_SaturationAdd", saturationAdd);
-            _material.SetFloat("_SaturationSinMultiplier", saturationSinMultiplier);
-            _material.SetFloat("_Ratio", ratio);
-            _material.SetFloat("_TimeSinceStart", Mathf.Min(effectTime, effectAnimateDuration) * timeMultiplier);
+            wtsp = cam.WorldToScreenPoint(pullEffectObject.position);
 
-            Graphics.Blit(source, destination, material);
+            if (wtsp.z > 0)
+            {
+                pos = new Vector2(wtsp.x / cam.pixelWidth, wtsp.y / cam.pixelHeight);
+
+                _material.SetFloat("_SaturationAdd", _SaturationAdd);
+                _material.SetVector("_Position", pos);
+                _material.SetFloat("_Ratio", ratio);
+                _material.SetFloat("_Rad", radius);
+                _material.SetFloat("_Distance", Vector3.Distance(pullEffectObject.position, transform.position));
+                _material.SetFloat("_TimeSinceStart", Mathf.Min(effectTime, effectAnimateDuration) * strength);
+
+                Graphics.Blit(source, destination, material);
+            }
         }
         else
         {
@@ -92,10 +98,12 @@ public class TimeFieldEffect : MonoBehaviour
         }
     }
 
-    internal void StartEffect(Vector2 dir, float effectDuration)
+    internal void StartEffect(Transform pullObjectTransform, float effectDuration)
     {
-        this.dir = dir;
-        
+        if (pullEffectObject != null) EndEffect();
+
+        pullEffectObject = pullObjectTransform;
+
         effectTime = 0;
         this.effectDuration = effectDuration;
 
@@ -104,6 +112,9 @@ public class TimeFieldEffect : MonoBehaviour
 
     public void EndEffect()
     {
+        if(pullEffectObject != null) Destroy(pullEffectObject.gameObject);
+        pullEffectObject = null;
+
         effectActive = false;
     }
 }

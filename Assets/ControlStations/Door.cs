@@ -12,9 +12,9 @@ public class Door : ControlStation
         playerMovement = FindObjectOfType<PlayerMovement>();
     }
 
-    public override void CompleteTask()
+    public override void CompleteTask(ItemData currentItem = null)
     {
-        base.CompleteTask();
+        base.CompleteTask(currentItem);
 
         if (Utils.OutOfShip(playerMovement.transform)) playerMovement.transform.position = insideSpawnPoint.position;
         else playerMovement.transform.position = outsideSpawnPoint.position;

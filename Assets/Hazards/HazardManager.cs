@@ -90,13 +90,17 @@ public class HazardManager : MonoBehaviour
 
     private void BreakRandomStation()
     {
-        int rand = UnityEngine.Random.Range(0, allControlStations.Count);
+        int rand;
 
-        if (!allControlStations[rand].CanBreak())
+        int iterations = 0;
+        int maxIterations = 20;
+        
+        do
         {
-            print("cant break");
-            return;
+            rand = UnityEngine.Random.Range(0, allControlStations.Count);
+            iterations++;
         }
+        while (!allControlStations[rand].CanBreak() && iterations < maxIterations);
         
         if(interactableDetector.CurrentInteractingInteractable != null && ((Interactable)interactableDetector.CurrentInteractingInteractable).station == allControlStations[rand])
         {

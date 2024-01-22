@@ -1,5 +1,3 @@
-using System;
-using UnityEditor.Experimental.RestService;
 using UnityEngine;
 
 public class UpgradeShop : MonoBehaviour

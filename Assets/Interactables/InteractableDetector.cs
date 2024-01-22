@@ -85,7 +85,7 @@ public class InteractableDetector : MonoBehaviour
     {
         if (currentClosestInteractable == null) return;
 
-        currentClosestInteractable.TakeItem();
+        currentClosestInteractable.TakeOutItem();
     }
 
     public void OnInteractEnd()

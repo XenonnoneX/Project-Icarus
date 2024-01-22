@@ -36,7 +36,7 @@ public class UpgradeMenuUI : MonoBehaviour
 
     private void UpdateUI()
     {
-        rpText.text = upgradeShop.currentFounds.ToString() + " €";
+        rpText.text = upgradeShop.currentFounds.ToString();
 
         for (int i = 0; i < upgradeShowObjects.Count; i++)
         {

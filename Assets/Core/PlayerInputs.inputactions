@@ -76,6 +76,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "SuckupAnomaly",
+                    "type": "Button",
+                    "id": "9200eae3-8c4f-410e-8ee3-0420336f95df",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -302,7 +311,7 @@
                 {
                     "name": "",
                     "id": "17d069d7-0f88-4998-9926-7677ea9a316c",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -324,7 +333,7 @@
                 {
                     "name": "",
                     "id": "ae5d0261-d4b7-4a63-abf1-abfe7bd9dfa1",
-                    "path": "<Keyboard>/e",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
@@ -351,6 +360,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "TakeItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9a75eafb-281b-49cf-ba56-840ab43ea96b",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SuckupAnomaly",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

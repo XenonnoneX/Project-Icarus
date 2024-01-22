@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using static System.Collections.Specialized.BitVector32;
+using static UnityEditor.Progress;
 
 public class Interactable : MonoBehaviour, IInteractable, TimeAffected
 {
@@ -57,7 +58,7 @@ public class Interactable : MonoBehaviour, IInteractable, TimeAffected
         {
             if(playerInventory.GetCurrentItem().name == "RepairKit")
             {
-                playerInventory.DestroyItem();
+                playerInventory.RemoveCurrentItem();
 
                 station.SetStationState(StationState.Broken);
                 SetIsInteracting(false);
@@ -91,7 +92,7 @@ public class Interactable : MonoBehaviour, IInteractable, TimeAffected
             }
             else if (playerInventory.GetCurrentItem() == neededItem)
             {
-                currentItem = playerInventory.GetCurrentItem();
+                InsertItem(playerInventory.GetCurrentItem());
                 playerInventory.SetCurrentItem(null);
                 task.StartTask(this);
             }
@@ -103,11 +104,25 @@ public class Interactable : MonoBehaviour, IInteractable, TimeAffected
         }
     }
 
-    public void TakeItem()
+    public void InsertItem(ItemData itemData)
     {
-        if (currentItem == null) return;
+        currentItem = itemData;
+    }
+
+    public void TakeOutItem()
+    {
         playerInventory.PickUpItem(currentItem);
+        
         currentItem = null;
+    }
+
+    public void ExchangeItems()
+    {
+        ItemData item = currentItem;
+        InsertItem(playerInventory.GetCurrentItem());
+        playerInventory.RemoveCurrentItem();
+        
+        playerInventory.PickUpItem(item);
     }
 
     public void InteractEnd()
@@ -152,7 +167,7 @@ public class Interactable : MonoBehaviour, IInteractable, TimeAffected
 
     internal virtual void CompleteTask()
     {
-        station.CompleteTask();
+        station.CompleteTask(currentItem);
         InteractEnd();
     }
 

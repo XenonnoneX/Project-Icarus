@@ -98,6 +98,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SuckupAnomaly"",
+                    ""type"": ""Button"",
+                    ""id"": ""9200eae3-8c4f-410e-8ee3-0420336f95df"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -324,7 +333,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""17d069d7-0f88-4998-9926-7677ea9a316c"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -346,7 +355,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""ae5d0261-d4b7-4a63-abf1-abfe7bd9dfa1"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
@@ -373,6 +382,17 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""TakeItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9a75eafb-281b-49cf-ba56-840ab43ea96b"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SuckupAnomaly"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -968,6 +988,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Player_Repair = m_Player.FindAction("Repair", throwIfNotFound: true);
         m_Player_DropItem = m_Player.FindAction("DropItem", throwIfNotFound: true);
         m_Player_TakeItem = m_Player.FindAction("TakeItem", throwIfNotFound: true);
+        m_Player_SuckupAnomaly = m_Player.FindAction("SuckupAnomaly", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1049,6 +1070,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Repair;
     private readonly InputAction m_Player_DropItem;
     private readonly InputAction m_Player_TakeItem;
+    private readonly InputAction m_Player_SuckupAnomaly;
     public struct PlayerActions
     {
         private @PlayerInputs m_Wrapper;
@@ -1061,6 +1083,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @Repair => m_Wrapper.m_Player_Repair;
         public InputAction @DropItem => m_Wrapper.m_Player_DropItem;
         public InputAction @TakeItem => m_Wrapper.m_Player_TakeItem;
+        public InputAction @SuckupAnomaly => m_Wrapper.m_Player_SuckupAnomaly;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1094,6 +1117,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @TakeItem.started += instance.OnTakeItem;
             @TakeItem.performed += instance.OnTakeItem;
             @TakeItem.canceled += instance.OnTakeItem;
+            @SuckupAnomaly.started += instance.OnSuckupAnomaly;
+            @SuckupAnomaly.performed += instance.OnSuckupAnomaly;
+            @SuckupAnomaly.canceled += instance.OnSuckupAnomaly;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1122,6 +1148,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @TakeItem.started -= instance.OnTakeItem;
             @TakeItem.performed -= instance.OnTakeItem;
             @TakeItem.canceled -= instance.OnTakeItem;
+            @SuckupAnomaly.started -= instance.OnSuckupAnomaly;
+            @SuckupAnomaly.performed -= instance.OnSuckupAnomaly;
+            @SuckupAnomaly.canceled -= instance.OnSuckupAnomaly;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1312,6 +1341,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnRepair(InputAction.CallbackContext context);
         void OnDropItem(InputAction.CallbackContext context);
         void OnTakeItem(InputAction.CallbackContext context);
+        void OnSuckupAnomaly(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

@@ -4,10 +4,35 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class TimeSlowField : Anomaly
 {
+    TimeSlowEffect timeSlowEffect;
+    TimeSpeedEffect timeSpeedEffect;
+
     [SerializeField] float timeScale = 0.5f;
 
     List<TimeAffected> currentlyAffectedObjects = new List<TimeAffected>();
 
+
+    private void Awake()
+    {
+        timeSlowEffect = Camera.main.GetComponent<TimeSlowEffect>();
+        timeSpeedEffect = Camera.main.GetComponent<TimeSpeedEffect>();
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+
+        if (timeScale < 1)
+        {
+            print("Start slow effect");
+            timeSlowEffect.StartEffect(transform, anomalyDuration);
+        }
+        else
+        {
+            print("Start speed effect");
+            timeSpeedEffect.StartEffect(transform, anomalyDuration);
+        }
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

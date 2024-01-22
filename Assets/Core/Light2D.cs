@@ -6,6 +6,7 @@ public class Light2D : MonoBehaviour, TimeAffected
     [SerializeField] LayerMask wallLayer = 1 << 10;
     [SerializeField] float lightRange = 1f;
     [SerializeField] Color lightColor = Color.white;
+    public Color LightColor => lightColor;
     // [SerializeField, Range(0, 1)] float emissionIntensity = 0.5f;
     [SerializeField] float blinkingSpeed = 10f; // Blinks per second
     float blinkSpeedMultiplier = 1;
@@ -77,7 +78,7 @@ public class Light2D : MonoBehaviour, TimeAffected
 
             vertices[vertexIndex] = direction * distance;
             float normalizedDistance = distance / lightRange;
-            float intensity = 1f - Mathf.Pow(distance / lightRange, 2f);
+            float intensity = 1f - Mathf.Pow(normalizedDistance, 2f);
             colors[vertexIndex] = lightColor * intensity;
 
             if (i < rayCount - 1)

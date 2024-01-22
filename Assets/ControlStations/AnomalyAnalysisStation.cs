@@ -35,7 +35,7 @@ public class AnomalyAnalysisStation : ControlStation
         timeSinceAnomalyAnalysisStarted = 0;
     }
 
-    public override void CompleteTask()
+    public override void CompleteTask(ItemData currentItem = null)
     {
         if (timeSinceAnomalyAnalysisStarted == 0)
         {
@@ -62,4 +62,9 @@ public class AnomalyAnalysisStation : ControlStation
     internal bool AnalysisCompleted() => analysisCompleted;
 
     internal bool CurrentlyAnalizing() => timeSinceAnomalyAnalysisStarted > 0;
+
+    internal float GetAnomalyAnalysisProgress()
+    {
+        return timeSinceAnomalyAnalysisStarted / anomalyAnalysisTime;
+    }
 }

@@ -29,7 +29,7 @@ public class GravityField : Anomaly
 
         if (rand == 0)
         {
-            dir = new Vector2(0, 1);
+            dir = new Vector2(-1, 0);
         }
         else if (rand == 1)
         {
@@ -41,7 +41,7 @@ public class GravityField : Anomaly
         }
         else if(rand == 3)
         {
-            dir = new Vector2(-1, 0);
+            dir = new Vector2(0, 1);
         }
 
         gravityFieldEffect.StartEffect(dir, anomalyDuration);
@@ -56,8 +56,18 @@ public class GravityField : Anomaly
     {
         base.RemoveAnomaly();
 
+        playerMovement.AddVelocity(Vector2.zero);
         gravityFieldEffect.EndEffect();
 
+        removed = true;
+
         Destroy(gameObject);
+    }
+
+    bool removed;
+
+    void OnDisable()
+    {
+        if(!removed) RemoveAnomaly();
     }
 }

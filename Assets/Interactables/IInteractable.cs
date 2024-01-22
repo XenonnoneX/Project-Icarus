@@ -10,7 +10,7 @@ public interface IInteractable
     public void ShowInteractable();
     public void HideInteractable();
     public void Interact();
-    public void TakeItem();
+    public void TakeOutItem();
     public void InteractEnd();
     void CancelTask();
 }

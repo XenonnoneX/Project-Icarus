@@ -67,11 +67,11 @@ public class ResearchStation : ControlStation
         return onBoardStoredRP / (RPStorageCapacity + addedRPStorageCapacity);
     }
 
-    public override void CompleteTask()
+    public override void CompleteTask(ItemData currentItem = null)
     {
         savedRP += onBoardStoredRP;
         onBoardStoredRP = 0;
 
-        base.CompleteTask();
+        base.CompleteTask(currentItem);
     }
 }

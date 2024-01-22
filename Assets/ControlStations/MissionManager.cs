@@ -46,11 +46,11 @@ public class MissionManager : ControlStation
         if(currentMissions.Count * timeToGetNewMission + newMissionTimer < maxMissions * timeToGetNewMission) newMissionTimer += Time.deltaTime * timeScale;
     }
 
-    public override void CompleteTask()
+    public override void CompleteTask(ItemData currentItem = null)
     {
         GetNewMissions();
 
-        base.CompleteTask();
+        base.CompleteTask(currentItem);
     }
 
     private void GetNewMissions()
@@ -60,6 +60,7 @@ public class MissionManager : ControlStation
             newMissionTimer -= timeToGetNewMission;
 
             Mission newMission = GetNewRandomMission();
+
             newMission.Setup();
             currentMissions.Add(newMission);
             onMissionsChanged.Invoke();
