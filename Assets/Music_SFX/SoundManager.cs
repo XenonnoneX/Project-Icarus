@@ -24,8 +24,6 @@ public class SoundManager : MonoBehaviour
     {
         if (instance == null) instance = this;
         else Destroy(this);
-
-        DontDestroyOnLoad(this);
     }
 
     // Start is called before the first frame update

@@ -70,16 +70,18 @@ public abstract class ControlStation : MonoBehaviour, TimeAffected
     {
         if (state == stationState) return;
 
-        if ((state == StationState.Broken || state == StationState.Destroyed) && !CanBreak())
-        {
-            return;
-        }
+        if (state == StationState.Broken && stationState == StationState.Working && !CanBreak()) return;
+
+        if (state == StationState.Destroyed && !CanBreak()) return;
         
         stationState = state;
 
         if (stationState == StationState.Working)
         {
             timeSinceRepaired = 0;
+        }else if(stationState == StationState.Broken)
+        {
+            timeSinceBroken = 0;
         }
 
         onChangeStationState?.Invoke(state);

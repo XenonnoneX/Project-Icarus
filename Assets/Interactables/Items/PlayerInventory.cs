@@ -52,5 +52,6 @@ public class PlayerInventory : MonoBehaviour
     internal void RemoveCurrentItem()
     {
         currentItem = null;
+        onItemChanged?.Invoke();
     }
 }

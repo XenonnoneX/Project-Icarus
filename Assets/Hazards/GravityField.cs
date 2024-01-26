@@ -44,19 +44,19 @@ public class GravityField : Anomaly
             dir = new Vector2(0, 1);
         }
 
-        gravityFieldEffect.StartEffect(dir, anomalyDuration);
-    }
+        playerMovement.SetAddVelocity(pullPercentageOfMovSpeed * playerMovement.MoveSpeed * dir);
 
-    private void Update()
-    {
-        playerMovement.AddVelocity(pullPercentageOfMovSpeed * playerMovement.MoveSpeed * dir);
+        gravityFieldEffect.StartEffect(dir, anomalyDuration);
     }
 
     internal override void RemoveAnomaly()
     {
         base.RemoveAnomaly();
 
-        playerMovement.AddVelocity(Vector2.zero);
+        if (playerMovement != null)
+        {
+            playerMovement.SetAddVelocity(Vector2.zero);
+        }
         gravityFieldEffect.EndEffect();
 
         removed = true;

@@ -50,4 +50,13 @@ public class UpgradeShopManager : MonoBehaviour
             PlayerPrefs.SetInt("Upgrade_" + allUpgradeDatas[i].name, allUpgrades[i].currentLevel);
         }
     }
+
+    public void ResetUpgrades()
+    {
+        foreach (Upgrade upgrade in allUpgrades)
+        {
+            upgrade.SetLevel(0);
+        }
+        onUpgradesChanged.Invoke();
+    }
 }

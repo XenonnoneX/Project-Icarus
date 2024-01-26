@@ -24,12 +24,10 @@ public class TimeSlowField : Anomaly
 
         if (timeScale < 1)
         {
-            print("Start slow effect");
             timeSlowEffect.StartEffect(transform, anomalyDuration);
         }
         else
         {
-            print("Start speed effect");
             timeSpeedEffect.StartEffect(transform, anomalyDuration);
         }
     }

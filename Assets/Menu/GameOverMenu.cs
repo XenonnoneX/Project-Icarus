@@ -29,8 +29,6 @@ public class GameOverMenu : MonoBehaviour
         {
             int rand = Random.Range(-5, 6);
 
-            print(rand);
-
             foundsGained += 20 + rand;
 
             foundsGainedText.text = "Founds Gained: " + foundsGained.ToString();

@@ -56,7 +56,7 @@ public class Interactable : MonoBehaviour, IInteractable, TimeAffected
 
         if (station.GetStationState() == StationState.Destroyed)
         {
-            if(playerInventory.GetCurrentItem().name == "RepairKit")
+            if(playerInventory.GetCurrentItem() != null && playerInventory.GetCurrentItem().name == "RepairKit")
             {
                 playerInventory.RemoveCurrentItem();
 
@@ -156,7 +156,7 @@ public class Interactable : MonoBehaviour, IInteractable, TimeAffected
 
     public void BreakInteractable()
     {
-        station.SetStationState(StationState.Broken);
+        if(station.GetStationState() == StationState.Working) station.SetStationState(StationState.Broken);
     }
 
     public void FixInteractable()

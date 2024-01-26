@@ -22,8 +22,6 @@ public class GetArtifactTask : Task
 
     private void CheckGetArtifact()
     {
-        print("CheckGetArtifact");
-
         if(missionManager.CompletedMissionsCount % missionManager.missionsForArtifact == 0)
         {
             artifactDock.availableArtifactsCount++;

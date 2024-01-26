@@ -88,6 +88,11 @@ public class HazardManager : MonoBehaviour
         return (timeBetweenBreakingStationsAtHeight0 * (Mathf.Pow(timeBetweenBreakingStationsDecreasePerMinute, timeSinceStart / 60))) * (spaceShipMovement.GetCurrentHeight() + 1);
     }
 
+    public void HackBreakRandomStation()
+    {
+        BreakRandomStation();
+    }
+
     private void BreakRandomStation()
     {
         int rand;
@@ -100,7 +105,7 @@ public class HazardManager : MonoBehaviour
             rand = UnityEngine.Random.Range(0, allControlStations.Count);
             iterations++;
         }
-        while (!allControlStations[rand].CanBreak() && iterations < maxIterations);
+        while (!allControlStations[rand].CanBreak() && allControlStations[rand].GetStationState() != StationState.Destroyed && iterations < maxIterations);
         
         if(interactableDetector.CurrentInteractingInteractable != null && ((Interactable)interactableDetector.CurrentInteractingInteractable).station == allControlStations[rand])
         {

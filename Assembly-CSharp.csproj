@@ -89,6 +89,7 @@
     <Compile Include="Assets\Hazards\BH_Shader\BlackHoleEffect.cs" />
     <Compile Include="Assets\Upgrades\UpgradeShow.cs" />
     <Compile Include="Assets\Interactables\ShowBroken.cs" />
+    <Compile Include="Assets\Artifacts\RepairKitArtifact.cs" />
     <Compile Include="Assets\UI\TelescopeVisuals.cs" />
     <Compile Include="Assets\Interactables\InteractableDetector.cs" />
     <Compile Include="Assets\Tasks\ShowKeys.cs" />

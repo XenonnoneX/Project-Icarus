@@ -84,10 +84,8 @@ public class PlayerMovement : MonoBehaviour, TimeAffected
         rb.AddForce(force * timeScale);
     }
 
-    public void AddVelocity(Vector2 velocity)
+    public void SetAddVelocity(Vector2 velocity)
     {
-        if (!this.enabled) return;
-
         moveSpeedAddition = timeScale * velocity;
     }
 
