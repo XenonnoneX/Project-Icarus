@@ -41,10 +41,11 @@ public class StringOfTimeAbility : Artifact, TimeAffected, Ability
         base.Update();
 
         timeSinceLastUse += Time.deltaTime * timeScale;
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            if(timeSinceLastUse >= cooldown) UseAbility();
-        }
+    }
+
+    void OnStringOfTime()
+    {
+        if (timeSinceLastUse >= cooldown) UseAbility();
     }
     
     protected override void SetLevel(int level)

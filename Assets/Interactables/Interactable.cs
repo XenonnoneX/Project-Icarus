@@ -156,7 +156,12 @@ public class Interactable : MonoBehaviour, IInteractable, TimeAffected
 
     public void BreakInteractable()
     {
-        if(station.GetStationState() == StationState.Working) station.SetStationState(StationState.Broken);
+        if(station.GetStationState() == StationState.Working) SetStationBroken();
+    }
+
+    public void SetStationBroken()
+    {
+        station.SetStationState(StationState.Broken);
     }
 
     public void FixInteractable()

@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour, TimeAffected
     
     public event Action OnStartWalking;
     public event Action OnStopWalking;
+    public event Action OnLoopBoundaries;
 
     public delegate void OnHitByBH();
     public OnHitByBH onHitByBH;
@@ -24,6 +25,7 @@ public class PlayerMovement : MonoBehaviour, TimeAffected
     [SerializeField] Vector2 distToLoopToOtherSide;
 
     Vector2 moveSpeedAddition;
+    bool controlsInverted;
 
     public float timeScale = 1;
 
@@ -35,6 +37,11 @@ public class PlayerMovement : MonoBehaviour, TimeAffected
     // Update is called once per frame
     void Update()
     {
+        if (controlsInverted)
+        {
+            rb.velocity = -rb.velocity;
+        }
+        
         if (Utils.OutOfShip(transform))
         {
             OnStopWalking?.Invoke();
@@ -64,12 +71,25 @@ public class PlayerMovement : MonoBehaviour, TimeAffected
                 OnStopWalking?.Invoke();
             }
         }
+
+        if (controlsInverted)
+        {
+            rb.velocity = -rb.velocity;
+        }
     }
 
     private void LoopBoundaryConditions()
     {
-        if (Mathf.Abs(transform.position.x) > distToLoopToOtherSide.x) transform.position = new Vector3(-transform.position.x * 0.95f, transform.position.y, transform.position.z);
-        if (Mathf.Abs(transform.position.y) > distToLoopToOtherSide.y) transform.position = new Vector3(transform.position.x, -transform.position.y * 0.95f, transform.position.z);
+        if (Mathf.Abs(transform.position.x) > distToLoopToOtherSide.x)
+        {
+            transform.position = new Vector3(-transform.position.x * 0.95f, transform.position.y, transform.position.z);
+            OnLoopBoundaries?.Invoke();
+        }
+        if (Mathf.Abs(transform.position.y) > distToLoopToOtherSide.y)
+        {
+            transform.position = new Vector3(transform.position.x, -transform.position.y * 0.95f, transform.position.z);
+            OnLoopBoundaries?.Invoke();
+        }
     }
 
     void OnMove(InputValue inputValue)
@@ -89,9 +109,15 @@ public class PlayerMovement : MonoBehaviour, TimeAffected
         moveSpeedAddition = timeScale * velocity;
     }
 
+    public void SetControlsInverted(bool inverted)
+    {
+        controlsInverted = inverted;
+    }
+
     internal void StopMovement()
     {
         rb.velocity = Vector2.zero;
+        OnStopWalking?.Invoke();
         this.enabled = false;
     }
 

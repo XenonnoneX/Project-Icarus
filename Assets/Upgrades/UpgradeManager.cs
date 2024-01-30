@@ -22,6 +22,7 @@ public class UpgradeManager : MonoBehaviour
             else if (upgradeName == "RepairSpeed") FindObjectOfType<RepairTask>().repairSpeedMultiplier = upgrade.GetValue();
             else if (upgradeName == "RPStorageCap") FindObjectOfType<ResearchStation>().addedRPStorageCapacity = upgrade.GetValue();
             else if (upgradeName == "MoreRPFromMissions") FindObjectOfType<MissionManager>().missionRewardMultiplyer = upgrade.GetValue();
+            else if (upgradeName == "StartRepairKit" && upgradeLevel > 0) FindObjectOfType<PlayerInventory>().GetRepairKit();
         }
     }
 }

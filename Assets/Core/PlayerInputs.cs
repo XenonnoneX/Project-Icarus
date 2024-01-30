@@ -107,6 +107,33 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""StringOfTime"",
+                    ""type"": ""Button"",
+                    ""id"": ""999a13a2-6747-4129-a594-0b4b6f7a6786"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""6b47abb0-0087-4bd5-805d-1d50a35c3a4c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Upload"",
+                    ""type"": ""Value"",
+                    ""id"": ""21197527-c9a2-4eb3-9f0b-ce76d278e6fd"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -144,31 +171,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""up"",
-                    ""id"": ""8180e8bd-4097-4f4e-ab88-4523101a6ce9"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": ""down"",
                     ""id"": ""320bffee-a40b-4347-ac70-c210eb8bc73a"",
                     ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""1c5327b5-f71c-4f60-99c7-4e737386f1d1"",
-                    ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
@@ -188,31 +193,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""left"",
-                    ""id"": ""2e46982e-44cc-431b-9f0b-c11910bf467a"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": ""right"",
                     ""id"": ""fcfe95b8-67b9-4526-84b5-5d0bc98d6400"",
                     ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""77bff152-3580-4b21-b6de-dcd0c7e41164"",
-                    ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
@@ -343,11 +326,33 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""500073e2-56f6-44d2-adc3-3260f440521f"",
+                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""0b91f203-ad5f-420f-b909-9d224de9ca6f"",
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""CancelInteraction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4d66cfbc-ab3c-422b-ba05-f4fd03c00c2e"",
+                    ""path"": ""<XInputController>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""CancelInteraction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -365,11 +370,33 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""1dde7690-73c3-42b6-b9e6-245d718ff0af"",
+                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Repair"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""2e973013-76d0-4304-bd15-bc2dd17ebe42"",
                     ""path"": ""<Keyboard>/q"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""DropItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""efe58367-6a2e-46f1-a765-6817202d2467"",
+                    ""path"": ""<XInputController>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""DropItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -380,7 +407,18 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""TakeItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""27b08bf5-70cb-40e5-ac61-4a93b56a4bb0"",
+                    ""path"": ""<XInputController>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""TakeItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -391,10 +429,164 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""SuckupAnomaly"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""51e40fd5-7d7c-47b5-bc57-202085875165"",
+                    ""path"": ""<XInputController>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""SuckupAnomaly"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""530c2d2c-62c6-441c-9942-623f7384ce12"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""StringOfTime"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""167f4656-951e-46e8-812d-3fa2f781851e"",
+                    ""path"": ""<XInputController>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""StringOfTime"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dba86faa-3872-4a44-89ee-316049de7c3c"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5af29c90-0cdf-45e5-8811-81fa1961ff94"",
+                    ""path"": ""<XInputController>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Arrows"",
+                    ""id"": ""b0fb82fd-6292-474b-813c-3b8d1c870b3a"",
+                    ""path"": ""Dpad"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Upload"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""70e7ed4c-2b61-4f96-9040-6bce9e0eff37"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Upload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""bcdd6a14-6f1a-415d-b3e7-0cb8f6678602"",
+                    ""path"": ""<Gamepad>/dpad/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Upload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""7302784d-278a-4cb0-9857-b9c95d7180ad"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Upload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""6a275a09-68ea-4891-bd7d-9a8e61cb3094"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Upload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""3a90bc06-7348-490b-bd4d-964794dee587"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Upload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""fcb31849-99ca-42e5-87b4-eab8f82e6220"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Upload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""69c9272a-e705-4bdf-99d1-d59cf3ae5b7e"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Upload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""550320e8-9800-4c97-94ad-18c0efcb1b1b"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Upload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -989,6 +1181,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Player_DropItem = m_Player.FindAction("DropItem", throwIfNotFound: true);
         m_Player_TakeItem = m_Player.FindAction("TakeItem", throwIfNotFound: true);
         m_Player_SuckupAnomaly = m_Player.FindAction("SuckupAnomaly", throwIfNotFound: true);
+        m_Player_StringOfTime = m_Player.FindAction("StringOfTime", throwIfNotFound: true);
+        m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
+        m_Player_Upload = m_Player.FindAction("Upload", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1071,6 +1266,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_DropItem;
     private readonly InputAction m_Player_TakeItem;
     private readonly InputAction m_Player_SuckupAnomaly;
+    private readonly InputAction m_Player_StringOfTime;
+    private readonly InputAction m_Player_Dash;
+    private readonly InputAction m_Player_Upload;
     public struct PlayerActions
     {
         private @PlayerInputs m_Wrapper;
@@ -1084,6 +1282,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @DropItem => m_Wrapper.m_Player_DropItem;
         public InputAction @TakeItem => m_Wrapper.m_Player_TakeItem;
         public InputAction @SuckupAnomaly => m_Wrapper.m_Player_SuckupAnomaly;
+        public InputAction @StringOfTime => m_Wrapper.m_Player_StringOfTime;
+        public InputAction @Dash => m_Wrapper.m_Player_Dash;
+        public InputAction @Upload => m_Wrapper.m_Player_Upload;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1120,6 +1321,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @SuckupAnomaly.started += instance.OnSuckupAnomaly;
             @SuckupAnomaly.performed += instance.OnSuckupAnomaly;
             @SuckupAnomaly.canceled += instance.OnSuckupAnomaly;
+            @StringOfTime.started += instance.OnStringOfTime;
+            @StringOfTime.performed += instance.OnStringOfTime;
+            @StringOfTime.canceled += instance.OnStringOfTime;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
+            @Upload.started += instance.OnUpload;
+            @Upload.performed += instance.OnUpload;
+            @Upload.canceled += instance.OnUpload;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1151,6 +1361,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @SuckupAnomaly.started -= instance.OnSuckupAnomaly;
             @SuckupAnomaly.performed -= instance.OnSuckupAnomaly;
             @SuckupAnomaly.canceled -= instance.OnSuckupAnomaly;
+            @StringOfTime.started -= instance.OnStringOfTime;
+            @StringOfTime.performed -= instance.OnStringOfTime;
+            @StringOfTime.canceled -= instance.OnStringOfTime;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
+            @Upload.started -= instance.OnUpload;
+            @Upload.performed -= instance.OnUpload;
+            @Upload.canceled -= instance.OnUpload;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1342,6 +1561,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnDropItem(InputAction.CallbackContext context);
         void OnTakeItem(InputAction.CallbackContext context);
         void OnSuckupAnomaly(InputAction.CallbackContext context);
+        void OnStringOfTime(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
+        void OnUpload(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

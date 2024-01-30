@@ -49,13 +49,19 @@ public class SpaceShipMovement : ControlStation
     {
         float speed = 0;
 
+        float brokenPercentage = StationManager.instance.GetStationBrokenPercentage();
+
         if (goingDown)
         {
-            speed -= speedDown + (speedDown * StationManager.instance.GetStationBrokenPercentage() / percentageBrokenToCancelOutUpSpeed);
+            speed -= speedDown + (speedDown * brokenPercentage / percentageBrokenToCancelOutUpSpeed);
+            if (brokenPercentage > percentageBrokenToCancelOutUpSpeed)
+            {
+                speed *= 2;
+            }
         }
         else
         {
-            speed += speedUp - (speedUp * StationManager.instance.GetStationBrokenPercentage() / percentageBrokenToCancelOutUpSpeed);
+            speed += speedUp - (speedUp * brokenPercentage / percentageBrokenToCancelOutUpSpeed);
         }
         return speed;
     }

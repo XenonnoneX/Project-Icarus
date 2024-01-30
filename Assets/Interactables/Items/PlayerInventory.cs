@@ -4,6 +4,8 @@ using static PlayerInventory;
 
 public class PlayerInventory : MonoBehaviour
 {
+    [SerializeField] ItemData anomalySucker;
+    [SerializeField] ItemData repairKit;
     [SerializeField] PickupItem itemPrefab;
     ItemData currentItem;
 
@@ -14,6 +16,11 @@ public class PlayerInventory : MonoBehaviour
     public event OnDropedItem onDropedItem;
 
     public ItemData GetCurrentItem() => currentItem;
+
+    void Start()
+    {
+        PickUpItem(anomalySucker);
+    }
     public void SetCurrentItem(ItemData item) 
     { 
         currentItem = item;
@@ -46,12 +53,16 @@ public class PlayerInventory : MonoBehaviour
         }
 
 
-        SetCurrentItem(null);
+        RemoveCurrentItem();
     }
 
     internal void RemoveCurrentItem()
     {
-        currentItem = null;
-        onItemChanged?.Invoke();
+        SetCurrentItem(null);
+    }
+
+    internal void GetRepairKit()
+    {
+        PickUpItem(repairKit);
     }
 }

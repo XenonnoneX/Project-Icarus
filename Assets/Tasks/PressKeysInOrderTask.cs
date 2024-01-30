@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PressKeysInOrderTask : Task
 {
@@ -32,20 +34,19 @@ public class PressKeysInOrderTask : Task
 
     protected override void UpdateLogic()
     {
-        base.UpdateLogic();
-
         if (keyCodes.Count == 0) return;
+        
+        if(controls.Player.Upload.triggered)
+            CheckInput(controls.Player.Upload.ReadValue<Vector2>());
+    }
 
-        foreach (KeyCode code in System.Enum.GetValues(typeof(KeyCode)))
-        {
-            if (Input.GetKeyDown(code) && code != keyCodes[currentKeyIndex])
-            {
-                currentKeyIndex = 0;
-                onInputRegistered?.Invoke();
-            }
-        }
+    void CheckInput(Vector2 input)
+    {
+        if (input == Vector2.zero) return;
 
-        if (Input.GetKeyDown(keyCodes[currentKeyIndex]))
+        print("input: " + input);
+
+        if (InputCorrect(input))
         {
             currentKeyIndex++;
 
@@ -58,6 +59,41 @@ public class PressKeysInOrderTask : Task
                 EndTask();
                 currentKeyIndex = 0;
             }
+        }
+        else
+        {
+            currentKeyIndex = 0;
+            onInputRegistered?.Invoke();
+        }
+    }
+
+    private bool InputCorrect(Vector2 input)
+    {
+        if (input.x > 0 && keyCodes[currentKeyIndex] == KeyCode.RightArrow)
+        {
+            print("input right correct");
+            return true;
+        }
+        else if (input.x < 0 && keyCodes[currentKeyIndex] == KeyCode.LeftArrow)
+        {
+            print("input left correct");
+            return true;
+        }
+        else if (input.y > 0 && keyCodes[currentKeyIndex] == KeyCode.UpArrow)
+        {
+            print("input up correct");
+            return true;
+            
+        }
+        else if (input.y < 0 && keyCodes[currentKeyIndex] == KeyCode.DownArrow)
+        {
+            print("input down correct");
+            return true;
+        }
+        else
+        {
+            print("input incorrect");
+            return false;
         }
     }
 

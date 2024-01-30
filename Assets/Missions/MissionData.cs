@@ -90,6 +90,11 @@ public class MissionStep
             PlayerInventory playerInventory = GameObject.FindObjectOfType<PlayerInventory>();
             playerInventory.onDropedItem += CheckDropedItemInSpace;
         }
+        else if (missionType == MissionType.FlyFarAway)
+        {
+            PlayerMovement playerMovement = GameObject.FindObjectOfType<PlayerMovement>();
+            playerMovement.OnLoopBoundaries += CheckCompleteMissionStep;
+        }
     }
 
     private void CheckDropedItemInSpace(bool outOfShip)
@@ -126,6 +131,10 @@ public class MissionStep
             }
         }
         else if (missionType == MissionType.GetHitByTinyBH)
+        {
+            SetMissionStepCompleted(true);
+        }
+        else if (missionType == MissionType.FlyFarAway)
         {
             SetMissionStepCompleted(true);
         }

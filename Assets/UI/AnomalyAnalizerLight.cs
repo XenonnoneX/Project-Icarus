@@ -29,7 +29,7 @@ public class AnomalyAnalizerLight : MonoBehaviour
         else if (anomalyAnalysisStation.CurrentlyAnalizing())
         {
             analizerLight.SetAlphaMulitplier(0.75f);
-            analizerLight.SetBlinkSpeedMultiplier(2f);
+            analizerLight.SetBlinkSpeedMultiplier(5f);
         }
         else
         {

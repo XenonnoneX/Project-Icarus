@@ -6,6 +6,9 @@ public class ShowBroken : MonoBehaviour
     ControlStation station;
     [SerializeField] Light2D warningLight;
 
+    [SerializeField] SpriteRenderer brokenSprite;
+    [SerializeField] Sprite brokenSprite0, brokenSprite1, brokenSprite2;
+
     private void Awake()
     {
         station = interactable.station;
@@ -18,6 +21,19 @@ public class ShowBroken : MonoBehaviour
         warningLight.SetBlinkSpeedMultiplier(brokenPercentage);
         warningLight.SetAlphaMulitplier(brokenPercentage);
         warningLight.SetTimeScale(station.timeScale);
+
+        if (brokenPercentage < 0.33f)
+        {
+            brokenSprite.sprite = brokenSprite0;
+        }
+        else if (brokenPercentage < 0.66f)
+        {
+            brokenSprite.sprite = brokenSprite1;
+        }
+        else
+        {
+            brokenSprite.sprite = brokenSprite2;
+        }
     }
 
 }

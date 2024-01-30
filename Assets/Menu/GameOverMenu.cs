@@ -10,6 +10,8 @@ public class GameOverMenu : MonoBehaviour
 
     [SerializeField] TMP_Text foundsGainedText;
 
+    [SerializeField] float timeToGetFounds = 1f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,10 +24,11 @@ public class GameOverMenu : MonoBehaviour
     IEnumerator GainFounds()
     {
         int foundsGained = 0;
+        int paperCount = PlayerPrefs.GetInt("ReleasedPapers");
 
         foundsGainedText.text = "Founds Gained: " + foundsGained.ToString();
 
-        for (int i = 0; i < PlayerPrefs.GetInt("ReleasedPapers"); i++)
+        for (int i = 0; i < paperCount; i++)
         {
             int rand = Random.Range(-5, 6);
 
@@ -33,7 +36,7 @@ public class GameOverMenu : MonoBehaviour
 
             foundsGainedText.text = "Founds Gained: " + foundsGained.ToString();
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(timeToGetFounds / paperCount);
         }
 
         PlayerPrefs.SetInt("ReleasedPapers", 0);

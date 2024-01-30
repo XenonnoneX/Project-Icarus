@@ -105,14 +105,17 @@ public class HazardManager : MonoBehaviour
             rand = UnityEngine.Random.Range(0, allControlStations.Count);
             iterations++;
         }
-        while (!allControlStations[rand].CanBreak() && allControlStations[rand].GetStationState() != StationState.Destroyed && iterations < maxIterations);
-        
-        if(interactableDetector.CurrentInteractingInteractable != null && ((Interactable)interactableDetector.CurrentInteractingInteractable).station == allControlStations[rand])
-        {
-            interactableDetector.CurrentInteractingInteractable.CancelTask();
-        }
+        while ((!allControlStations[rand].CanBreak() || allControlStations[rand].GetStationState() == StationState.Destroyed) && iterations < maxIterations);
 
-        allControlStations[UnityEngine.Random.Range(0, allControlStations.Count)].SetStationState(StationState.Broken);
+        if (iterations < maxIterations)
+        {
+            if (interactableDetector.CurrentInteractingInteractable != null && ((Interactable)interactableDetector.CurrentInteractingInteractable).station == allControlStations[rand])
+            {
+                interactableDetector.CurrentInteractingInteractable.CancelTask();
+            }
+            
+            allControlStations[rand].SetStationState(StationState.Broken);
+        }
     }
 
     private void SpawnAnomaly()

@@ -11,8 +11,6 @@ public class AnomalyAnalysisStation : ControlStation
     [SerializeField] float anomalyAnalysisTime = 15f;
     float timeSinceAnomalyAnalysisStarted = 0;
 
-    bool analysisCompleted = false;
-
     private void Awake()
     {
         anomalyScanner = FindObjectOfType<AnomalyScanner>();
@@ -55,13 +53,12 @@ public class AnomalyAnalysisStation : ControlStation
     private void FinishAnalysis()
     {
         print("Analysis of " + currentAnomalyType + " finished");
-        analysisCompleted = true;
         timeSinceAnomalyAnalysisStarted = 0;
     }
 
-    internal bool AnalysisCompleted() => analysisCompleted;
+    internal bool AnalysisCompleted() => timeSinceAnomalyAnalysisStarted >= anomalyAnalysisTime;
 
-    internal bool CurrentlyAnalizing() => timeSinceAnomalyAnalysisStarted > 0;
+    internal bool CurrentlyAnalizing() => timeSinceAnomalyAnalysisStarted > 0 && timeSinceAnomalyAnalysisStarted < anomalyAnalysisTime;
 
     internal float GetAnomalyAnalysisProgress()
     {

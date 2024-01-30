@@ -27,14 +27,15 @@ public class Dash : Artifact, Ability
         base.Update();
 
         timeSinceLastUse += Time.deltaTime;
+    }
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+    void OnDash()
+    {
+        print("Dash");
+        if (timeSinceLastUse >= cooldown)
         {
-            if (timeSinceLastUse >= cooldown)
-            {
-                UseAbility();
-                timeSinceLastUse = 0;
-            }
+            UseAbility();
+            timeSinceLastUse = 0;
         }
     }
 
@@ -51,6 +52,7 @@ public class Dash : Artifact, Ability
 
     IEnumerator DoDash()
     {
+        print("DoDash");
         playerRB.velocity = Vector2.zero;
         
         playerMovement.enabled = false;

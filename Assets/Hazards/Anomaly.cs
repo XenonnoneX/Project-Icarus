@@ -7,7 +7,8 @@ public enum AnomalyType
     TimeSlowField,
     TimeSpeedField,
     TinyBH,
-    GravityField
+    GravityField,
+    Inverter
 }
 
 public class Anomaly : MonoBehaviour

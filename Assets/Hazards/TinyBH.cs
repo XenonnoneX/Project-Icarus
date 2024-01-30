@@ -58,7 +58,7 @@ public class TinyBH : Anomaly, TimeAffected
         }
         else if(collision.GetComponent<Interactable>())
         {
-            collision.GetComponent<Interactable>()?.BreakInteractable();
+            collision.GetComponent<Interactable>()?.SetStationBroken();
         }
     }
 }
