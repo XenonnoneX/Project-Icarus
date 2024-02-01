@@ -40,7 +40,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9039142049504771854}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8353f150f07eb2949bc7bdc2cd77203f, type: 3}
   m_Name: 
@@ -51,7 +51,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   visibleAreaMaterial: {fileID: 2100000, guid: 1dec0cdb29b81544ebe36282c7ff4eb0, type: 2}
-  lightColor: {r: 0, g: 1, b: 0, a: 0.11764706}
+  lightColor: {r: 0, g: 1, b: 0, a: 1}
   sortingLayer: 13
 --- !u!212 &1450409208447319382
 SpriteRenderer:
@@ -94,7 +94,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8febebadbfe1e0941b612b53e0d5867e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d6fb0b709f0b7b4488b6cad233912747, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

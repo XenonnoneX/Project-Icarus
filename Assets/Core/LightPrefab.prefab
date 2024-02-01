@@ -48,10 +48,10 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 0
-  lightRange: 1
-  lightColor: {r: 0, g: 0.82172465, b: 1, a: 1}
-  blinkingSpeed: 0
-  sortingLayer: 14
+  lightRange: 1.5
+  lightColor: {r: 1, g: 0.92115414, b: 0, a: 1}
+  blinkingSpeed: 10
+  sortingLayer: 15
 --- !u!1001 &3555932482185289763
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -60,6 +60,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4835608156744258022}
     m_Modifications:
+    - target: {fileID: 663675250216285288, guid: 84b80bb92a7a52044b460db01a1cbf9d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 663675250216285288, guid: 84b80bb92a7a52044b460db01a1cbf9d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 663675250216285288, guid: 84b80bb92a7a52044b460db01a1cbf9d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -100,6 +108,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1450409208447319382, guid: 84b80bb92a7a52044b460db01a1cbf9d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 9039142049504771854, guid: 84b80bb92a7a52044b460db01a1cbf9d, type: 3}
       propertyPath: m_Name
       value: NewLight
@@ -112,6 +124,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 6661402733902827042}
   m_SourcePrefab: {fileID: 100100000, guid: 84b80bb92a7a52044b460db01a1cbf9d, type: 3}
+--- !u!212 &2700425559050575221 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 1450409208447319382, guid: 84b80bb92a7a52044b460db01a1cbf9d, type: 3}
+  m_PrefabInstance: {fileID: 3555932482185289763}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4065885006981059659 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 663675250216285288, guid: 84b80bb92a7a52044b460db01a1cbf9d, type: 3}
@@ -136,13 +153,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   light2D: {fileID: 1584303208026658867}
   newLight: {fileID: 7556099667266197007}
+  spriteRenderer: {fileID: 2700425559050575221}
 --- !u!114 &7556099667266197007 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6450735066572404268, guid: 84b80bb92a7a52044b460db01a1cbf9d, type: 3}
   m_PrefabInstance: {fileID: 3555932482185289763}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5487721967633719085}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8353f150f07eb2949bc7bdc2cd77203f, type: 3}
   m_Name: 

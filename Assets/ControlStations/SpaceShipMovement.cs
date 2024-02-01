@@ -97,10 +97,15 @@ public class SpaceShipMovement : ControlStation
 
     internal bool HeightBelowWarningHeight()
     {
-        if (currentHeight < maxHeight * 0.25f)
+        if (currentHeight < GetWarnHeight())
         {
             return true;
         }
         else return false;
+    }
+
+    internal float GetWarnHeight()
+    {
+        return maxHeight * 0.25f;
     }
 }

@@ -29,9 +29,10 @@ public class Dash : Artifact, Ability
         timeSinceLastUse += Time.deltaTime;
     }
 
-    void OnDash()
+    public void ActivateAbilityInput()
     {
-        print("Dash");
+        if (!this.isActiveAndEnabled) return;
+
         if (timeSinceLastUse >= cooldown)
         {
             UseAbility();
@@ -56,9 +57,9 @@ public class Dash : Artifact, Ability
         playerRB.velocity = Vector2.zero;
         
         playerMovement.enabled = false;
-        
+
         // Get dash direction and distance based on player input
-        Vector2 dashDir = playerMovement.MoveInput;
+        Vector2 dashDir = playerMovement.ControlsInverted ? -playerMovement.MoveInput : playerMovement.MoveInput;
 
         Vector2 dashVector = dashDir * GetDashRange(dashDir);
 

@@ -45,6 +45,8 @@ public class TunnelDash : Dash
 
     private void Teleport()
     {
-        playerMovement.gameObject.transform.position += Utils.V2_To_V3(playerMovement.MoveInput * dash.dashRange);
+        Vector2 dir = playerMovement.ControlsInverted ? -playerMovement.MoveInput : playerMovement.MoveInput;
+
+        playerMovement.gameObject.transform.position += Utils.V2_To_V3(dir * dash.dashRange);
     }
 }

@@ -1,7 +1,5 @@
 using System;
 using UnityEngine;
-using static System.Collections.Specialized.BitVector32;
-using static UnityEditor.Progress;
 
 public class Interactable : MonoBehaviour, IInteractable, TimeAffected
 {

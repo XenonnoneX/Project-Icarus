@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class InteractableDetector : MonoBehaviour
@@ -71,6 +72,8 @@ public class InteractableDetector : MonoBehaviour
 
     void OnInteract()
     {
+        print("detector OnInvetect");
+
         if (currentClosestInteractable == null) return;
 
         currentInteractingInteractable = currentClosestInteractable;
@@ -132,5 +135,10 @@ public class InteractableDetector : MonoBehaviour
         if (hit.collider.GetComponent<IInteractable>() != interactable) return false;
 
         return true;
+    }
+
+    internal void InteractInput()
+    {
+        print("DoInteract");
     }
 }

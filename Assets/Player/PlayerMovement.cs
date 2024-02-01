@@ -26,6 +26,7 @@ public class PlayerMovement : MonoBehaviour, TimeAffected
 
     Vector2 moveSpeedAddition;
     bool controlsInverted;
+    public bool ControlsInverted { get => controlsInverted; }
 
     public float timeScale = 1;
 

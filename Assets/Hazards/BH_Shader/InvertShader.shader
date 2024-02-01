@@ -102,6 +102,8 @@ Shader "Hidden/GravityFieldShader"
                 half3 originalColor = tex2D(_MainTex, i.uv).rgb;
                 half3 finalColor = originalColor;
 
+                // rotate colors
+
                 // finalColor.r = originalColor.g;
 				// finalColor.g = originalColor.b;
 				// finalColor.b = originalColor.r;
@@ -110,11 +112,22 @@ Shader "Hidden/GravityFieldShader"
 				finalColor.g = originalColor.r;
 				finalColor.b = originalColor.g;
 
+                
+                // mirror colors
+
+                // finalColor.r = (originalColor.b + originalColor.g) / 2;
+				// finalColor.g = (originalColor.r + originalColor.b) / 2;
+				// finalColor.b = (originalColor.g + originalColor.r) / 2;
+
+                
                 // contrast higher
                 
 				finalColor.r = (finalColor.r - 0.5) * 1.05 + 0.5;
 				finalColor.g = (finalColor.g - 0.5) * 1.05 + 0.5;
 				finalColor.b = (finalColor.b - 0.5) * 1.05 + 0.5;
+
+                
+                // invert colors
 
                 // if(originalColor.r > originalColor.g && originalColor.r > originalColor.b)
 				// 	finalColor.r = 1 - originalColor.r;

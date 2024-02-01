@@ -22,7 +22,7 @@ public class Light2D : MonoBehaviour, TimeAffected
 
     private void Start()
     {
-        meshFilter = gameObject.AddComponent<MeshFilter>();
+        // meshFilter = gameObject.AddComponent<MeshFilter>();
         meshRenderer = gameObject.AddComponent<MeshRenderer>();
 
         GenerateMesh();
@@ -52,7 +52,7 @@ public class Light2D : MonoBehaviour, TimeAffected
     private void GenerateMesh()
     {
         Mesh mesh = new Mesh();
-        meshFilter.mesh = mesh;
+        // meshFilter.mesh = mesh;
 
         Vector2 origin = transform.position;
         int rayCount = 360;

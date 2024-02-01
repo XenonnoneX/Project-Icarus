@@ -29,6 +29,12 @@ public class GetArtifactTask : Task
         }
     }
 
+    public void HackGetArtifact()
+    {
+        artifactDock.availableArtifactsCount++;
+        StartTask(null);
+    }
+
     public override void StartTask(Interactable interactable)
     {
         base.StartTask(interactable);

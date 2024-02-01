@@ -22,5 +22,7 @@ public class Hacks : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P)) FindObjectOfType<PlayerInventory>().PickUpItem(repairKit);
 
         if (Input.GetKeyDown(KeyCode.I)) FindObjectOfType<HazardManager>().HackBreakRandomStation();
+
+        if (Input.GetKeyDown(KeyCode.M)) FindObjectOfType<GetArtifactTask>().HackGetArtifact();
     }
 }

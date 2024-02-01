@@ -72,6 +72,7 @@
     <Compile Include="Assets\Artifacts\Artifact.cs" />
     <Compile Include="Assets\Artifacts\StringOfTimeAbility.cs" />
     <Compile Include="Assets\UI\GetArtifactTaskUI.cs" />
+    <Compile Include="Assets\Core\PlayerInputManager.cs" />
     <Compile Include="Assets\Settings\Settings.cs" />
     <Compile Include="Assets\Hazards\Spawner.cs" />
     <Compile Include="Assets\ControlStations\SpaceShipMovement.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="Assets\Menu\Menu.cs" />
     <Compile Include="Assets\Hazards\BH_Shader\InvertEffect.cs" />
     <Compile Include="Assets\Core\Utils.cs" />
+    <Compile Include="Assets\UI\HeightVignette.cs" />
     <Compile Include="Assets\Upgrades\Upgrade.cs" />
     <Compile Include="Assets\Menu\ButtonHover.cs" />
     <Compile Include="Assets\Interactables\InteractableManager.cs" />

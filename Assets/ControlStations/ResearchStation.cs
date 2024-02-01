@@ -56,7 +56,7 @@ public class ResearchStation : ControlStation
     }
 
     public void AddResearchPoints(float researchPoints)
-    {
+    {lights fixe
         onBoardStoredRP += researchPoints;
 
         if (onBoardStoredRP > RPStorageCapacity + addedRPStorageCapacity) onBoardStoredRP = RPStorageCapacity + addedRPStorageCapacity;

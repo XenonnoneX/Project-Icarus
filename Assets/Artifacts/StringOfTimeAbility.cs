@@ -43,9 +43,14 @@ public class StringOfTimeAbility : Artifact, TimeAffected, Ability
         timeSinceLastUse += Time.deltaTime * timeScale;
     }
 
-    void OnStringOfTime()
+    public void ActivateAbilityInput()
     {
-        if (timeSinceLastUse >= cooldown) UseAbility();
+        if (timeSinceLastUse >= cooldown)
+        {
+            UseAbility();
+
+            timeSinceLastUse = 0f;
+        }
     }
     
     protected override void SetLevel(int level)
@@ -69,8 +74,6 @@ public class StringOfTimeAbility : Artifact, TimeAffected, Ability
     {
         player.position = positions.Dequeue();
         positions.Clear();
-
-        timeSinceLastUse = 0f;
 
         onAbilityUsed?.Invoke();
     }
