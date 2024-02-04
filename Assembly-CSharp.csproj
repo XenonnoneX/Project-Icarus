@@ -96,6 +96,7 @@
     <Compile Include="Assets\Tasks\ShowKeys.cs" />
     <Compile Include="Assets\Music_SFX\AbilitySound.cs" />
     <Compile Include="Assets\Artifacts\Ability.cs" />
+    <Compile Include="Assets\Hazards\BH_Shader\HITimeSpeedEffect.cs" />
     <Compile Include="Assets\ControlStations\VoronoiEffect\VoronoiTiling.cs" />
     <Compile Include="Assets\Missions\MissionData.cs" />
     <Compile Include="Assets\ControlStations\Telescope.cs" />
@@ -111,7 +112,9 @@
     <Compile Include="Assets\Tasks\KeyShowObject.cs" />
     <Compile Include="Assets\Menu\GameOverMenu.cs" />
     <Compile Include="Assets\UI\AnomalyAnalizerProgressBar.cs" />
+    <Compile Include="Assets\Hazards\TimeField.cs" />
     <Compile Include="Assets\ControlStations\StationManager.cs" />
+    <Compile Include="Assets\Artifacts\DashVisuals.cs" />
     <Compile Include="Assets\Core\PlayerInputs.cs" />
     <Compile Include="Assets\Core\TimeAffected.cs" />
     <Compile Include="Assets\Tasks\ControlShipHeightTask.cs" />
@@ -156,12 +159,12 @@
     <Compile Include="Assets\Artifacts\CatArtifact.cs" />
     <Compile Include="Assets\UI\SpaceShipMovementUI.cs" />
     <Compile Include="Assets\Hazards\TinyBH.cs" />
-    <Compile Include="Assets\Hazards\TimeSlowField.cs" />
     <Compile Include="Assets\Music_SFX\ControlStationSounds.cs" />
     <Compile Include="Assets\Hazards\HighImpactAnomalyWarnings.cs" />
     <Compile Include="Assets\Hazards\BH_Shader\GravityFieldEffect.cs" />
     <Compile Include="Assets\UI\ArtifactAvailableLight.cs" />
     <Compile Include="Assets\Upgrades\UpgradeShopManager.cs" />
+    <Compile Include="Assets\Hazards\HITimeField.cs" />
     <Compile Include="Assets\Player\CameraFollowPlayer.cs" />
     <Compile Include="Assets\Upgrades\UpgradeManager.cs" />
     <Compile Include="Assets\Tasks\Task.cs" />

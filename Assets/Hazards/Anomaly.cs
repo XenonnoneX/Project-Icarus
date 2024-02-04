@@ -8,7 +8,8 @@ public enum AnomalyType
     TimeSpeedField,
     TinyBH,
     GravityField,
-    Inverter
+    Inverter,
+    HITimeSpeedField
 }
 
 public class Anomaly : MonoBehaviour

@@ -28,7 +28,7 @@ public class HeightVignette : MonoBehaviour
     {
         if (shipMovement.HeightBelowWarningHeight())
         {
-            vignetteColor.a = 1 - shipMovement.GetCurrentHeight() / shipMovement.GetWarnHeight();
+            vignetteColor.a = 1 - shipMovement.GetCurrentHeightFloat() / shipMovement.GetWarnHeight();
         }
         else
         {

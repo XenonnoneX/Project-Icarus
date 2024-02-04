@@ -42,8 +42,6 @@ public class PressKeysInOrderTask : Task
     {
         if (input == Vector2.zero) return;
 
-        print("input: " + input);
-
         if (InputCorrect(input))
         {
             currentKeyIndex++;
@@ -69,28 +67,23 @@ public class PressKeysInOrderTask : Task
     {
         if (input.x > 0 && keyCodes[currentKeyIndex] == KeyCode.RightArrow)
         {
-            print("input right correct");
             return true;
         }
         else if (input.x < 0 && keyCodes[currentKeyIndex] == KeyCode.LeftArrow)
         {
-            print("input left correct");
             return true;
         }
         else if (input.y > 0 && keyCodes[currentKeyIndex] == KeyCode.UpArrow)
         {
-            print("input up correct");
             return true;
             
         }
         else if (input.y < 0 && keyCodes[currentKeyIndex] == KeyCode.DownArrow)
         {
-            print("input down correct");
             return true;
         }
         else
         {
-            print("input incorrect");
             return false;
         }
     }

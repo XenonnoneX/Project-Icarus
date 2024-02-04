@@ -28,6 +28,8 @@ public class PlayerMovement : MonoBehaviour, TimeAffected
     bool controlsInverted;
     public bool ControlsInverted { get => controlsInverted; }
 
+    bool spaceSuitActive = false;
+
     public float timeScale = 1;
 
     private void Awake()
@@ -47,7 +49,16 @@ public class PlayerMovement : MonoBehaviour, TimeAffected
         {
             OnStopWalking?.Invoke();
 
-            rb.velocity += movSpeedMultiplier * outOfShipMoveForce * timeScale * moveInput + moveSpeedAddition;
+            Vector2 velocityAddition = movSpeedMultiplier * outOfShipMoveForce * timeScale * moveInput + moveSpeedAddition;
+
+            Vector2 previousRBVelocity = rb.velocity;
+
+            rb.velocity += velocityAddition;
+
+            if(previousRBVelocity.magnitude > rb.velocity.magnitude) // turn direction faster (2x)
+            {
+                rb.velocity += velocityAddition;
+            }
 
             rb.velocity = Vector2.ClampMagnitude(rb.velocity, moveSpeed * movSpeedMultiplier * timeScale);
 
@@ -143,5 +154,10 @@ public class PlayerMovement : MonoBehaviour, TimeAffected
     {
         transform.position = Utils.GetWalkablePosNextTo(interactable.transform.position, 1f);
         rb.velocity = Vector2.zero;
+    }
+
+    internal void ActivateSpaceSuit()
+    {
+        spaceSuitActive = true;
     }
 }

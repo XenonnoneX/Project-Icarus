@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49cbf701327406e43a265b4e9dffec32, type: 3}
   m_Name: Lens_Green
   m_EditorClassIdentifier: 
-  sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  itemPrefab: {fileID: 1790577605867817137, guid: 041bbc4535b6ece43b9f8365ef680d72, type: 3}
+  sprite: {fileID: 21300000, guid: e47e09f758c380240b70c0d7086ff702, type: 3}
+  secondarySprite: {fileID: 21300000, guid: ed851f28f8a0db7429126fb657a7bbe4, type: 3}

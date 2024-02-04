@@ -48,11 +48,6 @@ public class TimeSpeedEffect : MonoBehaviour
         {
             EndEffect();
         }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            effectTime = 0;
-        }
     }
 
     void OnEnable()

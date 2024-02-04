@@ -20,9 +20,22 @@ public class UpgradeManager : MonoBehaviour
 
             if (upgradeName == "MovSpeed") FindObjectOfType<PlayerMovement>().movSpeedMultiplier = upgrade.GetValue();
             else if (upgradeName == "RepairSpeed") FindObjectOfType<RepairTask>().repairSpeedMultiplier = upgrade.GetValue();
+            else if (upgradeName == "AnalysisSpeed") FindObjectOfType<AnomalyAnalysisStation>().analysisSpeedMultiplier = upgrade.GetValue();
+            else if (upgradeName == "MissionRechargeSpeed") FindObjectOfType<MissionManager>().missionRechargeMultiplier = upgrade.GetValue();
+            else if (upgradeName == "PullUpSpeed") FindObjectOfType<SpaceShipMovement>().pullUpSpeedMultiplier = upgrade.GetValue();
             else if (upgradeName == "RPStorageCap") FindObjectOfType<ResearchStation>().addedRPStorageCapacity = upgrade.GetValue();
+            else if (upgradeName == "StationHealth")
+            {
+                ControlStation[] stations = FindObjectsOfType<ControlStation>();
+
+                foreach (ControlStation station in stations)
+                {
+                    station.timeToBreakMultiplier = upgrade.GetValue();
+                }
+            }
             else if (upgradeName == "MoreRPFromMissions") FindObjectOfType<MissionManager>().missionRewardMultiplyer = upgrade.GetValue();
             else if (upgradeName == "StartRepairKit" && upgradeLevel > 0) FindObjectOfType<PlayerInventory>().GetRepairKit();
+            else if (upgradeName == "SpaceSuit" && upgradeLevel > 0) FindObjectOfType<PlayerMovement>().ActivateSpaceSuit();
         }
     }
 }

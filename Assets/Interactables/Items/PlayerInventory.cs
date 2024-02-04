@@ -4,7 +4,7 @@ using static PlayerInventory;
 
 public class PlayerInventory : MonoBehaviour
 {
-    [SerializeField] ItemData anomalySucker;
+    [SerializeField] ItemData startItem;
     [SerializeField] ItemData repairKit;
     [SerializeField] PickupItem itemPrefab;
     ItemData currentItem;
@@ -19,7 +19,7 @@ public class PlayerInventory : MonoBehaviour
 
     void Start()
     {
-        PickUpItem(anomalySucker);
+        PickUpItem(startItem);
     }
     public void SetCurrentItem(ItemData item) 
     { 

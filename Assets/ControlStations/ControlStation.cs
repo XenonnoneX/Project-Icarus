@@ -36,6 +36,7 @@ public abstract class ControlStation : MonoBehaviour, TimeAffected
     public float timeScale = 1;
 
     [SerializeField] float timeToBreak = 30;
+    internal float timeToBreakMultiplier = 1;
     float timeSinceBroken = 0;
     public bool beingRepaired;
     bool canBreak => !beingRepaired && timeSinceRepaired >= safeTimeAfterRepair && !isInteracting;
@@ -52,7 +53,7 @@ public abstract class ControlStation : MonoBehaviour, TimeAffected
         if(stationState == StationState.Broken && !beingRepaired)
         {
             timeSinceBroken += Time.deltaTime * timeScale;
-            if (timeSinceBroken > timeToBreak)
+            if (timeSinceBroken > timeToBreak * timeToBreakMultiplier)
             {
                 SetStationState(StationState.Destroyed);
             }

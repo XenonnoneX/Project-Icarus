@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49cbf701327406e43a265b4e9dffec32, type: 3}
   m_Name: AnomalyScanner
   m_EditorClassIdentifier: 
-  sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  itemPrefab: {fileID: 1449485769738505381, guid: 8241fc16b33cee9429dc8f9d50962c29, type: 3}
+  sprite: {fileID: 21300000, guid: fec24d50323a25c43baed9e8f02e6b0e, type: 3}
+  secondarySprite: {fileID: 0}

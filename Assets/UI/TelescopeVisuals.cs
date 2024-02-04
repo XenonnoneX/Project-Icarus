@@ -18,6 +18,6 @@ public class TelescopeVisuals : MonoBehaviour
     private void OnLensChanged(ItemData currentLens)
     {
         if (currentLens == null) lensRenderer.sprite = null;
-        else lensRenderer.sprite = currentLens.sprite;
+        else lensRenderer.sprite = currentLens.secondarySprite;
     }
 }

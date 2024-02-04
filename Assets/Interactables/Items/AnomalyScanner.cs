@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static AnomalyScanner;
 
 public class AnomalyScanner : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class AnomalyScanner : MonoBehaviour
 
     public delegate void OnAnomalyChanged(AnomalyType anomalyType);
     public event OnAnomalyChanged onAnomalyChanged;
+
+    public delegate void OnSuckup(Anomaly anomaly);
+    public event OnSuckup onSuckup;
 
     private void Awake()
     {
@@ -38,6 +42,8 @@ public class AnomalyScanner : MonoBehaviour
             Anomaly closestAnomaly = GetClosestAnomaly();
 
             if (closestAnomaly == null) return;
+
+            onSuckup?.Invoke(closestAnomaly);
 
             SetAnomalyType(closestAnomaly.anomalyType);
 

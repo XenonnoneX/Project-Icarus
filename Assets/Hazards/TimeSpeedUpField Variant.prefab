@@ -24,6 +24,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1019574893298209021, guid: 6ae66d55eb90eba43a137dc6927e7503, type: 3}
+      propertyPath: m_SortingOrder
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1896844525242792584, guid: 6ae66d55eb90eba43a137dc6927e7503, type: 3}
       propertyPath: m_Name
       value: TimeSpeedUpField Variant

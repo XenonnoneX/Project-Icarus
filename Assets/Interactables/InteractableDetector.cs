@@ -72,8 +72,6 @@ public class InteractableDetector : MonoBehaviour
 
     void OnInteract()
     {
-        print("detector OnInvetect");
-
         if (currentClosestInteractable == null) return;
 
         currentInteractingInteractable = currentClosestInteractable;
@@ -118,6 +116,10 @@ public class InteractableDetector : MonoBehaviour
 
         return closestInteractable;
     }
+
+    Vector3 hitPoint;
+    Vector3 dir;
+    float mag;
     private bool IsVisible(IInteractable interactable)
     {
         // cast ray to interactable
@@ -128,6 +130,10 @@ public class InteractableDetector : MonoBehaviour
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, Vector3.Magnitude(direction));
 
+        hitPoint = hit.point;
+        dir = direction;
+        mag = Vector3.Magnitude(direction);
+
         if (hit.collider == null) return false;
 
         if (hit.collider.GetComponent<IInteractable>() == null) return false;
@@ -137,8 +143,16 @@ public class InteractableDetector : MonoBehaviour
         return true;
     }
 
-    internal void InteractInput()
+    private void OnDrawGizmos()
     {
-        print("DoInteract");
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + dir.normalized * mag);
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(transform.position, hitPoint);
     }
+
+    // internal void InteractInput()
+    // {
+    //     print("DoInteract");
+    // }
 }

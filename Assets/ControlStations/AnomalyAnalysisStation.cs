@@ -8,12 +8,17 @@ public class AnomalyAnalysisStation : ControlStation
     AnomalyType currentAnomalyType;
     public AnomalyType CurrentAnomalyType => currentAnomalyType;
 
+    ResearchStation researchStation;
+    [SerializeField] int rpForAnalysis = 20;
+
     [SerializeField] float anomalyAnalysisTime = 15f;
     float timeSinceAnomalyAnalysisStarted = 0;
+    internal float analysisSpeedMultiplier = 1;
 
     private void Awake()
     {
         anomalyScanner = FindObjectOfType<AnomalyScanner>();
+        researchStation = FindObjectOfType<ResearchStation>();
     }
 
     protected override void Update()
@@ -24,7 +29,7 @@ public class AnomalyAnalysisStation : ControlStation
 
         if (currentAnomalyType == AnomalyType.None) return;
         
-        timeSinceAnomalyAnalysisStarted += Time.deltaTime * timeScale;
+        timeSinceAnomalyAnalysisStarted += analysisSpeedMultiplier * Time.deltaTime * timeScale;
     }
 
     public void SetAnomalyType(AnomalyType anomalyType)
@@ -53,6 +58,9 @@ public class AnomalyAnalysisStation : ControlStation
     private void FinishAnalysis()
     {
         print("Analysis of " + currentAnomalyType + " finished");
+
+        researchStation.AddResearchPoints(rpForAnalysis);
+
         timeSinceAnomalyAnalysisStarted = 0;
     }
 

@@ -23,6 +23,7 @@ public class MissionManager : ControlStation
 
     public delegate void OnMissionCompleted();
     public OnMissionCompleted onMissionCompleted;
+    internal float missionRechargeMultiplier = 1;
 
     private void Awake()
     {
@@ -43,7 +44,7 @@ public class MissionManager : ControlStation
 
         if (stationState != StationState.Working) return;
 
-        if(currentMissions.Count * timeToGetNewMission + newMissionTimer < maxMissions * timeToGetNewMission) newMissionTimer += Time.deltaTime * timeScale;
+        if(currentMissions.Count * timeToGetNewMission + newMissionTimer < maxMissions * timeToGetNewMission) newMissionTimer += missionRechargeMultiplier * Time.deltaTime * timeScale;
     }
 
     public override void CompleteTask(ItemData currentItem = null)

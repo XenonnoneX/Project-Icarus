@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class StringOfTimeAbility : Artifact, TimeAffected, Ability
     public float Cooldown { get => cooldown; }
     [SerializeField] float abilityDuration = 5f;
     [SerializeField] float saveTime = 0.1f;
+    [SerializeField] float playerFlybackTime = 0.25f;
 
     public Queue<Vector3> positions = new Queue<Vector3>();
 
@@ -62,6 +64,8 @@ public class StringOfTimeAbility : Artifact, TimeAffected, Ability
 
     private void SaveCurrentPosition()
     {
+        if (timeSinceLastUse < cooldown) return;
+
         positions.Enqueue(player.position);
         if (positions.Count > abilityDuration / saveTime)
         {
@@ -72,11 +76,34 @@ public class StringOfTimeAbility : Artifact, TimeAffected, Ability
 
     void UseAbility()
     {
-        player.position = positions.Dequeue();
-        positions.Clear();
+        StartCoroutine(FlyBackRoutine());
 
         onAbilityUsed?.Invoke();
     }
+
+    IEnumerator FlyBackRoutine()
+    {
+        PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
+        playerMovement.StopMovement();
+
+        Vector3[] flyPositions = positions.ToArray();
+
+        for (float i = 0; i < playerFlybackTime; i+= Time.deltaTime)
+        {
+            player.position = flyPositions[flyPositions.Length - 1 - (int)(i / playerFlybackTime * flyPositions.Length)];
+            
+            // player.GetComponent<PlayerAnimator>().animator.SetBool("isWalking", 
+
+            yield return null;
+        }
+
+
+        player.position = positions.Dequeue();
+        positions.Clear();
+
+        playerMovement.StartMovement();
+    }
+
 
     public void SetTimeScale(float timeScale)
     {

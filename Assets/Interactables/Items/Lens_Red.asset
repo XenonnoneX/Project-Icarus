@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49cbf701327406e43a265b4e9dffec32, type: 3}
   m_Name: Lens_Red
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: 2288766cc4100ad40a540cbc61b8b1d5, type: 3}
+  sprite: {fileID: 21300000, guid: b9b46746b44c82d4b873756206618cc2, type: 3}
+  secondarySprite: {fileID: 21300000, guid: 6d020866c260265438d78bd27e3bd235, type: 3}

@@ -16,6 +16,7 @@ public class SpaceShipMovement : ControlStation
 
     public static SpaceShipMovement instance;
     ResearchStation researchStation;
+    internal float pullUpSpeedMultiplier = 1;
 
     private void Awake()
     {
@@ -47,13 +48,13 @@ public class SpaceShipMovement : ControlStation
 
     float GetCurrentSpeed()
     {
-        float speed = 0;
+        float speed;
 
         float brokenPercentage = StationManager.instance.GetStationBrokenPercentage();
 
         if (goingDown)
         {
-            speed -= speedDown + (speedDown * brokenPercentage / percentageBrokenToCancelOutUpSpeed);
+            speed = -(speedDown + (speedDown * brokenPercentage / percentageBrokenToCancelOutUpSpeed));
             if (brokenPercentage > percentageBrokenToCancelOutUpSpeed)
             {
                 speed *= 2;
@@ -61,7 +62,7 @@ public class SpaceShipMovement : ControlStation
         }
         else
         {
-            speed += speedUp - (speedUp * brokenPercentage / percentageBrokenToCancelOutUpSpeed);
+            speed = speedUp * pullUpSpeedMultiplier - (speedUp * brokenPercentage / percentageBrokenToCancelOutUpSpeed);
         }
         return speed;
     }
@@ -79,6 +80,11 @@ public class SpaceShipMovement : ControlStation
     public int GetCurrentHeight()
     {
         return (int)currentHeight;
+    }
+
+    public float GetCurrentHeightFloat()
+    {
+        return currentHeight;
     }
 
     internal float GetCurrentHeightPercentage()

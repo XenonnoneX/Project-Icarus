@@ -5,7 +5,8 @@ public class RPStorageUI : MonoBehaviour
 {
     ResearchStation researchStation;
 
-    [SerializeField] Image image;
+    [SerializeField] Image fillImage;
+    [SerializeField] Image secondFillImage;
     [SerializeField] Light2D warningLight;
 
     private void Awake()
@@ -16,9 +17,10 @@ public class RPStorageUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        image.fillAmount = researchStation.GetRPStorageFillPercentage();
-
-        if(researchStation.GetStationState() != StationState.Working)
+        fillImage.fillAmount = researchStation.GetRPStorageFillPercentage();
+        secondFillImage.fillAmount = researchStation.GetRPStorageFillPercentage();
+        
+        if (researchStation.GetStationState() != StationState.Working)
         {
             warningLight.SetAlphaMulitplier(0);
         }

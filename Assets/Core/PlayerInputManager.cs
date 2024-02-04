@@ -9,14 +9,14 @@ public class PlayerInputManager : MonoBehaviour
     StringOfTimeAbility stringOfTimeAbility;
     [SerializeField] Dash dash;
     TunnelDash tunnelDash;
-    InteractableDetector interactableDetector;
+    // InteractableDetector interactableDetector;
 
     private void Awake()
     {
         stringOfTimeAbility = FindObjectOfType<StringOfTimeAbility>();
         if(dash == null) dash = FindObjectOfType<Dash>();
         tunnelDash = FindObjectOfType<TunnelDash>();
-        interactableDetector = FindObjectOfType<InteractableDetector>();
+        // interactableDetector = FindObjectOfType<InteractableDetector>();
     }
 
     // Start is called before the first frame update
@@ -31,7 +31,7 @@ public class PlayerInputManager : MonoBehaviour
     {
         if (controls.Player.StringOfTime.triggered) StringOfTime();
         if (controls.Player.Dash.triggered) Dash();
-        if (controls.Player.Interact.triggered) Interact();
+        // if (controls.Player.Interact.triggered) Interact();
     }
 
     void StringOfTime()
@@ -45,8 +45,8 @@ public class PlayerInputManager : MonoBehaviour
         tunnelDash.ActivateAbilityInput();
     }
 
-    void Interact()
-    {
-        interactableDetector.InteractInput();
-    }
+    // void Interact()
+    // {
+    //     interactableDetector.InteractInput();
+    // }
 }
