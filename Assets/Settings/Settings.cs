@@ -13,7 +13,7 @@ public class Settings : MonoBehaviour
             panel.SetActive(false);
         }
 
-        currentPanel = panels[0];
+        SetPanel(FindObjectOfType<SceneHandler>().SettingsStartIndex);
         currentPanel.SetActive(true);
     }
 

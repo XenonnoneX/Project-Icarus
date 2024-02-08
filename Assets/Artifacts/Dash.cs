@@ -53,7 +53,6 @@ public class Dash : Artifact, Ability
 
     IEnumerator DoDash()
     {
-        print("DoDash");
         playerRB.velocity = Vector2.zero;
         
         playerMovement.enabled = false;

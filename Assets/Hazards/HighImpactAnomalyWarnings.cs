@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HighImpactAnomalyWarnings : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class HighImpactAnomalyWarnings : MonoBehaviour
 
     [SerializeField] GameObject showWarning;
     [SerializeField] TMP_Text warningText;
+    [SerializeField] Image warningImage;
 
     private void Awake()
     {
@@ -30,13 +32,17 @@ public class HighImpactAnomalyWarnings : MonoBehaviour
 
     IEnumerator ShowWarningCooldown(Anomaly anomaly)
     {
+        warningImage.sprite = anomaly.warningCountdownSprite;
+        
         for (int i = 0; i < hazardManager.HighImpactAnomalyWarningTime; i++)
         {
-            warningText.text = $"High impact anomaly detected. Type: {anomaly.anomalyType}.\nImpact in {hazardManager.HighImpactAnomalyWarningTime - i} seconds.";
+            warningText.text = (hazardManager.HighImpactAnomalyWarningTime - i).ToString();
+            //$"High impact anomaly detected. Type: {anomaly.anomalyType}.\nImpact in {hazardManager.HighImpactAnomalyWarningTime - i} seconds.";
             yield return new WaitForSeconds(1f);
         }
 
-        warningText.text = $"High impact anomaly detected. Type: {anomaly.anomalyType}.\nImpact now!";
+        warningImage.sprite = anomaly.warningImpactNowSprite;
+        warningText.text = "";//$"High impact anomaly detected. Type: {anomaly.anomalyType}.\nImpact now!";
 
         yield return new WaitForSeconds(anomaly.AnomalyDuration);
 

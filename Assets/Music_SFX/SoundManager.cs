@@ -12,7 +12,7 @@ public class SoundManager : MonoBehaviour
     bool sfxOn = true;
     int currentTrack = 0;
 
-    float volume = 1f;
+    public event Action onSoundReload;
 
     [Header("SFX")]
     [SerializeField] UISFX uiSFX;
@@ -46,6 +46,13 @@ public class SoundManager : MonoBehaviour
         sfxAudioSource.volume = volume;
     }
 
+    public float GetSFXVolume()
+    {
+        if (!sfxOn) return 0;
+
+        return sfxAudioSource.volume;
+    }
+
     public void PlaySound(AudioClip clip)
     {
         if (!sfxOn) return;
@@ -63,6 +70,8 @@ public class SoundManager : MonoBehaviour
         else if(!musicOn) musicAudioSource.Stop();
 
         sfxOn = PlayerPrefs.GetInt("SFXOn", 1) == 1;
+
+        onSoundReload?.Invoke();
     }
 
     [System.Serializable]

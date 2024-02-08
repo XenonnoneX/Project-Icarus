@@ -6,6 +6,7 @@ public class PickupItem : MonoBehaviour, IInteractable
     PlayerInventory playerInventory;
     SpriteRenderer spriteRenderer;
     [SerializeField] GameObject showInteractable;
+    [SerializeField] SpriteRenderer interactableRenderer;
 
     [SerializeField] ItemData itemData;
 
@@ -73,6 +74,7 @@ public class PickupItem : MonoBehaviour, IInteractable
     {
         this.itemData = itemData;
         spriteRenderer.sprite = itemData.sprite;
+        interactableRenderer.sprite = itemData.interactOutline;
     }
 
     public void CancelTask()

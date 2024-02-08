@@ -23,7 +23,7 @@ public class StationManager : MonoBehaviour
         foreach (ControlStation station in controlStations)
         {
             if (station.GetStationState() == StationState.Broken) percentage += 0.5f;
-            else if(station.GetStationState() == StationState.Destroyed) percentage += 1f;
+            else if(station.GetStationState() == StationState.Destroyed) percentage += 1.5f;
         }
 
         return percentage / controlStations.Count;

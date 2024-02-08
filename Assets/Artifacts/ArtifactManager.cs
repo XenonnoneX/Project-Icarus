@@ -7,6 +7,7 @@ public class ArtifactManager : MonoBehaviour
     public List<ArtifactData> allArtifactDatas;
     public List<Artifact> allArtifacts;
 
+    public event Action onArtifactsChanged;
 
     bool ArtifactIsMaxLevel(int index)
     {
@@ -61,6 +62,7 @@ public class ArtifactManager : MonoBehaviour
     internal void AddOrLevelUpArtifact(Artifact artifact)
     {
         allArtifacts[allArtifacts.IndexOf(artifact)].LevelUp();
+        onArtifactsChanged?.Invoke();
     }
 
     internal void AddArtifact(Artifact artifact)

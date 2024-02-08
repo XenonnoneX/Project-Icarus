@@ -9,7 +9,8 @@ public enum AnomalyType
     TinyBH,
     GravityField,
     Inverter,
-    HITimeSpeedField
+    HITimeSpeedField,
+    HILowGravity
 }
 
 public class Anomaly : MonoBehaviour
@@ -18,6 +19,8 @@ public class Anomaly : MonoBehaviour
     public float AnomalyDuration { get => anomalyDuration; }
 
     public AnomalyType anomalyType;
+    public Sprite warningCountdownSprite;
+    public Sprite warningImpactNowSprite;
 
     public delegate void OnRemoveAnomaly();
     public OnRemoveAnomaly onRemoveAnomaly;

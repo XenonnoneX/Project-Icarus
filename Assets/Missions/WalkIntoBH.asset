@@ -15,8 +15,10 @@ MonoBehaviour:
   missionSteps:
   - missionType: 2
     height: 4
-    stationType: 0
-    anomalyType: 0
+    stationType: 3
+    anomalyType: 4
+    neededLens: {fileID: 0}
     station: {fileID: 0}
   missionText: Walk into BH Anomaly
+  missionTextImage: {fileID: 21300000, guid: fcac26b959ee42d4dba434f3c46f400c, type: 3}
   missionReward: 50

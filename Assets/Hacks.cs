@@ -15,14 +15,18 @@ public class Hacks : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K)) playerMovement.GetHitByBH();
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftAlt))
+        {
 
-        if (Input.GetKeyDown(KeyCode.L)) anomalyScanner.SetAnomalyType(AnomalyType.None);
+            if (Input.GetKeyDown(KeyCode.K)) playerMovement.GetHitByBH();
 
-        if (Input.GetKeyDown(KeyCode.P)) FindObjectOfType<PlayerInventory>().PickUpItem(repairKit);
+            if (Input.GetKeyDown(KeyCode.L)) anomalyScanner.SetAnomalyType(AnomalyType.None);
 
-        if (Input.GetKeyDown(KeyCode.I)) FindObjectOfType<HazardManager>().HackBreakRandomStation();
+            if (Input.GetKeyDown(KeyCode.P)) FindObjectOfType<PlayerInventory>().PickUpItem(repairKit);
 
-        if (Input.GetKeyDown(KeyCode.M)) FindObjectOfType<GetArtifactTask>().HackGetArtifact();
+            if (Input.GetKeyDown(KeyCode.I)) FindObjectOfType<HazardManager>().HackBreakRandomStation();
+
+            if (Input.GetKeyDown(KeyCode.M)) FindObjectOfType<GetArtifactTask>().HackGetArtifact();
+        }
     }
 }

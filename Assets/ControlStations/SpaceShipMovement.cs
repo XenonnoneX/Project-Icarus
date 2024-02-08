@@ -12,6 +12,8 @@ public class SpaceShipMovement : ControlStation
 
     [SerializeField] float currentHeight;
 
+    [SerializeField] AudioClip gameOverSound;
+
     bool goingDown = true;
 
     public static SpaceShipMovement instance;
@@ -97,6 +99,8 @@ public class SpaceShipMovement : ControlStation
         PlayerPrefs.SetInt("CollectedResearchPoints", researchStation.GetSavedRP());
         PlayerPrefs.SetInt("ReleasedPapers", researchStation.PapersReleased());
         PlayerPrefs.SetFloat("TimeSurvived", Time.timeSinceLevelLoad);
+
+        SoundManager.instance.PlaySound(gameOverSound);
 
         SceneManager.LoadScene("GameOver");
     }

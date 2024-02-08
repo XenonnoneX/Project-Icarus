@@ -1,4 +1,6 @@
-﻿public class Telescope : ControlStation
+﻿using System;
+
+public class Telescope : ControlStation
 {
     ItemData currentLens;
 
@@ -15,5 +17,10 @@
         else print("Inserted Lens: " + currentItem.name);
 
         base.CompleteTask();
+    }
+
+    internal ItemData GetCurrentLens()
+    {
+        return currentLens;
     }
 }

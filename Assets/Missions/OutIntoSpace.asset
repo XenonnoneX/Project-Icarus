@@ -17,6 +17,8 @@ MonoBehaviour:
     height: 0
     stationType: 0
     anomalyType: 0
+    neededLens: {fileID: 0}
     station: {fileID: 0}
   missionText: Get far away from the ship
+  missionTextImage: {fileID: 21300000, guid: 271bde5831531764ca016439d8e90a76, type: 3}
   missionReward: 50

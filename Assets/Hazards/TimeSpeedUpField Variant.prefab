@@ -40,6 +40,10 @@ PrefabInstance:
       propertyPath: anomalyType
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6257306187346951986, guid: 6ae66d55eb90eba43a137dc6927e7503, type: 3}
+      propertyPath: anomalySpawnSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 997c0eb11f2321146a67401faf7376b7, type: 3}
     - target: {fileID: 7053453654599514443, guid: 6ae66d55eb90eba43a137dc6927e7503, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.75

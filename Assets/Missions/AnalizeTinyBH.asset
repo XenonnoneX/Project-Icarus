@@ -17,6 +17,8 @@ MonoBehaviour:
     height: 0
     stationType: 3
     anomalyType: 4
+    neededLens: {fileID: 0}
     station: {fileID: 0}
   missionText: Analyze Micro BH
+  missionTextImage: {fileID: 21300000, guid: b574d46c55d9f554ebdafd372c4493ca, type: 3}
   missionReward: 50

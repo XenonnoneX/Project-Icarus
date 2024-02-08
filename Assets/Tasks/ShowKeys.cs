@@ -16,6 +16,11 @@ public class ShowKeys : MonoBehaviour
         keysTask.onStartTask += UpdateVisuals;
     }
 
+    void UpdateVisuals(float timeScale)
+    {
+        UpdateVisuals();
+    }
+
     void UpdateVisuals()
     {
         SpawnKeyShowObjects();

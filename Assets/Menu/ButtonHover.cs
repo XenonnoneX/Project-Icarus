@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler
 {
     public Image buttonImage;
     public Sprite hoverSprite;
@@ -49,5 +49,15 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void OnHoverExit()
     {
         buttonImage.sprite = normalSprite;
+    }
+
+    public void OnSelect(BaseEventData eventData)
+    {
+        OnHoverEnter();
+    }
+
+    public void OnDeselect(BaseEventData eventData)
+    {
+        OnHoverExit();
     }
 }

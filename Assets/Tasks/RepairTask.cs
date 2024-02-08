@@ -20,6 +20,8 @@ public class RepairTask : Task
 
         repairTime += controls.Player.Repair.ReadValue<float>() * repairSpeedMultiplier * Time.deltaTime * timeScale;
 
+        if (timeScale != 1) print("repair not normal speed: " + timeScale);
+
         slider.value = repairTime / holdDownTime;
 
         if (repairTime >= holdDownTime)

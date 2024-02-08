@@ -12,6 +12,7 @@ public class StringOfTimeAbility : Artifact, TimeAffected, Ability
     [SerializeField] float abilityDuration = 5f;
     [SerializeField] float saveTime = 0.1f;
     [SerializeField] float playerFlybackTime = 0.25f;
+    public float PlayerFlybackTime => playerFlybackTime;
 
     public Queue<Vector3> positions = new Queue<Vector3>();
 
@@ -91,8 +92,6 @@ public class StringOfTimeAbility : Artifact, TimeAffected, Ability
         for (float i = 0; i < playerFlybackTime; i+= Time.deltaTime)
         {
             player.position = flyPositions[flyPositions.Length - 1 - (int)(i / playerFlybackTime * flyPositions.Length)];
-            
-            // player.GetComponent<PlayerAnimator>().animator.SetBool("isWalking", 
 
             yield return null;
         }

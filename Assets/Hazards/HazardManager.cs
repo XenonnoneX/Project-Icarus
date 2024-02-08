@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ public enum HazardType
 public class HazardManager : MonoBehaviour
 {
     SpaceShipMovement spaceShipMovement;
+    MissionManager missionManager;
     InteractableDetector interactableDetector;
     List<ControlStation> allControlStations = new List<ControlStation>();
     
@@ -29,19 +31,23 @@ public class HazardManager : MonoBehaviour
     [SerializeField] float timeFreeOfOtherHazardsAfterHighImpactAnomaly = 10f;
     public float HighImpactAnomalyWarningTime => highImpactAnomalyWarningTime;
     float newAnomalyTimer;
+    int lastSpawnedAnomalyIndex;
     float breakingStationTimer;
     float timeSinceStart;
     float newHighImpactAnomalyTimer;
 
     bool highImpactAnomalyActive;
+    public bool HighImpactAnomalyActive => highImpactAnomalyActive;
 
     public delegate void OnHighImpactAnomalyWarning(Anomaly anomaly);
     public OnHighImpactAnomalyWarning onHighImpactAnomalyWarning;
 
-    
+    public event Action OnSpawnHIAnomaly;
+
     private void Awake()
     {
         spaceShipMovement = FindObjectOfType<SpaceShipMovement>();
+        missionManager = FindObjectOfType<MissionManager>();
         interactableDetector = FindObjectOfType<InteractableDetector>();
         allControlStations.AddRange(FindObjectsOfType<ControlStation>());
     }
@@ -120,10 +126,40 @@ public class HazardManager : MonoBehaviour
 
     private void SpawnAnomaly()
     {
-        Anomaly temp = GameObject.Instantiate(allAnomalies[UnityEngine.Random.Range(0, allAnomalies.Count)], Utils.GetRandomPosOnWalkableArea(), Quaternion.identity);
+        int index = GetIndexOfAnomalyNeededForMission();
+        while (index == lastSpawnedAnomalyIndex)
+        {
+            index = UnityEngine.Random.Range(0, anomalySpawner.allObjects.Count);
+        }
+
+        lastSpawnedAnomalyIndex = index;
+
+        Anomaly temp = GameObject.Instantiate(allAnomalies[index], Utils.GetRandomPosOnWalkableArea(), Quaternion.identity);
         temp.transform.parent = hazardParent;
     }
-    
+
+    private int GetIndexOfAnomalyNeededForMission()
+    {
+        foreach (Mission mission in missionManager.currentMissions)
+        {
+            if (mission.missionData.missionSteps[0].anomalyType == AnomalyType.None)
+            {
+                continue;
+            }
+
+            for (int i = 0; i < anomalySpawner.allObjects.Count; i++)
+            {
+                if (anomalySpawner.allObjects[i].anomalyType == mission.missionData.missionSteps[0].anomalyType)
+                {
+                    if (i == lastSpawnedAnomalyIndex) continue;
+                    else return i;
+                }
+            }
+        }
+
+        return lastSpawnedAnomalyIndex;
+    }
+
     System.Collections.IEnumerator SpawnHighImpactAnomaly()
     {
         Anomaly anomaly = highImpactAnomalies[UnityEngine.Random.Range(0, highImpactAnomalies.Count)];
@@ -135,7 +171,11 @@ public class HazardManager : MonoBehaviour
 
         Anomaly temp = GameObject.Instantiate(anomaly, Utils.GetRandomPosOnWalkableArea(), Quaternion.identity);
 
+        OnSpawnHIAnomaly?.Invoke();
+
         yield return new WaitForSeconds(timeFreeOfOtherHazardsAfterHighImpactAnomaly);
+
+        // yield return new WaitForSeconds(temp.AnomalyDuration - timeFreeOfOtherHazardsAfterHighImpactAnomaly); // player can only fulfill the telescope mission before or in the first few seconds of the anomaly
 
         highImpactAnomalyActive = false;
     }

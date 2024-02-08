@@ -20,8 +20,14 @@ public class PlayerSounds : MonoBehaviour
         interactableDetector = FindObjectOfType<InteractableDetector>();
         playerInventory = GetComponent<PlayerInventory>();
 
+        SoundManager.instance.onSoundReload += Reload;
         interactableDetector.onInteracted += PlayInteractSound;
         playerInventory.onDropedItem += PlayDropItemSound;
+    }
+
+    private void Reload()
+    {
+        audioSource.volume = SoundManager.instance.GetSFXVolume();
     }
 
     private void PlayDropItemSound(bool outOfShip)

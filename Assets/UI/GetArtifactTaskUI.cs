@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
- 
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
 public class GetArtifactTaskUI : MonoBehaviour
 {
     ArtifactDock artifactDock;
@@ -39,6 +41,8 @@ public class GetArtifactTaskUI : MonoBehaviour
             {
                 artifactShowObjects[i].SetArtifact(getArtifactTask.chooseableArtifacts[i]);
                 artifactShowObjects[i].gameObject.SetActive(true);
+
+                if (i == 0) SetSelected(artifactShowObjects[i].gameObject.GetComponentInChildren<Button>());
             }
             else
             {
@@ -46,6 +50,11 @@ public class GetArtifactTaskUI : MonoBehaviour
             }
 
         }
+    }
+
+    private void SetSelected(Button button)
+    {
+        GameObject.Find("EventSystem").GetComponent<EventSystem>().SetSelectedGameObject(button.gameObject);
     }
 
     private void SpawnUpgradeShowObjects()

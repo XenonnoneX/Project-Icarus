@@ -14,7 +14,7 @@ public abstract class Task : MonoBehaviour, TimeAffected
 
     protected float timeScale = 1;
 
-    public delegate void OnStartTask();
+    public delegate void OnStartTask(float timeScale);
     public event OnStartTask onStartTask;
 
     protected virtual void Start()
@@ -48,8 +48,8 @@ public abstract class Task : MonoBehaviour, TimeAffected
         this.interactable = interactable;
 
         SetIsInteracting(true);
-
-        onStartTask?.Invoke();
+        
+        onStartTask?.Invoke(timeScale);
     }
 
     public virtual void EndTask()

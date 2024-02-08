@@ -10,7 +10,7 @@ public class Menu : MonoBehaviour
 
     private void Start()
     {
-        loadingPanel.SetActive(false);
+        if(loadingPanel != null) loadingPanel.SetActive(false);
     }
 
     public void StartGame()

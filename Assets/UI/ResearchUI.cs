@@ -13,6 +13,6 @@ public class ResearchUI : MonoBehaviour
 
     void Update()
     {
-        PapersReleasedText.text = research.PapersReleased().ToString() + " papers released";
+        PapersReleasedText.text = research.PapersReleased().ToString();
     }
 }

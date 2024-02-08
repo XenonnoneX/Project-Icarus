@@ -7,6 +7,7 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] ItemData startItem;
     [SerializeField] ItemData repairKit;
     [SerializeField] PickupItem itemPrefab;
+    [SerializeField] float dropRange = 0.75f;
     ItemData currentItem;
 
     public delegate void OnItemChanged();
@@ -38,7 +39,7 @@ public class PlayerInventory : MonoBehaviour
     {
         if (currentItem == null) return;
 
-        PickupItem itemDrop = Instantiate(itemPrefab, Utils.GetWalkablePosNextTo(transform.position, 1), transform.rotation);
+        PickupItem itemDrop = Instantiate(itemPrefab, Utils.GetWalkablePosNextTo(transform.position, dropRange), transform.rotation); // TODO: check with raycast to not drop item on other side of wall
         itemDrop.SetItemData(currentItem);
 
         if (Utils.OutOfShip(transform))

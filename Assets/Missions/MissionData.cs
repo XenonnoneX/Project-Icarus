@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Android;
 
 public enum MissionType
 {
@@ -9,7 +7,10 @@ public enum MissionType
     CompleteStationTask,
     GetHitByTinyBH,
     DropItemOutInSpace,
-    FlyFarAway
+    FlyFarAway,
+    RepairInSpeedField,
+    RepairInSlowField,
+    LensDuringHIAnomaly
 }
 
 [CreateAssetMenu()]
@@ -18,6 +19,7 @@ public class MissionData : ScriptableObject
     public List<MissionStep> missionSteps;
     
     public string missionText;
+    public Sprite missionTextImage;
     public int missionReward = 50;
 
     internal void Setup()
@@ -43,6 +45,9 @@ public class MissionStep
     [ConditionalHide("stationType", (int)StationType.AnomalyAnalizer)]
     public AnomalyType anomalyType;
 
+    [ConditionalHide("missionType", (int)MissionType.LensDuringHIAnomaly)]
+    public ItemData neededLens;
+
 
     [HideInInspector] public ControlStation station;
     bool missionStepCompleted;
@@ -53,7 +58,15 @@ public class MissionStep
         if(missionType == MissionType.ReachHeightBelow)
         {
             return ReachedHeightBelow(height);
-        }else if (missionType == MissionType.CompleteStationTask || missionType == MissionType.GetHitByTinyBH || missionType == MissionType.DropItemOutInSpace)
+        }
+        else if (
+            missionType == MissionType.CompleteStationTask || 
+            missionType == MissionType.GetHitByTinyBH ||
+            missionType == MissionType.DropItemOutInSpace ||
+            missionType == MissionType.FlyFarAway ||
+            missionType == MissionType.RepairInSlowField || 
+            missionType == MissionType.RepairInSpeedField ||
+            missionType == MissionType.LensDuringHIAnomaly)
         {
             bool completed = missionStepCompleted;
             missionStepCompleted = false;
@@ -94,7 +107,46 @@ public class MissionStep
         {
             PlayerMovement playerMovement = GameObject.FindObjectOfType<PlayerMovement>();
             playerMovement.OnLoopBoundaries += CheckCompleteMissionStep;
+        }else if(missionType == MissionType.RepairInSlowField)
+        {
+            RepairTask repairTask = GameObject.FindObjectOfType<RepairTask>();
+            repairTask.onStartTask += CheckRepairInSlowField;
+        }else if(missionType == MissionType.RepairInSpeedField)
+        {
+            RepairTask repairTask = GameObject.FindObjectOfType<RepairTask>();
+            repairTask.onStartTask += CheckRepairInSpeedField;
+        }else if(missionType == MissionType.LensDuringHIAnomaly)
+        {
+            HazardManager hazardManager = GameObject.FindObjectOfType<HazardManager>();
+            hazardManager.OnSpawnHIAnomaly += CheckCorrectLensInTelescope;
+            GameObject.FindObjectOfType<Telescope>().onLensChanged += CheckHIHazardActiveAndCorrectLens;
         }
+    }
+
+    private void CheckHIHazardActiveAndCorrectLens(ItemData lens)
+    {
+        if (lens != neededLens) return;
+
+        if (GameObject.FindObjectOfType<HazardManager>().HighImpactAnomalyActive) missionStepCompleted = true;
+    }
+
+    private void CheckCorrectLensInTelescope()
+    {
+        Telescope telescope = GameObject.FindObjectOfType<Telescope>();
+
+        if (telescope.GetCurrentLens() == neededLens) missionStepCompleted = true;
+    }
+
+    private void CheckRepairInSlowField(float timeScale)
+    {
+        Debug.Log("CheckRepeir slow: " + timeScale);
+        if (timeScale < 1) missionStepCompleted = true;
+    }
+
+    private void CheckRepairInSpeedField(float timeScale)
+    {
+        Debug.Log("CheckRepeir fast: " + timeScale);
+        if (timeScale > 1) missionStepCompleted = true;
     }
 
     private void CheckDropedItemInSpace(bool outOfShip)

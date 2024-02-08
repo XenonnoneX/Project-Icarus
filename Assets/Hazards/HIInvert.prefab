@@ -46,3 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anomalyDuration: 15
   anomalyType: 6
+  warningCountdownSprite: {fileID: 21300000, guid: 9f7b9a375b37d1548b1c6b36cb8325a8, type: 3}
+  warningImpactNowSprite: {fileID: 21300000, guid: de7dc1701da74854488a44916563b3f3, type: 3}

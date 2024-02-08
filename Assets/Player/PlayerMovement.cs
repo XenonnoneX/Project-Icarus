@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour, TimeAffected
     public bool ControlsInverted { get => controlsInverted; }
 
     bool spaceSuitActive = false;
+    public bool everywhereLowGravity = false;
 
     public float timeScale = 1;
 
@@ -45,7 +46,7 @@ public class PlayerMovement : MonoBehaviour, TimeAffected
             rb.velocity = -rb.velocity;
         }
         
-        if (Utils.OutOfShip(transform))
+        if (Utils.OutOfShip(transform) || everywhereLowGravity)
         {
             OnStopWalking?.Invoke();
 
@@ -55,9 +56,12 @@ public class PlayerMovement : MonoBehaviour, TimeAffected
 
             rb.velocity += velocityAddition;
 
-            if(previousRBVelocity.magnitude > rb.velocity.magnitude) // turn direction faster (2x)
+            if (spaceSuitActive)
             {
-                rb.velocity += velocityAddition;
+                if (previousRBVelocity.magnitude > rb.velocity.magnitude) // turn direction faster (2x)
+                {
+                    rb.velocity += velocityAddition;
+                }
             }
 
             rb.velocity = Vector2.ClampMagnitude(rb.velocity, moveSpeed * movSpeedMultiplier * timeScale);

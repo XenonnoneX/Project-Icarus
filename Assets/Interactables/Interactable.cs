@@ -71,8 +71,8 @@ public class Interactable : MonoBehaviour, IInteractable, TimeAffected
         }
         else if (station.GetStationState() == StationState.Broken)
         {
-            repairTask.StartTask(this);
             repairTask.SetTimeScale(station.timeScale);
+            repairTask.StartTask(this);
         }
         else
         {

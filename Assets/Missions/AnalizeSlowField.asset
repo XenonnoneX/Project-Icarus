@@ -17,6 +17,8 @@ MonoBehaviour:
     height: 0
     stationType: 3
     anomalyType: 2
+    neededLens: {fileID: 0}
     station: {fileID: 0}
   missionText: Analyze Slow Field
+  missionTextImage: {fileID: 21300000, guid: 97d1f789311f9ba48a3f10b3812084ae, type: 3}
   missionReward: 50

@@ -38,6 +38,7 @@ public abstract class ControlStation : MonoBehaviour, TimeAffected
     [SerializeField] float timeToBreak = 30;
     internal float timeToBreakMultiplier = 1;
     float timeSinceBroken = 0;
+    public float TimeSinceBroken => timeSinceBroken;
     public bool beingRepaired;
     bool canBreak => !beingRepaired && timeSinceRepaired >= safeTimeAfterRepair && !isInteracting;
     [SerializeField] float safeTimeAfterRepair = 10f;

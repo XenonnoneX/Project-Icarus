@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: e47e09f758c380240b70c0d7086ff702, type: 3}
   secondarySprite: {fileID: 21300000, guid: ed851f28f8a0db7429126fb657a7bbe4, type: 3}
+  interactOutline: {fileID: 21300000, guid: 658a74efa792e444c8e87234ed5bc72f, type: 3}

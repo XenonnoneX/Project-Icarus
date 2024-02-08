@@ -15,6 +15,7 @@ public class PlayerAnimator : MonoBehaviour
     Rigidbody2D rb;
 
     public bool isWalking = false;
+    public Vector2 direction = Vector2.down;
 
 
     private void Awake()
@@ -77,10 +78,12 @@ public class PlayerAnimator : MonoBehaviour
         {
             if (rb.velocity.y > 0)
             {
+                direction = Vector2.up;
                 return backAnimator;
             }
             else
             {
+                direction = Vector2.down;
                 return frontAnimator;
             }
         }
@@ -88,10 +91,12 @@ public class PlayerAnimator : MonoBehaviour
         {
             if (rb.velocity.x > 0)
             {
+                direction = Vector2.right;
                 return rightAnimator;
             }
             else
             {
+                direction = Vector2.left;
                 return leftAnimator;
             }
         }

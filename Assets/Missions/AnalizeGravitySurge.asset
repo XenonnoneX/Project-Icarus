@@ -17,6 +17,8 @@ MonoBehaviour:
     height: 0
     stationType: 3
     anomalyType: 1
+    neededLens: {fileID: 0}
     station: {fileID: 0}
   missionText: Analyze Gravity Surge
+  missionTextImage: {fileID: 21300000, guid: aee79a4db34034942b177cc6c0c4d7cc, type: 3}
   missionReward: 50

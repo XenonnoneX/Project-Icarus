@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: RepairKit
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 512a3ae04a0f0e94080d6f63685136c6, type: 3}
+  secondarySprite: {fileID: 0}
+  interactOutline: {fileID: 21300000, guid: 3a149e7bf29378b4c848d42d91982655, type: 3}

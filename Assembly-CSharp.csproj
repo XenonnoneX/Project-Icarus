@@ -77,6 +77,7 @@
     <Compile Include="Assets\Hazards\Spawner.cs" />
     <Compile Include="Assets\ControlStations\SpaceShipMovement.cs" />
     <Compile Include="Assets\Interactables\Items\PlayerInventory.cs" />
+    <Compile Include="Assets\Settings\TutorialSlideShow.cs" />
     <Compile Include="Assets\Core\FieldOfView.cs" />
     <Compile Include="Assets\Hazards\BH_Shader\TimeSlowEffect.cs" />
     <Compile Include="Assets\Hacks.cs" />
@@ -103,6 +104,7 @@
     <Compile Include="Assets\Artifacts\StringOfTimeVisuals.cs" />
     <Compile Include="Assets\Tasks\GetArtifactTask.cs" />
     <Compile Include="Assets\Core\ConditionalHideAttribute.cs" />
+    <Compile Include="Assets\UI\CurrentArtifactsUI.cs" />
     <Compile Include="Assets\Core\TimeManager.cs" />
     <Compile Include="Assets\Player\PlayerMovement.cs" />
     <Compile Include="Assets\ControlStations\ResearchStation.cs" />
@@ -129,6 +131,7 @@
     <Compile Include="Assets\Artifacts\ArtifactManager.cs" />
     <Compile Include="Assets\Tasks\InsertItemTask.cs" />
     <Compile Include="Assets\Menu\Menu.cs" />
+    <Compile Include="Assets\Hazards\HILowGravity.cs" />
     <Compile Include="Assets\Hazards\BH_Shader\InvertEffect.cs" />
     <Compile Include="Assets\Core\Utils.cs" />
     <Compile Include="Assets\UI\HeightVignette.cs" />
@@ -160,6 +163,7 @@
     <Compile Include="Assets\UI\SpaceShipMovementUI.cs" />
     <Compile Include="Assets\Hazards\TinyBH.cs" />
     <Compile Include="Assets\Music_SFX\ControlStationSounds.cs" />
+    <Compile Include="Assets\Artifacts\PlayerVisual.cs" />
     <Compile Include="Assets\Hazards\HighImpactAnomalyWarnings.cs" />
     <Compile Include="Assets\Hazards\BH_Shader\GravityFieldEffect.cs" />
     <Compile Include="Assets\UI\ArtifactAvailableLight.cs" />

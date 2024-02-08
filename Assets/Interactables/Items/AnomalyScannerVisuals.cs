@@ -32,7 +32,6 @@ public class AnomalyScannerVisuals : MonoBehaviour
 
     private void SuckupEffect(Anomaly anomaly)
     {
-        print("do suchup effect");
         StartCoroutine(SuckupRoutine(anomaly.transform.position));
     }
 
@@ -49,10 +48,7 @@ public class AnomalyScannerVisuals : MonoBehaviour
         for (float i = 0; i < animationTime; i+= Time.deltaTime)
         {
             Vector3[] positions = new Vector3[] { Vector3.Lerp(anomalyPosition, anomalyScanner.transform.position, i / animationTime), Vector3.Lerp(anomalyPosition, anomalyScanner.transform.position, Mathf.Clamp01(2 * i / animationTime)) };
-
-            print("anomalyPos: " + anomalyPosition);
-            print("current pos: " + Vector3.Lerp(anomalyPosition, anomalyScanner.transform.position, i / animationTime));
-
+            
             lineRenderer.SetPositions(positions);
             yield return null;
         }

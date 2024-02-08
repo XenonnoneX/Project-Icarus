@@ -79,23 +79,26 @@ public class CatInteractable : MonoBehaviour, IInteractable, TimeAffected
             return;
         }
 
-        List<Interactable> brokenInteractables = new List<Interactable>();
+        Interactable mostBrokenInteractable = null;
+        float longestBrokenTime = 0;
 
         foreach (Interactable interactable in interactables)
         {
             if (interactable.station.GetStationState() == StationState.Broken)
             {
-                brokenInteractables.Add(interactable);
+                if (interactable.station.TimeSinceBroken > longestBrokenTime)
+                {
+                    mostBrokenInteractable = interactable;
+                    longestBrokenTime = interactable.station.TimeSinceBroken;
+                }
             }
         }
 
-        if (brokenInteractables.Count == 0) return;
+        if (mostBrokenInteractable == null) return;
 
         cdTimer = 0;
 
-        int rand = UnityEngine.Random.Range(0, brokenInteractables.Count);
-
-        playerMovement.TeleportToInteractable(brokenInteractables[rand]);
+        playerMovement.TeleportToInteractable(mostBrokenInteractable);
     }
 
     public void SetTimeScale(float timeScale)

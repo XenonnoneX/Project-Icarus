@@ -49,7 +49,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   lightRange: 1.5
-  lightColor: {r: 0.39607844, g: 1, b: 0, a: 1}
+  lightColor: {r: 0.29910004, g: 1, b: 0, a: 1}
   blinkingSpeed: 0
   sortingLayer: 150
 --- !u!1001 &3555932482185289763
@@ -114,7 +114,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6450735066572404268, guid: 84b80bb92a7a52044b460db01a1cbf9d, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6450735066572404268, guid: 84b80bb92a7a52044b460db01a1cbf9d, type: 3}
       propertyPath: sortingLayer
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 3555932482185289763}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5487721967633719085}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8353f150f07eb2949bc7bdc2cd77203f, type: 3}
   m_Name: 

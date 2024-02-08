@@ -88,13 +88,21 @@ public class MissionManager : ControlStation
 
         foreach (Mission mission in currentMissions)
         {
-            if (mission.missionData == checkMission.missionData || SameStationMissions(mission, checkMission))
+            if (mission.missionData == checkMission.missionData || SameStationMissions(mission, checkMission) || OtherwiseSameMission(mission, checkMission))
             {
                 return true;
             }
         }
 
         return false;
+    }
+
+    private bool OtherwiseSameMission(Mission mission, Mission checkMission)
+    {
+        if (mission.missionData.missionSteps[0].missionType == MissionType.LensDuringHIAnomaly && checkMission.missionData.missionSteps[0].missionType == MissionType.LensDuringHIAnomaly) return true;
+        else if (mission.missionData.missionSteps[0].missionType == MissionType.RepairInSpeedField && checkMission.missionData.missionSteps[0].missionType == MissionType.RepairInSlowField) return true;
+        else if (mission.missionData.missionSteps[0].missionType == MissionType.RepairInSlowField && checkMission.missionData.missionSteps[0].missionType == MissionType.RepairInSpeedField) return true;
+        else return false;
     }
 
     private bool SameStationMissions(Mission mission, Mission checkMission)
